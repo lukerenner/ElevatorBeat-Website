@@ -13,7 +13,7 @@
   --text-muted: #5b6472;
   --border: #e5ddcd;
   --border-soft: #efe7d8;
-  --cyan: #45c9d6;
+  --cyan: #44c9d6;
   --cyan-dark: #2aa9b6;
   /* Darker cyan reserved for small text on light grounds — --cyan
      alone fails WCAG AA for body-size text. */
@@ -254,8 +254,10 @@ button:focus-visible,
   cursor: pointer;
 }
 .button:hover { transform: translateY(-1px); }
-.button-primary { background: var(--orange); color: #fff; }
-.button-primary:hover { background: var(--orange-dark); box-shadow: var(--shadow-soft); }
+/* Cyan is light enough that white label text fails AA — primary buttons use
+   deep navy on the cyan fill instead (9:1). */
+.button-primary { background: var(--cyan); color: var(--navy-deep); }
+.button-primary:hover { background: var(--cyan-dark); box-shadow: var(--shadow-soft); }
 .button-secondary {
   background: transparent;
   color: var(--ink);
@@ -294,7 +296,7 @@ button:focus-visible,
   font-size: 15px;
   cursor: default;
 }
-.button-upcoming:hover { transform: none; background: var(--orange); }
+.button-upcoming:hover { transform: none; background: var(--cyan); }
 .button-label { display: grid; }
 .button-label > span {
   grid-area: 1 / 1;
@@ -506,14 +508,14 @@ button:focus-visible,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 54% 42%;
-  /* Mirrored: in the source painting the two figures stand on the left, which
-     is where the copy goes. Flipping puts them opposite the text. */
-  transform: scaleX(-1);
+  /* Biased down so the desert horizon and the lounge deck stay in frame behind
+     the copy, and slightly right so the tower keeps clear of the copy column.
+     The moon takes the loss at the top on wide viewports. */
+  object-position: 56% 56%;
 }
 /* The hero uses a LEFT-weighted scrim rather than the shared bottom one: the
    copy sits in the left column, while the things that give the scene its sense
-   of place — the figures, the valley of houses — sit centre and right. A
+   of place — the tower, the lounge, the palms — sit centre and right. A
    bottom-heavy scrim darkens exactly the band those sit in and flattens the
    whole painting. The second, much lighter bottom gradient only seats the
    button row. */
@@ -929,7 +931,9 @@ button:focus-visible,
     padding-top: 84px;
     padding-bottom: 32px;
   }
-  .hero-media { object-position: 58% 46%; }
+  /* Portrait crops the landscape painting hard, so frame the base of the tower
+     — deck lights, palms, red rock — rather than an anonymous stretch of shaft. */
+  .hero-media { object-position: 62% 84%; }
   .chip { left: 8px; bottom: 8px; padding: 4px 9px; font-size: 10.5px; }
   .compare-chip.is-after { right: 8px; }
   .compare-handle::before { width: 52px; height: 52px; }

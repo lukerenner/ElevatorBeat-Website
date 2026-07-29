@@ -38,11 +38,11 @@
   <!-- The hero photograph is the LCP element — preloading it is what keeps LCP
        fast. Do not remove this as "unused": its consumer is the <img> below,
        which the parser would otherwise not reach until the stylesheet lands. -->
-  <link rel="preload" as="image" href="assets/img/about-1400.webp"
-        imagesrcset="assets/img/about-900.webp 900w, assets/img/about-1400.webp 1400w, assets/img/about-1920.webp 1920w, assets/img/about-2400.webp 2400w"
+  <link rel="preload" as="image" href="assets/img/hero-1400.webp"
+        imagesrcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w, assets/img/hero-1920.webp 1920w, assets/img/hero-2400.webp 2400w"
         imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260729a">
-  <script defer src="script.js?v=20260729a"></script>
+  <link rel="stylesheet" href="styles.css?v=20260729b">
+  <script defer src="script.js?v=20260729b"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -54,7 +54,7 @@
     <div class="container nav-shell">
       <a class="brand" href="#top" aria-label="ElevatorBeat home">
         <svg class="brand-mark" viewBox="0 0 24 36" aria-hidden="true">
-          <rect width="24" height="36" rx="5.2" fill="#45c9d6"/>
+          <rect width="24" height="36" rx="5.2" fill="#44c9d6"/>
           <rect x="6" y="7.8" width="12" height="4" rx="2" fill="#14233f"/>
           <rect x="6" y="15.8" width="12" height="4" rx="2" fill="#14233f"/>
           <rect x="6" y="23.8" width="12" height="4" rx="2" fill="#14233f"/>
@@ -78,13 +78,13 @@
   <main id="main">
     <!-- ---------- Hero ----------
          Full viewport height, sitting under the overlaid header. The painting
-         is the night view of the house the whole site is set in; it is mirrored
-         so the two figures fall on the right and leave the left column clear
-         for the copy. -->
+         is the glass elevator tower rising over a desert resort at dusk — the
+         studio's namesake. Its composition already leaves the left third open
+         sky and desert, so the copy sits there without the art being flipped. -->
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <img class="hero-media" src="assets/img/about-1400.webp"
-           srcset="assets/img/about-900.webp 900w, assets/img/about-1400.webp 1400w, assets/img/about-1920.webp 1920w, assets/img/about-2400.webp 2400w"
-           sizes="100vw" width="2688" height="1536" fetchpriority="high" alt="">
+      <img class="hero-media" src="assets/img/hero-1400.webp"
+           srcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w, assets/img/hero-1920.webp 1920w, assets/img/hero-2400.webp 2400w"
+           sizes="100vw" width="2400" height="1600" fetchpriority="high" alt="">
       <div class="container hero-inner">
         <p class="eyebrow eyebrow-light">Portland, Oregon &middot; Creative App Studio</p>
         <h1 id="hero-title">We make apps for people who make things.</h1>
@@ -261,7 +261,7 @@
     </section>
 
     <!-- ---------- Origin band (full-bleed) ----------
-         The same house as the hero, seen from outside in daylight. -->
+         The house version of the hero's elevator tower, seen in daylight. -->
     <section class="bleed-band band-copy" aria-labelledby="origin-title">
       <img src="assets/img/house-day-1400.webp"
            srcset="assets/img/house-day-900.webp 900w, assets/img/house-day-1400.webp 1400w, assets/img/house-day-1920.webp 1920w, assets/img/house-day-2400.webp 2400w, assets/img/house-day-3000.webp 3000w"
@@ -320,7 +320,7 @@
       <div class="footer-brand">
         <a class="brand brand-dark" href="#top">
           <svg class="brand-mark" viewBox="0 0 24 36" aria-hidden="true">
-            <rect width="24" height="36" rx="5.2" fill="#45c9d6"/>
+            <rect width="24" height="36" rx="5.2" fill="#44c9d6"/>
             <rect x="6" y="7.8" width="12" height="4" rx="2" fill="#14233f"/>
             <rect x="6" y="15.8" width="12" height="4" rx="2" fill="#14233f"/>
             <rect x="6" y="23.8" width="12" height="4" rx="2" fill="#14233f"/>
