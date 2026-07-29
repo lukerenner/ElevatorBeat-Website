@@ -1,0 +1,197 @@
+[
+ {
+  "index": 1,
+  "collection": "haute-haus",
+  "collection_name": "Haute Haus",
+  "collection_description": "Intercontinental couture",
+  "stem": "haute-haus-01",
+  "widths": [
+   480,
+   682
+  ],
+  "source": "11. Nadja Evangelique.jpg",
+  "alt": "A Haute Haus look: a copper satin mermaid gown with opera gloves, photographed in a raw concrete colonnade."
+ },
+ {
+  "index": 2,
+  "collection": "afterglow",
+  "collection_name": "Afterglow",
+  "collection_description": "A black tie affair",
+  "stem": "afterglow-02",
+  "widths": [
+   480,
+   768
+  ],
+  "source": "3. Maribel Kensington.jpg",
+  "alt": "An Afterglow look: an emerald sequinned gown and matching fur, lit by teal chandeliers in a grand salon."
+ },
+ {
+  "index": 3,
+  "collection": "euphoria-uv",
+  "collection_name": "Euphoria // UV",
+  "collection_description": "Electric love and molly magnificence",
+  "stem": "euphoria-uv-03",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "9. Sasha Velvet.jpg",
+  "alt": "A Euphoria // UV look: a purple sequinned bodice and dark bouffant framed by a red neon rectangle."
+ },
+ {
+  "index": 4,
+  "collection": "canonical-queens",
+  "collection_name": "Canonical Queens",
+  "collection_description": "Iconic looks that always cook",
+  "stem": "canonical-queens-04",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "6. Hannah Nevada.jpg",
+  "alt": "A Canonical Queens look: a tall blue updo and a monochrome zebra gown against a flat cyan ground."
+ },
+ {
+  "index": 5,
+  "collection": "haute-haus",
+  "collection_name": "Haute Haus",
+  "collection_description": "Intercontinental couture",
+  "stem": "haute-haus-05",
+  "widths": [
+   480,
+   706
+  ],
+  "source": "2. Isolde Versachi.jpg",
+  "alt": "A Haute Haus look: a tiered teal tulle ball gown with sheer sleeves, shot in a concrete courtyard."
+ },
+ {
+  "index": 6,
+  "collection": "afterglow",
+  "collection_name": "Afterglow",
+  "collection_description": "A black tie affair",
+  "stem": "afterglow-06",
+  "widths": [
+   480,
+   788
+  ],
+  "source": "8. Octavia Sterling.jpg",
+  "alt": "An Afterglow look: a white feathered gown beside a lit pool under a full moon, holding a sparkler."
+ },
+ {
+  "index": 7,
+  "collection": "ground-control",
+  "collection_name": "Ground Control",
+  "collection_description": "Retro-futurist space drag",
+  "stem": "ground-control-07",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "3. Gigi Stardust.jpg",
+  "alt": "A Ground Control look: a silver and mint flight suit with a rocket headdress and a smoking ray gun."
+ },
+ {
+  "index": 8,
+  "collection": "euphoria-uv",
+  "collection_name": "Euphoria // UV",
+  "collection_description": "Electric love and molly magnificence",
+  "stem": "euphoria-uv-08",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "15. Kitty Caliente.jpg",
+  "alt": "A Euphoria // UV look: candyfloss curls and a liquid silver dress cut through by a blue neon beam."
+ },
+ {
+  "index": 9,
+  "collection": "haute-haus",
+  "collection_name": "Haute Haus",
+  "collection_description": "Intercontinental couture",
+  "stem": "haute-haus-09",
+  "widths": [
+   480,
+   682
+  ],
+  "source": "9. Tatiana von Runvay.jpg",
+  "alt": "A Haute Haus look: a cream feathered gown with a ruffled train against pale concrete."
+ },
+ {
+  "index": 10,
+  "collection": "canonical-queens",
+  "collection_name": "Canonical Queens",
+  "collection_description": "Iconic looks that always cook",
+  "stem": "canonical-queens-10",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "14. Imani Obscura.jpg",
+  "alt": "A Canonical Queens look: a black strapless gown with a long train and a full afro, on a flat green ground."
+ },
+ {
+  "index": 11,
+  "collection": "afterglow",
+  "collection_name": "Afterglow",
+  "collection_description": "A black tie affair",
+  "stem": "afterglow-11",
+  "widths": [
+   480,
+   788
+  ],
+  "source": "11. Lorelei Whitaker.jpg",
+  "alt": "An Afterglow look: an embroidered emerald suit and finger waves in a red-lit drawing room."
+ },
+ {
+  "index": 12,
+  "collection": "euphoria-uv",
+  "collection_name": "Euphoria // UV",
+  "collection_description": "Electric love and molly magnificence",
+  "stem": "euphoria-uv-12",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "12. Stella Sorrento.jpg",
+  "alt": "A Euphoria // UV look: a teal bob and a zipped leather dress in front of hot pink neon rings."
+ },
+ {
+  "index": 13,
+  "collection": "haute-haus",
+  "collection_name": "Haute Haus",
+  "collection_description": "Intercontinental couture",
+  "stem": "haute-haus-13",
+  "widths": [
+   480,
+   682
+  ],
+  "source": "12. Madame San Laurent.jpg",
+  "alt": "A Haute Haus look: an enormous black tulle ball gown with a beaded bodice, shot against concrete."
+ },
+ {
+  "index": 14,
+  "collection": "afterglow",
+  "collection_name": "Afterglow",
+  "collection_description": "A black tie affair",
+  "stem": "afterglow-14",
+  "widths": [
+   480,
+   768
+  ],
+  "source": "1. Lucinda Biltmore.jpg",
+  "alt": "An Afterglow look: a crimson beaded gown and auburn waves in a red velvet salon."
+ },
+ {
+  "index": 15,
+  "collection": "ground-control",
+  "collection_name": "Ground Control",
+  "collection_description": "Retro-futurist space drag",
+  "stem": "ground-control-15",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "10. Major Climax.jpg",
+  "alt": "A Ground Control look: a lilac flight suit and an antenna bouffant, holding a prop scanner."
+ }
+]

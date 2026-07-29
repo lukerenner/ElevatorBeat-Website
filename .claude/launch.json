@@ -1,11 +1,16 @@
 {
   "version": "0.0.1",
+  "autoPort": true,
   "configurations": [
     {
       "name": "elevatorbeat",
+      "//": "The site is static, so this is only a file server. `python3 -m http.server` takes its port as a positional argument and ignores $PORT, which breaks automatic port assignment as soon as two sessions are open at once — hence the inline server, which reads $PORT and falls back to 8642.",
       "runtimeExecutable": "/opt/homebrew/bin/python3.12",
-      "runtimeArgs": ["-m", "http.server", "8642"],
-      "port": 8642
+      "runtimeArgs": [
+        "-c",
+        "import os, functools, http.server, socketserver; socketserver.TCPServer.allow_reuse_address = True; socketserver.TCPServer(('', int(os.environ.get('PORT', '8642'))), functools.partial(http.server.SimpleHTTPRequestHandler, directory=os.getcwd())).serve_forever()"
+      ],
+      "port": 8663
     }
   ]
 }

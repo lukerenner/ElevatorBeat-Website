@@ -1,7 +1,11 @@
 # ElevatorBeat — elevatorbeat.com
 
-Marketing site for ElevatorBeat, an independent creative app studio in Portland, Oregon
-(apps: Dragify, StraightPic). Dependency-free, hand-authored HTML/CSS/JS — no build step.
+Marketing site for ElevatorBeat, an independent studio in Portland, Oregon that builds
+**useful curiosities** — digital tools made with the care, authorship and visual ambition of
+art projects. Currently exhibiting Dragify and StraightPic.
+
+Positioning: *"Tools built like art projects."* Not "small apps", not "focused tools", not
+productivity. Dependency-free, hand-authored HTML/CSS/JS — no build step.
 
 ## Run locally
 
@@ -16,140 +20,212 @@ server, though relative links between pages work best served over HTTP.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home page — hero, statement + app lineup, app features, origin band, contact form, footer |
+| `index.html` | Home page — the ten-beat shot list (see below) |
 | `support.html` | App support (Dragify + StraightPic), links to contact |
 | `privacy.html` | Privacy policy for the site and both apps |
 | `terms.html` | Terms of use |
 | `open-source.html` | Open source license notices for Dragify and StraightPic |
 | `thanks.html` | Contact-form confirmation page — `noindex`, not in the sitemap |
-| `styles.css` | All styling — design tokens in `:root`, mobile-first responsive rules |
-| `script.js` | Before/after sliders, transparent-until-scroll header, mobile nav, canonical-policy dialog, scroll reveals |
+| `styles.css` | All styling — dual-ground tokens in `:root` / `.on-dark`, the `.plate` image component, one button system |
+| `script.js` | Before/after slider, transparent-until-scroll header, mobile nav, canonical-policy dialog, the rail, scroll reveals |
 | `assets/` | Favicon (SVG), apple touch icon, OG/social share image |
 | `assets/img/` | All site photography, WebP, multiple widths per image for `srcset` |
 | `assets/video/` | Superseded hero animation — **no longer referenced**, kept on disk only |
+| `tools/exhibit-art.py` | Cuts every architectural frame + art-directed mobile crops from the upscaled masters — dev only |
+| `tools/dragify-looks.py` | Exports the curated Dragify exhibition from the app's pack data — dev only |
+| `tools/straightpic-demo.py` | Builds the StraightPic before/after from `Tower.jpg` — dev only |
 | `tools/upscale.py` | Regenerates the original retro art from upscaled masters — dev only |
-| `tools/house-art.py` | Generates the `house-day` / `house-dusk` paintings — dev only |
-| `tools/house-dusk-refine.py` | Re-cuts only the figures in the dusk painting — dev only |
+| `tools/house-art.py`, `tools/house-dusk-refine.py` | Generate the `house-day` / `house-dusk` paintings — dev only |
+| `tools/deprecated/` | Superseded generators, kept for provenance — see the Dragify note below |
 | `robots.txt` | Allows crawling, points at sitemap |
 | `sitemap.xml` | Lists all five indexable pages (thanks.html is deliberately excluded) |
 | `CNAME` | Custom domain for GitHub Pages (`elevatorbeat.com`) |
 
+## Design system — two grounds, one set of components
+
+The page has two grounds, not one. **Warm white is the primary canvas** — where the work is
+explained, catalogued and read. **Midnight is reserved for the architecture**, full-frame and
+edge to edge.
+
+Both are expressed through the *same* custom properties. `:root` carries the paper palette;
+`.on-dark` overrides those properties in place. Every component — eyebrows, rules, captions,
+buttons, plates, the rail — reads `var(--ground)` / `var(--text)` / `var(--accent)`, so it
+works on either ground with no duplicate rulesets. **Adding a section means picking a ground,
+not writing a second theme.**
+
+Cyan is an annotation, not a brand wash: hairlines, ticks, the compare handle, the rail car,
+focus rings. The solid button is the inverse of whatever it sits on (ink on paper, ivory on
+midnight) — deliberately *not* cyan, because a large cyan rectangle over a photograph is the
+generic CTA reflex this system exists to avoid. Copper comes off the elevator's amber lighting
+and appears only as exhibition numerals.
+
+Four display tiers (`.display-xl` / `-l` / `-m` / `-s`) are chosen by the job a headline is
+doing, not by its heading level. The previous build ran every section at one `h2` size, which
+is most of why it read as a template.
+
+## The page — a shot list
+
+Ten beats, cut like a film rather than assembled from a formula. There is no rule forcing
+white and dark to alternate; sequence follows narrative continuity, contrast and pacing.
+
+| # | Beat | Ground | Asset |
+| --- | --- | --- | --- |
+| 01 | Arrival — the front elevation | dark | `hero-*` / `hero-mobile-*` |
+| 02 | The studio — one oversized statement | paper | — |
+| 03 | The lounge — interior, straight after the exterior | dark | `lounge-*` |
+| 04 | Exhibition 01, Dragify — wall label, then a full-bleed gallery | paper → dark | `assets/img/dragify/*` |
+| 05 | The grounds — panoramic interlude, caption only | dark | `band-mars-*` |
+| 06 | Morning — the one daylight frame | **paper over image** | `house-day-*` |
+| 07 | Exhibition 02, StraightPic — geometric, annotated | paper | `straightpic-*` |
+| 08 | The observation level — another room, another hour | dark | `about-*` |
+| 09 | Closing — split editorial | paper + image | `cta-*` |
+
+Beat 06 is the one chapter that does **not** carry `.on-dark`. Darkening a pale morning sky
+enough to hold ivory type would turn the morning into another dusk — the "every image becomes
+the same dark scene" failure. Its type is near-black and its scrim *lifts* the sky instead
+(`.scrim-lift`). Same component, inverted ground.
+
+Held back deliberately, for interior pages and OG artwork: `terrace-*` (duplicates
+`house-day`'s landscape role), `ascent-*` (too close to the hero to sit on the same page),
+`house-dusk-*` (duplicates `cta`), `nextup-*`.
+
+## The plate — the one image component
+
+Every photograph goes through `.plate`. The rules are not stylistic preferences; each closes a
+specific way a rounded image leaks white pixels at its corners:
+
+- The radius and `overflow: hidden` are on the **same element**. Split across a wrapper and a
+  child, the child's square corners poke out of the parent's round ones.
+- **No border.** A 1px stroke plus a radius is exactly where a corner seam comes from — the
+  stroke and the clip antialias on different subpixel boundaries. Separation comes from the
+  ground.
+- The background is `var(--ground)`, so a sub-pixel of wrapper showing through is invisible
+  rather than a bright triangle — and it is never white on a dark section, because `--ground`
+  follows `.on-dark`.
+- `aspect-ratio` on the plate, so its height always agrees with the file inside it.
+- Full-bleed cinematic images set `--plate-radius: 0`. Editorial photography is not a card.
+
+Grid widths are fractional at fluid breakpoints. That is fine and is *not* worth chasing: the
+clip and the image are the same element, so they antialias together, and the ground behind
+them matches.
+
+`<picture>` must be told to fill: it is an inline wrapper by default, so an `<img>` inside it
+resolving `height: 100%` measures against the picture's own content height, not the chapter.
+`.chapter-media picture { display: block; height: 100% }` exists for exactly that reason.
+
 ## Imagery
 
-The CSS gradient placeholders are gone — every visual is now a real image in `assets/img/`.
-
-**Two sources.** The atmospheric retro-futurist paintings (hero, origin band, studio
-lounge, "in development", closing CTA) come from `Reference Images/Retrofuturism/`, which
-is git-ignored and not deployed. The product shots are pulled from the actual apps:
+Two sources. The retro-futurist paintings come from `Reference Images/Retrofuturism/`
+(git-ignored, not deployed). The product imagery is pulled from the actual apps.
 
 | Asset | Source |
 | --- | --- |
-| `hero-*` | Generated — **no longer used**, was the old video poster |
-| `band-mars-*` | `Retrofuturism/FuturePlane8.png` — **no longer used**, superseded by `house-day-*` |
-| `about-*` | Generated — now the **hero**, mirrored; supersedes the unused `lounge-*` files |
-| `house-day-*` | Generated by `tools/house-art.py` — the origin band |
-| `house-dusk-*` | Generated by `tools/house-art.py` + `house-dusk-refine.py` — the closing CTA |
-| `lounge-*` | `Retrofuturism/FuturePlane2.png` — **no longer used**, kept only as a fallback |
-| `nextup-*` | `Retrofuturism/FuturePlane9.png` — **no longer used**, the in-development section is gone |
-| `cta-*` | `Retrofuturism/FuturePlane3.png` — **no longer used**, superseded by `house-dusk-*` |
-| `dragify-before/after-*`, `dragify-looks-*` | `Websites/Dragify Website/Images/` |
-| `straightpic-before/after-*` | `Apps/StraightPic/Reference Photos/` |
-| `icon-dragify-*` | Dragify 4.0 `AppIcon.appiconset/Icon-1024.png` |
-| `icon-straightpic-*` | `Apps/StraightPic/Reference Photos/App Icon.png` |
-| `assets/og-image.jpg` | Hero art, cropped to 1200×630 with the wordmark composited on |
+| `hero-*`, `hero-mobile-*` | `_upscaled/hero.png` — arrival, plus an art-directed 4:5 portrait crop |
+| `lounge-*` | `_upscaled/lounge.png` — studio interior |
+| `band-mars-*`, `band-mars-mobile-*` | `_upscaled/band-mars.png` — the grounds; 16:9 crop for phones |
+| `house-day-*` | the daylight frame |
+| `about-*` | the observation level |
+| `cta-*` | the closing scene |
+| `assets/img/dragify/*` | Dragify's own pack data — see below |
+| `straightpic-before/after-*` | `Apps/StraightPic/Reference Photos/Tower.jpg` |
+| `icon-dragify-*`, `icon-straightpic-*` | the apps' `AppIcon` assets |
 
-**Upscaled masters.** The retro paintings were only ~1448px wide natively, too small for the
-largest full-bleed candidates. The five used as large art were run through Replicate
-(`nightmareai/real-esrgan`, scale 4, `face_enhance=False`) and now live as ~5800–7700px
-masters in `Reference Images/Retrofuturism/_upscaled/` — git-ignored, not deployed, but kept
-on disk so a re-render never has to pay for the upscale again.
+**Upscaled masters.** The paintings were only ~1448px wide natively. The ones used as large
+art were run through Replicate (`nightmareai/real-esrgan`, `face_enhance=False` — it
+plasticizes the small painted figures) and live as ~3000–7700px masters in
+`Reference Images/Retrofuturism/_upscaled/`, git-ignored but kept on disk so a re-render never
+pays for the upscale again.
 
-`tools/upscale.py` reproduces this. It reads `REPLICATE_API_TOKEN` from the environment,
-skips any master already present, and `--skip-upscale` re-encodes the WebP variants from
-existing masters for free. `face_enhance` stays **off**: it plasticizes the small painted
-figures in the closing CTA.
+**`tools/exhibit-art.py`** cuts every architectural frame from those masters. It does two
+things a plain resize does not:
 
-The Dragify and StraightPic product shots are deliberately *not* upscaled — those sources are
-2500–2700px against a ~620px display width, so they are already oversampled, and an upscaler
-would only invent detail and risk distorting real faces and app UI.
+1. **Art-directed crops, not `object-fit: cover` guesses.** Each mobile crop was chosen
+   against the actual subjects — the offsets are measured, not defaults — and is served
+   through `<picture>`.
+2. **A restrained shared grade.** `band-mars` and `cta` sit far enough into the reds that they
+   read as a different world from `about` and `house-day`. A few points of desaturation on
+   those frames only. Deliberately a small global desaturation rather than a hue-targeted
+   filter or a cyan wash: those images are ~90% warm rock and sky, so it lowers the orange
+   almost exclusively while skin, white architecture and desert rock keep their own colour.
+   The goal is related images, not identical ones.
 
-**Regenerating.** Each master is resized to several widths with ImageMagick (`-filter Lanczos`,
-light `-unsharp`) and encoded to WebP at q76–78. Largest candidate per image: hero and CTA
-2800px, origin band 3000px, studio lounge 1600px, in-development 1800px.
+Heights are computed from each master's true ratio, so every emitted size lands on whole
+pixels and a CSS `aspect-ratio` can never disagree with the file it frames.
 
-**Conventions when adding an image.**
+### Dragify — the exhibition
 
-1. Wrap it in the shared `.media` frame (`.media-4x3` / `.media-3x4` / `.media-16x9` /
-   `.media-6x4`, the compare frame) rather
-   than styling a one-off block; full-bleed bands use `.bleed-band` + `.band-copy`/`.band-strip`.
-2. Give every image explicit `width`/`height` and a real `alt` (`alt=""` only if decorative),
-   plus `loading="lazy"` below the fold and a `srcset`/`sizes` pair.
-3. **Do not add `decoding="async"`.** It let the first frame paint before the image had
-   decoded, and with nothing to trigger a repaint the images stayed blank until the user
-   scrolled. Removing it fixed a blank hero.
-4. The hero (`about-*`) is the LCP element: it keeps `fetchpriority="high"` and the
-   `<link rel="preload">` in `<head>`, and must not be lazy-loaded.
-5. Photographic sections put white text over art via the shared `--scrim-bottom` gradient and
-   a `z-index: 0 / 1 / 2` stack (image / scrim / copy). Avoid negative z-index and
-   `isolation: isolate` here — that combination stopped the image layer painting at all.
-6. The hero is the one deliberate exception to `--scrim-bottom`: its copy sits in the left
-   column while the figures and the valley — the whole point of the shot — sit centre and
-   right, and a bottom-weighted scrim darkened exactly that band and flattened the painting.
-   It uses a left-weighted gradient instead. Don't "fix" it back to the shared token.
+`tools/dragify-looks.py` exports the gallery straight from Dragify's backend pack data
+(`Dragify 4.0/App/backend/data/packs/`), which carries five signed collections and ~90
+full-bleed look images at 768–1024px:
 
-## One house, four times of day
-
-The site is set in a single building — a round mid-century glass pavilion with a slender
-glass elevator tower. Every full-bleed painting is a different view of that same house, so
-the art reads as one place rather than a stock-image grab bag:
-
-| Asset | View |
+| Collection | Description |
 | --- | --- |
-| `about-*` | Night, inside the observation lounge, looking out over the valley — **the hero** |
-| `house-day-*` | Late morning, from across the desert valley — the origin band |
-| `house-dusk-*` | Sunset, from the pool deck, elevator tower lit — the closing CTA |
+| Canonical Queens | Iconic looks that always cook |
+| Euphoria // UV | Electric love and molly magnificence |
+| Afterglow | A black tie affair |
+| Haute Haus | Intercontinental couture |
+| Ground Control | Retro-futurist space drag |
 
-The hero is `about-*.webp` **mirrored** (`transform: scaleX(-1)` on `.hero-media`). In the
-original painting the two figures stand on the left, which is exactly where the hero copy
-goes; flipping puts them opposite the text instead of behind it. If you ever swap the hero
-image, re-check that flip — it is a property of this painting, not a general rule.
+Fifteen looks ship, chosen for visual quality, spread across all five collections, and
+sequenced so colour, silhouette and setting change frame to frame. Twelve show at tablet
+width, eight on a phone — abundance is the strength of the edit, not the count. The homepage
+labels by **collection only**; the individual queen names stay in the app.
 
-The hero used to be a `<video>` (rocket launch, locked-off camera). That is gone: the files
-are still in `assets/video/` but nothing references them, and `script.js` no longer has any
-video code. Delete the folder if you want the space back.
+Every look is emitted at the same **2:3**. That is deliberate: shared cropping and presentation
+are what make fifteen unrelated portraits read as one exhibition. Rhythm comes from how many
+grid columns a frame spans and how far it is dropped, authored in `styles.css` (`.look:nth-child`)
+rather than in the markup — so the whole edit can be re-timed in one place.
 
-`tools/house-art.py` generates the two exterior views, and `tools/house-dusk-refine.py`
-re-cuts only the figures in the dusk one. Both read `REPLICATE_API_TOKEN` from the
-environment and follow the same pipeline as `upscale.py`: `google/nano-banana` to generate
-(passing the existing paintings as `image_input` so the architecture and palette carry over),
-then `nightmareai/real-esrgan` at scale 2, then ImageMagick for the WebP variants.
+> **Deprecated: `assets/img/deprecated/`, `tools/deprecated/dragify-sheet.py`.**
+> `dragify-looks-*.webp` is a fourteen-up contact sheet in which **every tile already has a
+> rounded corner baked onto a white ground**. The old `dragify-sheet.py` cut tiles at their
+> bounding box, so that white shipped inside the files, and inside a second differently-radiused
+> CSS frame it showed as white triangles in the corner of every thumbnail. It was never a CSS
+> bug — the white was in the image data. Nothing references those files; do not reintroduce them.
 
-**Scrim.** `.closing::after` is weighted more heavily than the other bands. The dusk painting's
-sunset sits bright right behind the headline and the contact form's white labels; the gradient
-tuned for the old `cta-*` art left them short on contrast. Don't lighten it without re-checking
-those labels.
+### StraightPic — the demonstration
 
-**On the figures.** The paintings are deliberately not heteronormative — the couple in the
-foreground of the dusk painting is two men, and the pairs behind them are same-sex. The
-first generation pass rendered a man-and-woman couple despite the prompt; `house-dusk-refine.py`
-exists because editing that one pass was more reliable than regenerating the whole scene and
-losing the architecture. If you regenerate this art, check the figures rather than assuming
-the prompt was honoured.
+`tools/straightpic-demo.py` builds the before/after from
+`Apps/StraightPic/Reference Photos/Tower.jpg`, a 4284×5712 phone photograph of a brick
+smokestack. It is architecture, it has strong converging verticals, and it is a picture worth
+keeping — which is the whole argument. The source is already exactly 3:4, so both frames keep
+the photographer's full composition.
+
+The correction is a keystone reproducing the transform the app applies. **It is a
+demonstration built from the raw photograph, not a screen recording of the app.**
+
+The guide lines and corner handles are **not baked into the pixels** — they are an SVG overlay
+in `index.html`, so they stay crisp at any density and the photographs underneath can be
+swapped without redoing the artwork. The plate is 3:4 and so is the photograph, so with
+`preserveAspectRatio="none"` the viewBox units map straight onto the picture at any size.
+
+Better before/after photographs are welcome: drop them in at the same
+`straightpic-before-*` / `straightpic-after-*` filenames and nothing else needs to change.
+
+## The rail
+
+A fixed hairline in the left gutter with a lit cyan segment tracking scroll position, a tick
+at the top of every chapter, and two-digit chapter numerals above 1400px. It carries nothing
+you cannot already see, which is why it is `aria-hidden`, and it is only built above 1100px
+where there is gutter to spare. Tick positions come from the chapters themselves, so editing
+the page cannot leave them pointing at nothing.
+
+Because it is `position: fixed` it crosses both grounds. `script.js` therefore asks whether any
+`.on-dark` band straddles a probe line 140px down the viewport, and colours the hairline to
+match. Asking which *section* is at the top gets this wrong — the Dragify exhibition is one
+section that opens on paper and then breaks full-bleed onto midnight for its gallery. Pure
+geometry rather than `elementFromPoint`, so it cannot disagree with itself depending on when
+in the frame it runs.
 
 ## Header
 
-The header is transparent and absolutely positioned over the hero, then switches to a solid
-fixed bar once the page scrolls past 12px — the same behaviour as lukerenner.co 2.0. Over the
-hero every element in the bar is white; `.is-scrolled` reverts it to the ink palette.
+The header is transparent and absolutely positioned over the arrival image, then switches to a
+solid paper bar once the page scrolls past 12px.
 
-Pages with no dark hero (`support`, `privacy`, `terms`, `open-source`, `thanks`) ship
-`class="site-header is-solid"` in the markup. That starts them in the solid appearance and
-makes `script.js` skip the scroll toggle entirely — without it those pages would paint white
-text on cream. **If you add a page, remember the `is-solid`.**
-
-The brand mark is `assets/logo.png` redrawn as inline SVG, matching `assets/favicon.svg`. It
-carries its own two colours rather than inheriting `fill`, so the one markup blob works on
-both the transparent and the solid bar.
+Pages with no photographic arrival (`support`, `contact`, `privacy`, `terms`, `open-source`,
+`thanks`) ship `class="site-header is-solid"` in the markup. That starts them in the solid
+appearance and makes `script.js` skip the scroll toggle entirely. **If you add a page,
+remember the `is-solid`.**
 
 ## Canonical policy dialog
 
@@ -172,29 +248,21 @@ Notes for anyone touching this:
 StraightPic's links point at this site's own `terms.html` / `privacy.html`, which are single
 documents covering both apps — hence no per-app fragment.
 
-## Before/after sliders
+## Before/after slider
 
-The Dragify and StraightPic features use a drag-to-compare slider ported from the Dragify
-Astro site (`src/components/BeforeAfterSlider.astro`) into vanilla CSS/JS.
+The Dragify mechanism uses a drag-to-compare slider. The control is a real
+`<input type="range">` stretched invisibly over the whole frame, so pointer dragging *and*
+keyboard arrows work without reimplementing either. `script.js` only mirrors its value onto a
+`--split` custom property, which drives both the `clip-path` on the "before" image and the
+handle position. Because the input is transparent, its focus ring is drawn on the frame via
+`.compare:has(.compare-range:focus-visible)`.
 
-The control is a real `<input type="range">` stretched invisibly over the whole frame, so
-pointer dragging *and* keyboard arrows work without reimplementing either. `script.js` only
-mirrors its value onto a `--split` custom property, which drives both the `clip-path` on the
-"before" image and the handle position. Because the input is transparent, its focus ring is
-drawn on the frame via `.compare:has(.compare-range:focus-visible)`.
+It sits **inside** the Dragify exhibition, below the gallery and at a fraction of its size:
+it demonstrates the mechanism, but the collection is the product. Both images are exported at
+exactly 3:4 to match the plate, so `object-fit: cover` has nothing to crop.
 
-The frame is `.media-6x4` capped at 900px wide, matching the slider on dragifyapp.com.
-
-`.compare img` uses **`object-fit: contain`, not `cover`** — this is deliberate, don't
-"optimise" it back. Both source sets are tight 3:4 portraits: the drag wig already touches the
-top edge of its frame, and StraightPic's guide markers sit in the bottom corners. Covering a
-6:4 box keeps only ~50% of the image height, which decapitated the wig and cropped out the
-markers — it removed the exact thing each slider exists to demonstrate. Letterboxing against
-`--navy-deep` keeps the requested dimensions without destroying the content. If the sources are
-ever re-shot or re-exported at a true landscape crop, `cover` becomes viable again.
-
-The StraightPic pair are placeholders — swap in real before/after photos at the same
-`straightpic-before-*` / `straightpic-after-*` filenames and nothing else needs to change.
+StraightPic uses a static two-up installation instead of a slider — a different exhibition,
+deliberately given a different form.
 
 ## Deploying to elevatorbeat.com (GitHub Pages)
 
@@ -211,10 +279,11 @@ The StraightPic pair are placeholders — swap in real before/after photos at th
 
 ## Forms / contact
 
-The closing section of `index.html` is a contact form posting to
+`contact.html` carries the contact form, posting to
 [FormSubmit](https://formsubmit.co) at `hello@elevatorbeat.com` — no backend to run. It uses
 a hidden `_honey` honeypot field with `_captcha` disabled, and `_next` redirects to
-`thanks.html` on success.
+`thanks.html` on success. The homepage closes on a decision, not a five-field form — the form
+lives where somebody who has already decided to write goes looking for it.
 
 **Two things to do before launch:**
 
@@ -243,6 +312,6 @@ StraightPic, and list anything new that gets added.
 
 ## Cache-busting
 
-CSS/JS are loaded with a version query string (`styles.css?v=20260729a`). Bump it on any
+CSS/JS are loaded with a version query string (`styles.css?v=20260729e`). Bump it on any
 meaningful change so browsers don't serve a stale cached copy — and bump it in all six
 HTML files together, not just `index.html`.

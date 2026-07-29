@@ -16,8 +16,9 @@ const header = document.querySelector('[data-header]');
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const nav = document.querySelector('[data-nav]');
 
-// The header is transparent over the hero and goes solid once the page moves.
-// Pages without a photographic hero ship .is-solid in the markup and opt out.
+// The header is transparent over the arrival image and goes solid once the
+// page moves. Pages without a photographic arrival ship .is-solid in the
+// markup and opt out.
 const updateHeader = () => {
   if (header?.classList.contains('is-solid')) return;
   header?.classList.toggle('is-scrolled', window.scrollY > 12);
@@ -39,39 +40,82 @@ nav?.addEventListener('click', (event) => {
 // The rail — the page's elevator position indicator.
 //
 // A hairline in the window's left gutter with a lit segment tracking scroll
-// position and a tick at the top of each section. It is decoration in the sense
+// position and a tick at the top of each chapter. It is decoration in the sense
 // that it carries nothing you can't already see, which is why it is aria-hidden
 // and why it is only built above 1100px, where there is gutter to spare. The
-// tick positions come from the sections themselves rather than hard-coded
+// tick positions come from the chapters themselves rather than hard-coded
 // offsets, so editing the page can't leave them pointing at nothing.
+//
+// The page has two grounds and the rail is fixed, so it crosses both as you
+// scroll. Rather than blend-mode tricks — which go wrong over photographs — it
+// asks which chapter currently occupies the top of the viewport and takes that
+// chapter's ground. The cyan car reads on either and never changes.
 // ---------------------------------------------------------------------------
 const rail = document.querySelector('[data-rail]');
 const railCar = rail?.querySelector('.rail-car');
+const sections = [...document.querySelectorAll('[data-rail-section]')];
 
-if (rail && railCar) {
-  const sections = [...document.querySelectorAll('[data-rail-section]')];
+if (rail && railCar && sections.length) {
   const wide = window.matchMedia('(min-width: 1100px)');
-  let ticks = [];
+  let marks = [];
 
   const buildTicks = () => {
-    ticks.forEach((tick) => tick.remove());
-    ticks = [];
+    marks.forEach((mark) => mark.remove());
+    marks = [];
     if (!wide.matches) return;
     const doc = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    const travel = window.innerHeight - 78;
     sections.forEach((section) => {
-      // Sections start at their own top; map that scroll offset onto the rail's
+      // Chapters start at their own top; map that scroll offset onto the rail's
       // full-viewport height the same way the car is mapped, so a tick and the
-      // car meet exactly when that section reaches the top of the window.
-      const at = Math.min(section.offsetTop / doc, 1);
+      // car meet exactly when that chapter reaches the top of the window.
+      const at = Math.min(section.offsetTop / doc, 1) * travel;
+
       const tick = document.createElement('span');
       tick.className = 'rail-tick';
-      tick.style.top = `${at * (window.innerHeight - 78)}px`;
+      tick.style.top = `${at}px`;
       rail.appendChild(tick);
-      ticks.push(tick);
+      marks.push(tick);
+
+      const label = section.dataset.railNum;
+      if (label) {
+        const num = document.createElement('span');
+        num.className = 'rail-num';
+        num.textContent = label;
+        num.style.top = `${at}px`;
+        rail.appendChild(num);
+        marks.push(num);
+      }
     });
   };
 
+  // Which ground is the rail sitting on right now?
+  //
+  // Asking which SECTION is at the top of the viewport gets this wrong: the
+  // Dragify exhibition is one section that opens on paper and then breaks
+  // full-bleed onto midnight for its gallery, so a section-level answer leaves
+  // an ink hairline drawn over a dark wall of photographs.
+  //
+  // So the question is asked of the dark BANDS instead of the sections: does
+  // any .on-ground-dark region straddle the probe line? That covers a section
+  // which changes ground partway through, needs no special case, and — unlike
+  // elementFromPoint — is pure geometry, so it can't disagree with itself
+  // depending on when in the frame it is called.
+  //
+  // The probe sits at y = 140, below the fixed header.
+  const darkZones = [...document.querySelectorAll('.on-dark')];
+  const PROBE_Y = 140;
+
+  const paintGround = () => {
+    const onDark = darkZones.some((zone) => {
+      const box = zone.getBoundingClientRect();
+      return box.top <= PROBE_Y && box.bottom > PROBE_Y;
+    });
+    rail.dataset.ground = onDark ? 'dark' : 'light';
+  };
+
   const paintRail = () => {
+    paintGround();
     if (!wide.matches) return;
     const doc = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
     const progress = Math.min(Math.max(window.scrollY / doc, 0), 1);
@@ -82,7 +126,7 @@ if (rail && railCar) {
   refresh();
   window.addEventListener('resize', refresh);
   wide.addEventListener('change', refresh);
-  // The scenes and product shots are lazy-loaded, so the document height keeps
+  // The chapters and gallery are lazy-loaded, so the document height keeps
   // changing after load; recompute once everything has settled.
   window.addEventListener('load', refresh);
 
@@ -137,13 +181,46 @@ if (legalDialog && typeof legalDialog.showModal === 'function') {
   legalDialog.addEventListener('close', teardown);
 }
 
+// ---------------------------------------------------------------------------
+// Reveals.
+//
+// Two behaviours share one observer. Copy blocks rise into place; full-frame
+// chapters settle their photograph from 1.03 to 1, which is the only motion on
+// the page that touches an image.
+//
+// Gallery frames are staggered by their position in their own row rather than
+// by their index in the list, so a wide row doesn't run a long cascade while a
+// narrow one finishes instantly. Both are one-shot: once seen, unobserved.
+// ---------------------------------------------------------------------------
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    }
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('is-visible');
+    observer.unobserve(entry.target);
   });
 }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
 
-document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.observe(element));
+
+// Stagger within each gallery row. Reading offsetTop rather than nth-child is
+// what keeps the cascade correct after the grid reflows at a breakpoint — the
+// rows are different at every width, and a hard-coded delay would be wrong at
+// two of the three.
+const stagger = () => {
+  document.querySelectorAll('.gallery-grid').forEach((grid) => {
+    let rowTop = null;
+    let position = 0;
+    [...grid.children].forEach((item) => {
+      if (getComputedStyle(item).display === 'none') return;
+      const top = item.offsetTop;
+      if (rowTop === null || Math.abs(top - rowTop) > 80) {
+        rowTop = top;
+        position = 0;
+      }
+      item.style.setProperty('--delay', `${position * 90}ms`);
+      position += 1;
+    });
+  });
+};
+stagger();
+window.addEventListener('load', stagger);
