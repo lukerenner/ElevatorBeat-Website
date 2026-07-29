@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+# Form-confirmation page only — nothing to index, and it should never be a
+# landing page in search results.
+Disallow: /thanks.html
 
 Sitemap: https://elevatorbeat.com/sitemap.xml
