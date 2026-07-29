@@ -1128,6 +1128,10 @@ textarea:focus-visible {
 .page-hero { padding-block: clamp(120px, 12vw, 176px) 0; }
 .page-hero .display-l { max-width: 17ch; }
 .page-hero .lede { margin-top: 6px; }
+/* The hero carries no bottom padding because a .page-body normally follows and
+   supplies its own. On thanks.html the hero IS the whole page, so without this
+   its button row sits flush against the footer's top hairline. */
+main > .page-hero:last-child { padding-bottom: clamp(88px, 9vw, 132px); }
 /* Narrower than the container, for a readable measure — but starting at the
    container's LEFT edge. These sections also carry .container, and its
    `margin-inline: auto` would centre the narrow box, leaving the body copy
