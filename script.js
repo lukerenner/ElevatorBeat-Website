@@ -17,13 +17,11 @@ const menuToggle = document.querySelector('[data-menu-toggle]');
 const nav = document.querySelector('[data-nav]');
 
 // The header is transparent over the hero and goes solid once the page moves.
-// Pages without a dark hero ship .is-solid in the markup and opt out entirely.
+// Pages without a photographic hero ship .is-solid in the markup and opt out.
 const updateHeader = () => {
   if (header?.classList.contains('is-solid')) return;
   header?.classList.toggle('is-scrolled', window.scrollY > 12);
 };
-updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
 
 menuToggle?.addEventListener('click', () => {
   const isOpen = nav.classList.toggle('is-open');
@@ -36,6 +34,67 @@ nav?.addEventListener('click', (event) => {
     menuToggle?.setAttribute('aria-expanded', 'false');
   }
 });
+
+// ---------------------------------------------------------------------------
+// The rail — the page's elevator position indicator.
+//
+// A hairline in the window's left gutter with a lit segment tracking scroll
+// position and a tick at the top of each section. It is decoration in the sense
+// that it carries nothing you can't already see, which is why it is aria-hidden
+// and why it is only built above 1100px, where there is gutter to spare. The
+// tick positions come from the sections themselves rather than hard-coded
+// offsets, so editing the page can't leave them pointing at nothing.
+// ---------------------------------------------------------------------------
+const rail = document.querySelector('[data-rail]');
+const railCar = rail?.querySelector('.rail-car');
+
+if (rail && railCar) {
+  const sections = [...document.querySelectorAll('[data-rail-section]')];
+  const wide = window.matchMedia('(min-width: 1100px)');
+  let ticks = [];
+
+  const buildTicks = () => {
+    ticks.forEach((tick) => tick.remove());
+    ticks = [];
+    if (!wide.matches) return;
+    const doc = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    sections.forEach((section) => {
+      // Sections start at their own top; map that scroll offset onto the rail's
+      // full-viewport height the same way the car is mapped, so a tick and the
+      // car meet exactly when that section reaches the top of the window.
+      const at = Math.min(section.offsetTop / doc, 1);
+      const tick = document.createElement('span');
+      tick.className = 'rail-tick';
+      tick.style.top = `${at * (window.innerHeight - 78)}px`;
+      rail.appendChild(tick);
+      ticks.push(tick);
+    });
+  };
+
+  const paintRail = () => {
+    if (!wide.matches) return;
+    const doc = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    const progress = Math.min(Math.max(window.scrollY / doc, 0), 1);
+    rail.style.setProperty('--rail-pos', `${progress * (window.innerHeight - 78)}px`);
+  };
+
+  const refresh = () => { buildTicks(); paintRail(); };
+  refresh();
+  window.addEventListener('resize', refresh);
+  wide.addEventListener('change', refresh);
+  // The scenes and product shots are lazy-loaded, so the document height keeps
+  // changing after load; recompute once everything has settled.
+  window.addEventListener('load', refresh);
+
+  window.addEventListener('scroll', () => {
+    updateHeader();
+    paintRail();
+  }, { passive: true });
+} else {
+  window.addEventListener('scroll', updateHeader, { passive: true });
+}
+
+updateHeader();
 
 // Policies that are canonical on another domain (Dragify's live on
 // dragifyapp.com) open in a dialog framing that page, so there is only ever one
@@ -85,6 +144,6 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
 
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));

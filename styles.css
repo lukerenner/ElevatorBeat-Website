@@ -1,78 +1,148 @@
-:root {
-  --font-display: Georgia, "Times New Roman", serif;
-  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+/* ==========================================================================
+   ElevatorBeat — one design system for the whole site.
 
-  --ink: #12203a;
-  --navy: #14233f;
-  --navy-deep: #0d1830;
-  --surface: #fffdf9;
-  --surface-page: #faf4ea;
-  --surface-blue: #e9eef7;
-  --surface-cream: #f3ead9;
-  --surface-cream-soft: #f7efe1;
-  --text-muted: #5b6472;
-  --border: #e5ddcd;
-  --border-soft: #efe7d8;
-  --cyan: #44c9d6;
-  --cyan-dark: #2aa9b6;
-  /* Darker cyan reserved for small text on light grounds — --cyan
-     alone fails WCAG AA for body-size text. */
-  --cyan-text: #147480;
-  --orange: #c04e28;
-  --orange-dark: #9c4526;
-  --orange-soft: #e2ceb8;
-  /* Warm tint for eyebrow/label text on DARK grounds — --orange itself
-     drops below AA against the image scrims. */
-  --orange-light: #eeae7c;
+   The page is midnight blue from the masthead to the copyright line. That is
+   the structural decision the rest of this file depends on: the brand's
+   photography is a single deep-blue, copper-lit world, and the previous build
+   dropped that photography into a cream editorial page, so every image met the
+   layout at a hard seam. A dark ground removes the seam — the pictures are
+   simply the places where the page opens up.
 
-  --container: 1280px;
-  --page-x: clamp(20px, 5.55vw, 80px);
-  --section-y: clamp(56px, 5.6vw, 96px);
-  --radius-card: 16px;
-  --radius-media: 18px;
-  --radius-control: 9px;
-  --shadow-soft: 0 20px 48px rgba(15, 30, 55, 0.08);
-  --shadow-card: 0 1px 0 rgba(15, 30, 55, 0.04), 0 12px 28px rgba(15, 30, 55, 0.06);
-  --shadow-media: 0 24px 60px rgba(28, 18, 10, 0.18);
+   Colour is deliberately short: midnight, warm ivory, one cyan. Copper and
+   desert rust appear only INSIDE the photographs, never as interface colour.
+   Anything saturated that is not brand cyan is app artwork.
+   ========================================================================== */
 
-  /* Reused scrim for text sitting on top of full-bleed photography. */
-  --scrim-bottom: linear-gradient(to top,
-      rgba(9, 16, 30, .88) 0%,
-      rgba(9, 16, 30, .72) 28%,
-      rgba(9, 16, 30, .36) 58%,
-      rgba(9, 16, 30, .08) 100%);
+/* Instrument Serif, self-hosted (SIL Open Font License 1.1) — headlines only.
+   Two 15 KB files rather than a webfont service: no third-party connection on
+   the critical path, and the display face is the only thing that needs one.
+   Body copy uses the platform UI sans, which is already resident. */
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/instrument-serif-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/instrument-serif-latin-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-[id] { scroll-margin-top: 84px; }
+:root {
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Ground values, darkest to lightest. Three is the whole range — more than
+     that and the page starts looking like stacked panels again. */
+  --midnight-deep: #050C15;
+  --midnight: #08131F;
+  --midnight-lift: #0D1B2B;
+
+  --ivory: #F3ECE1;          /* primary text — warm, never #fff */
+  --slate: #93A6B8;          /* secondary text, 7.3:1 on --midnight */
+  --cyan: #00D8ED;           /* the single accent */
+  --cyan-deep: #00A5B8;      /* hover / pressed */
+
+  /* Hairlines. The system has exactly two weights of line and no shadows:
+     depth comes from the photographs, not from drop shadows under boxes. */
+  --line: rgba(243, 236, 225, .13);
+  --line-strong: rgba(243, 236, 225, .26);
+
+  --container: 1180px;
+  --page-x: clamp(22px, 5vw, 72px);
+  --section-y: clamp(88px, 10vw, 168px);
+  --radius: 3px;             /* architectural, not app-store rounded */
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+[id] { scroll-margin-top: 96px; }
+
 body {
   margin: 0;
-  background: var(--surface-page);
-  color: var(--ink);
+  background: var(--midnight);
+  color: var(--ivory);
   font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.6;
-  text-rendering: optimizeLegibility;
+  font-size: 17px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; }
-p { margin: 0 0 1rem; }
+p { margin: 0 0 1.15em; }
 p:last-child { margin-bottom: 0; }
 button, a { -webkit-tap-highlight-color: transparent; }
+
+/* ---------- Type scale ----------
+   One expressive serif at display sizes, one sans everywhere else. Instrument
+   Serif is high-contrast and ships a single weight, so scale and leading do
+   the emphasis that a bold weight would normally do. */
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -.015em;
-  margin: 0 0 .5em;
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -.018em;
+  margin: 0 0 .38em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(46px, 7.2vw, 94px); }
+h2 { font-size: clamp(38px, 5.4vw, 66px); }
+h3 { font-size: clamp(32px, 3.9vw, 48px); }
+
+.lede {
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.6;
+  color: var(--slate);
+  max-width: 46ch;
+}
+.body-copy { max-width: 54ch; color: var(--slate); }
+.body-copy strong { color: var(--ivory); font-weight: 600; }
+
+/* Section label. The cyan tick is the smallest instance of the rail motif —
+   it appears anywhere the page starts a new floor. Tracking is kept modest;
+   wide-tracked capitals were part of what made the old page feel templated. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 22px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .085em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  box-shadow: 0 0 8px rgba(0, 216, 237, .55);
 }
 
 .container {
   width: min(calc(100% - (2 * var(--page-x))), var(--container));
   margin-inline: auto;
 }
+.section { padding-block: var(--section-y); }
+/* Sized in px, not ch: at the h2's display size a ch-based cap is barely wider
+   than a single word, which shredded "Two focused tools. More on the way."
+   into five lines. The headline keeps its own measure below. */
+.section-head { max-width: 780px; margin-bottom: clamp(48px, 5.5vw, 88px); }
+.section-head h2 { max-width: 15ch; }
 
 /* ---------- Accessibility helpers ---------- */
 .skip-link {
@@ -80,14 +150,14 @@ h1, h2, h3 {
   left: 16px;
   top: 12px;
   z-index: 1000;
-  transform: translateY(-160%);
-  background: var(--navy);
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 6px;
+  transform: translateY(-180%);
+  background: var(--cyan);
+  color: var(--midnight-deep);
+  padding: 11px 16px;
+  border-radius: var(--radius);
   font-weight: 700;
   text-decoration: none;
-  transition: transform .2s ease;
+  transition: transform .2s var(--ease);
 }
 .skip-link:focus { transform: translateY(0); }
 .sr-only {
@@ -103,62 +173,67 @@ h1, h2, h3 {
 }
 a:focus-visible,
 button:focus-visible,
-.support-card:focus-visible {
-  outline: 3px solid var(--cyan-dark);
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--cyan);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: var(--radius);
 }
-/* On dark photographic grounds the cyan ring loses contrast — use white. */
-.hero :focus-visible,
-.bleed-band :focus-visible,
-.closing :focus-visible { outline-color: #fff; }
 
-/* ---------- Header ----------
-   Transparent and overlaid on the hero at rest; on scroll it detaches into a
-   solid fixed bar. Pages with no dark hero (support, privacy, terms,
-   open-source, thanks) carry .is-solid in the markup so they start in the
-   scrolled appearance and never paint white text on cream. */
+/* ---------- The rail ----------
+   A fixed hairline down the left edge of the window with a lit segment that
+   tracks scroll position, and a tick at the top of every section: an elevator
+   position indicator for the page. It lives in the window gutter rather than
+   the content grid, so it never pushes on the layout, and it is hidden below
+   1100px where there is no gutter to give it. Paper-thin on purpose. */
+.rail {
+  position: fixed;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  z-index: 15;
+  width: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+.rail-tick {
+  position: absolute;
+  left: -3px;
+  width: 7px;
+  height: 1px;
+  background: var(--line-strong);
+}
+.rail-car {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 78px;
+  top: var(--rail-pos, 0px);
+  background: linear-gradient(to bottom,
+      rgba(0, 216, 237, 0), var(--cyan) 45%, rgba(0, 216, 237, 0));
+  box-shadow: 0 0 14px rgba(0, 216, 237, .7);
+}
+@media (max-width: 1099px) { .rail { display: none; } }
+
+/* ---------- Header ---------- */
 .site-header {
   position: absolute;
   inset: 0 0 auto;
   z-index: 20;
-  background: transparent;
+  padding: 22px 0;
   border-bottom: 1px solid transparent;
-  padding: 20px 0;
-  transition: background .2s ease, box-shadow .2s ease, padding .2s ease, border-color .2s ease;
+  transition: background .25s var(--ease), padding .25s var(--ease),
+    border-color .25s var(--ease);
 }
 .site-header.is-scrolled,
 .site-header.is-solid {
   position: fixed;
-  padding: 11px 0;
-  background: rgba(250, 244, 234, .88);
-  backdrop-filter: blur(12px);
-  border-color: var(--border);
-  box-shadow: 0 1px 0 rgba(15, 30, 55, .04);
+  padding: 13px 0;
+  background: rgba(8, 19, 31, .86);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--line);
 }
 .site-header.is-solid { position: sticky; }
-
-/* Over the hero photograph everything in the bar is white; once the bar goes
-   solid it reverts to the inherited ink colours below. */
-.site-header .brand { color: #fff; }
-.site-header .site-nav a { color: #fff; }
-.site-header .site-nav .nav-cta { color: #fff; border-color: rgba(255, 255, 255, .6); }
-.site-header .site-nav .nav-cta:hover { background: #fff; color: var(--navy); }
-.site-header .menu-toggle { border-color: rgba(255, 255, 255, .5); }
-.site-header .menu-toggle span { background: #fff; }
-
-.site-header.is-scrolled .brand,
-.site-header.is-solid .brand { color: var(--navy); }
-.site-header.is-scrolled .site-nav a,
-.site-header.is-solid .site-nav a { color: var(--ink); }
-.site-header.is-scrolled .site-nav .nav-cta,
-.site-header.is-solid .site-nav .nav-cta { color: var(--navy); border-color: var(--navy); }
-.site-header.is-scrolled .site-nav .nav-cta:hover,
-.site-header.is-solid .site-nav .nav-cta:hover { background: var(--navy); color: #fff; }
-.site-header.is-scrolled .menu-toggle,
-.site-header.is-solid .menu-toggle { border-color: var(--border); }
-.site-header.is-scrolled .menu-toggle span,
-.site-header.is-solid .menu-toggle span { background: var(--ink); }
 
 .nav-shell {
   display: flex;
@@ -169,234 +244,292 @@ button:focus-visible,
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: var(--navy);
+  gap: 11px;
+  color: var(--ivory);
   text-decoration: none;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 21px;
-  letter-spacing: -.02em;
+  font-size: 25px;
+  letter-spacing: -.01em;
 }
-/* The logo mark: the elevator-car badge from assets/logo.png, redrawn as SVG.
-   It carries its own two colours, so it reads on both the transparent header
-   over the hero and the solid one after scroll. */
-.brand-mark {
-  width: 18px;
-  height: 27px;
-  flex: none;
-}
-.site-nav {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
+.brand-mark { width: 17px; height: 26px; flex: none; }
+
+.site-nav { display: flex; align-items: center; gap: 32px; }
 .site-nav a {
-  color: var(--ink);
+  position: relative;
+  color: var(--ivory);
   text-decoration: none;
   font-size: 15px;
-  font-weight: 600;
-  opacity: .82;
-  transition: opacity .18s ease, color .18s ease;
+  font-weight: 500;
+  opacity: .78;
+  transition: opacity .18s var(--ease);
 }
-.site-nav a:hover { opacity: 1; color: var(--orange-dark); }
-.site-nav .nav-cta {
-  opacity: 1;
-  color: var(--navy);
-  background: transparent;
-  border: 1px solid var(--navy);
-  border-radius: var(--radius-control);
-  padding: 9px 18px;
-  font-weight: 700;
+.site-nav a:hover,
+.site-nav a[aria-current="page"] { opacity: 1; }
+/* The only nav decoration: a 1px cyan underline, i.e. the rail again. */
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 1px;
+  background: var(--cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .22s var(--ease);
 }
-.site-nav .nav-cta:hover { background: var(--navy); color: #fff; }
+.site-nav a:hover::after,
+.site-nav a[aria-current="page"]::after { transform: scaleX(1); }
 
 .menu-toggle {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
   cursor: pointer;
 }
 .menu-toggle span {
   display: block;
   width: 18px;
-  height: 2px;
+  height: 1px;
   margin-inline: auto;
-  background: var(--ink);
-  transition: transform .2s ease, opacity .2s ease;
+  background: var(--ivory);
 }
-.site-nav.is-open .nav-cta { order: 99; }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons ----------
+   Two only: a solid cyan primary and an outlined secondary. Cyan is bright
+   enough that its label has to be midnight rather than white (10:1 either way
+   round, but only one of them is legible). */
 .button-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 14px;
-  margin-top: 28px;
+  margin-top: 36px;
 }
 .button {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 13px 22px;
-  border-radius: var(--radius-control);
-  font-weight: 700;
-  font-size: 15px;
-  text-decoration: none;
+  gap: 10px;
+  padding: 14px 26px;
   border: 1px solid transparent;
-  transition: transform .15s ease, background .15s ease, box-shadow .15s ease, border-color .15s ease;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .005em;
+  text-decoration: none;
   cursor: pointer;
+  transition: background .18s var(--ease), border-color .18s var(--ease),
+    color .18s var(--ease);
 }
-.button:hover { transform: translateY(-1px); }
-/* Cyan is light enough that white label text fails AA — primary buttons use
-   deep navy on the cyan fill instead (9:1). */
-.button-primary { background: var(--cyan); color: var(--navy-deep); }
-.button-primary:hover { background: var(--cyan-dark); box-shadow: var(--shadow-soft); }
+.button-primary { background: var(--cyan); color: var(--midnight-deep); }
+.button-primary:hover { background: var(--cyan-deep); }
 .button-secondary {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--border);
+  color: var(--ivory);
+  border-color: var(--line-strong);
 }
-.button-secondary:hover { border-color: var(--navy); background: rgba(255, 255, 255, .55); }
-/* For button rows that sit on top of photography. */
-.button-invert { background: #fff; color: var(--navy-deep); }
-.button-invert:hover { background: var(--surface-cream); }
-.button-ghost {
-  background: transparent;
-  color: #fff;
-  border-color: rgba(255, 255, 255, .55);
-}
-.button-ghost:hover { border-color: #fff; background: rgba(255, 255, 255, .12); }
-.button-secondary.is-disabled {
-  color: var(--text-muted);
-  pointer-events: none;
-}
-/* The Apple glyph is 384×512 — forcing it into a square box is what made it
-   look stretched. Keep its own ratio and nudge it up to sit on the cap line. */
-.apple-icon {
-  width: 14px;
-  height: 18.7px;
-  flex: none;
-  fill: currentColor;
-  margin-top: -2px;
-}
+.button-secondary:hover { border-color: var(--ivory); }
+.button svg { flex: none; fill: currentColor; }
+/* The Apple glyph is 384×512 — held to its own ratio so it isn't stretched. */
+.apple-icon { width: 14px; height: 18.7px; margin-top: -2px; }
 
-/* An unreleased app's CTA: reads "Download on the App Store" at rest and swaps
-   to "Coming soon" on hover/focus. Both labels are stacked in the same grid
-   cell so the button keeps the width of the longer one and nothing reflows. */
-.button-upcoming {
-  font: inherit;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: default;
-}
-.button-upcoming:hover { transform: none; background: var(--cyan); }
+/* An app that hasn't shipped: a real focusable button rather than a dead link,
+   swapping its label to "Coming soon" on hover and keyboard focus. Both labels
+   share one grid cell so the width is the longer one and nothing reflows.
+   It takes the OUTLINED treatment even though it sits where the other app's
+   primary action sits: the hover swap is the only thing distinguishing the two
+   otherwise, and a phone has no hover — so on touch a solid cyan button would
+   read as a live download for an app that cannot be downloaded. Same position
+   and same hierarchy, different affordance. */
+.button-upcoming { cursor: default; }
 .button-label { display: grid; }
-.button-label > span {
-  grid-area: 1 / 1;
-  transition: opacity .15s ease;
-}
+.button-label > span { grid-area: 1 / 1; transition: opacity .16s var(--ease); }
 .button-label-hover { opacity: 0; }
 .button-upcoming:hover .button-label-rest,
 .button-upcoming:focus-visible .button-label-rest { opacity: 0; }
 .button-upcoming:hover .button-label-hover,
 .button-upcoming:focus-visible .button-label-hover { opacity: 1; }
-@media (prefers-reduced-motion: reduce) {
-  .button-label > span { transition: none; }
-}
 
-/* ---------- Layout helpers ---------- */
-.section { padding-block: var(--section-y); }
-.section-tight { padding-block: clamp(40px, 4vw, 64px); }
-/* Vertical rhythm between sibling blocks inside one section. */
-.stack-gap { margin-top: clamp(48px, 5vw, 88px); }
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: .11em;
-  font-size: 12.5px;
-  font-weight: 800;
-  color: var(--orange-dark);
-  margin: 0 0 12px;
-}
-.eyebrow-light { color: var(--orange-light); }
-.section-heading { max-width: 760px; margin-bottom: clamp(32px, 3.6vw, 52px); }
-.section-heading h2 { font-size: clamp(27px, 3.2vw, 38px); }
-.section-subtitle { color: var(--text-muted); font-size: 17px; }
-.lede { font-size: clamp(17px, 1.35vw, 19px); color: var(--text-muted); max-width: 52ch; }
-
-.reveal { opacity: 1; transform: none; }
+/* ---------- Reveal ---------- */
 .js .reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(20px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
 }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .js .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .button-label > span, .site-nav a::after { transition: none; }
 }
 
-/* ---------- Media primitives ----------
-   One canonical image frame, reused by every photographic block. */
-.media {
+/* ==========================================================================
+   1 — THE PROMISE
+   ========================================================================== */
+.hero {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  min-height: max(640px, 100svh);
+  padding-top: clamp(104px, 10vw, 140px);
+  padding-bottom: clamp(56px, 6vw, 96px);
   overflow: hidden;
-  border-radius: var(--radius-media);
-  background: #1d1710;
-  box-shadow: var(--shadow-media);
+  background: var(--midnight-deep);
 }
-.media img {
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Biased right so the tower and the lit deck stay clear of the copy column. */
+  object-position: 58% 54%;
 }
-.media-4x3 { aspect-ratio: 4 / 3; }
-.media-3x4 { aspect-ratio: 3 / 4; }
-.media-16x9 { aspect-ratio: 16 / 9; }
-/* The compare frame, matching the one on dragifyapp.com. */
-.media-6x4 { aspect-ratio: 6 / 4; }
-
-/* Before / after drag-to-compare — used by both app features.
-   The <input type="range"> is the actual control: stretched over the whole
-   frame and made invisible, so pointer dragging and keyboard arrows both work
-   without reimplementing either. JS only mirrors its value onto the clip and
-   the handle position. */
-.compare {
-  position: relative;
-  max-width: 900px;
-  /* Matte behind the letterboxed photograph — see the object-fit note below. */
-  background: var(--navy-deep);
-}
-.compare img {
+/* Left-weighted, because the copy is left-aligned and the subject is not. A
+   bottom-heavy scrim would darken the band the architecture sits in and flatten
+   the painting; this darkens only the column the text needs. */
+.hero::after {
+  content: "";
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  /* CONTAIN, not cover. Both source sets are tight portraits (3:4): the drag
-     wig already touches the top edge, and StraightPic's guide markers sit in
-     the bottom corners. Covering a 6:4 frame keeps only ~50% of the height,
-     which cut the wig off and dropped the markers — i.e. it cropped away the
-     exact thing each slider exists to show. Letterboxing keeps the frame at
-     dragifyapp.com's dimensions without destroying the content. */
-  object-fit: contain;
+  z-index: 1;
+  background: linear-gradient(to right,
+      rgba(5, 12, 21, .90) 0%,
+      rgba(5, 12, 21, .74) 32%,
+      rgba(5, 12, 21, .30) 62%,
+      rgba(5, 12, 21, 0) 92%);
 }
+.hero-inner { position: relative; z-index: 2; }
+.hero-inner h1 { max-width: 13ch; margin-bottom: .3em; }
+.hero-inner .lede { max-width: 44ch; color: rgba(243, 236, 225, .82); }
+
+/* ==========================================================================
+   2 — THE PHILOSOPHY
+   ========================================================================== */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: start;
+}
+.philosophy-grid h2 { max-width: 11ch; margin-bottom: 0; }
+.philosophy-grid .body-copy { font-size: 19px; padding-top: .5em; }
+
+/* Three principles as plain text separated by hairlines. Explicitly not cards:
+   no box, no shadow, no icon, no hover state — they are a list, and a list is
+   what they should look like. */
+.principles {
+  list-style: none;
+  margin: clamp(56px, 6vw, 96px) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.principles li {
+  display: grid;
+  grid-template-columns: minmax(0, 15ch) minmax(0, 52ch);
+  gap: clamp(24px, 5vw, 72px);
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+.principles dt, .principles h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2vw, 26px);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+}
+.principles p { margin: 0; color: var(--slate); }
+
+/* ==========================================================================
+   3 — THE PRODUCTS
+   ========================================================================== */
+.product {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.product + .product,
+.product-extra + .product { margin-top: clamp(88px, 9vw, 150px); }
+.product.is-reversed .product-copy { order: 2; }
+
+.product-copy h3 { margin-bottom: .34em; }
+.product-copy .body-copy { font-size: 18px; }
+.app-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  margin-bottom: 22px;
+}
+/* app name · category, sitting under the icon. Same rhythm as .eyebrow but
+   without the tick, which belongs to sections rather than items. */
+.product-kicker {
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .085em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.product-kicker strong { color: var(--cyan); font-weight: 600; }
+
+/* Quiet by design: these must never compete with the App Store button above
+   them, so they are one size down, slate, and separated by hairline pipes. */
+.app-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--slate);
+}
+.app-links a { text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+.app-links a:hover { color: var(--cyan); border-bottom-color: var(--cyan); }
+.app-links span { color: var(--line-strong); }
+
+/* ---------- The framing system ----------
+   Every photograph on the page — product shots and look tiles alike — sits in
+   this frame, at the same radius, on the same navy matte, behind the same
+   hairline. It is the thing that makes two unrelated apps read as one family. */
+.frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--midnight-lift);
+}
+.frame-3x4 { aspect-ratio: 3 / 4; }
+.frame img { width: 100%; height: 100%; object-fit: cover; }
+/* width:100% is load-bearing, not redundant. An auto inline margin turns a grid
+   item from stretch into shrink-to-fit, and every child of the compare frame is
+   absolutely positioned — so without an explicit width the frame's fit-content
+   size is its two border pixels and the whole image collapses.
+   The single auto margin pushes each frame out to the container edge rather
+   than centring it in its column, so both products sit on the same grid the
+   copy does instead of floating at two different insets. */
+.product-media { width: 100%; max-width: 470px; margin-inline: auto 0; }
+.product.is-reversed .product-media { margin-inline: 0 auto; }
+
+/* Before / after comparison. The <input type="range"> is the real control:
+   stretched over the frame and made invisible, so pointer dragging and keyboard
+   arrows both work without reimplementing either. JS only mirrors its value
+   onto --split, which drives the clip and the handle. */
+.compare img { position: absolute; inset: 0; }
 .compare-after { z-index: 1; }
-/* Clipped from the right; --split is written by script.js. */
-.compare-before {
-  z-index: 2;
-  clip-path: inset(0 calc(100% - var(--split, 50%)) 0 0);
-}
+.compare-before { z-index: 2; clip-path: inset(0 calc(100% - var(--split, 50%)) 0 0); }
 .compare-range {
   position: absolute;
   inset: 0;
-  z-index: 4;
+  z-index: 5;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -406,24 +539,21 @@ button:focus-visible,
   appearance: none;
   background: none;
 }
-.compare-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 44px;
-  height: 100%;
-}
+.compare-range::-webkit-slider-thumb { -webkit-appearance: none; width: 44px; height: 100%; }
 .compare-range::-moz-range-thumb { width: 44px; height: 100%; border: 0; }
-.compare-range:active { cursor: grabbing; }
-/* The visible affordance is inert — the range input above it takes all input. */
+/* The visible affordance is inert — the range above it takes every event.
+   A 1px lit line with a small square node: the rail motif as a control, rather
+   than the usual white circle with white arrows. */
 .compare-handle {
   position: absolute;
   top: 0;
   left: var(--split, 50%);
-  z-index: 3;
-  width: 3px;
+  z-index: 4;
+  width: 1px;
   height: 100%;
   transform: translateX(-50%);
-  background: #fff;
-  box-shadow: 0 0 12px rgba(9, 16, 30, .45);
+  background: var(--cyan);
+  box-shadow: 0 0 12px rgba(0, 216, 237, .8);
   pointer-events: none;
 }
 .compare-handle::before {
@@ -431,335 +561,203 @@ button:focus-visible,
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 46px;
-  height: 46px;
+  width: 30px;
+  height: 30px;
   transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 4px 18px rgba(9, 16, 30, .35);
+  border: 1px solid var(--cyan);
+  border-radius: var(--radius);
+  background: rgba(8, 19, 31, .82);
+  backdrop-filter: blur(2px);
 }
 .compare-handle::after {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 17px;
-  height: 9px;
+  width: 15px;
+  height: 8px;
   transform: translate(-50%, -50%);
-  /* Two arrowheads pointing out from the centre. */
-  background: var(--navy);
-  clip-path: polygon(0 50%, 6px 0, 6px 35%, 11px 35%, 11px 0, 17px 50%, 11px 100%, 11px 65%, 6px 65%, 6px 100%);
+  background: var(--cyan);
+  clip-path: polygon(0 50%, 5px 0, 5px 35%, 10px 35%, 10px 0, 15px 50%, 10px 100%, 10px 65%, 5px 65%, 5px 100%);
 }
-/* The range input is transparent, so its focus ring has to land on the frame. */
-.compare:has(.compare-range:focus-visible) {
-  outline: 3px solid #fff;
-  outline-offset: 3px;
-}
-.compare-chip { z-index: 3; pointer-events: none; }
-.compare-chip.is-before { left: 12px; right: auto; }
-.compare-chip.is-after { right: 12px; left: auto; }
-.chip {
+.compare:has(.compare-range:focus-visible) { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+/* Flat, small, and the same on both apps. No pill, no blur, no gradient. */
+.frame-label {
   position: absolute;
-  left: 12px;
-  bottom: 12px;
-  z-index: 1;
-  padding: 5px 11px;
-  border-radius: 100px;
-  background: rgba(9, 16, 30, .74);
-  backdrop-filter: blur(6px);
-  color: #fff;
-  font-size: 11.5px;
-  font-weight: 800;
-  letter-spacing: .09em;
+  top: 12px;
+  z-index: 4;
+  padding: 4px 9px;
+  border-radius: var(--radius);
+  background: rgba(5, 12, 21, .78);
+  color: var(--ivory);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .1em;
   text-transform: uppercase;
+  pointer-events: none;
 }
+.frame-label.is-before { left: 12px; }
+.frame-label.is-after { right: 12px; }
 
-/* App icon — reused in feature rows. */
-.app-icon {
-  width: 62px;
-  height: 62px;
-  border-radius: 15px;
-  box-shadow: var(--shadow-card);
-  margin-bottom: 18px;
-}
-
-/* ---------- Hero (full-bleed) ----------
-   Fills the viewport down to the fold, with the overlaid header sitting on top
-   of it rather than above it. */
-.hero {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 620px;
-  min-height: max(620px, 100svh);
-  /* Top padding clears the overlaid header. The bottom is deliberately lighter
-     than the top: the whole copy block has to fit inside one viewport on a
-     laptop, and symmetric padding at this type size pushed the button row past
-     the fold. */
-  padding-top: clamp(92px, 9vw, 118px);
-  padding-bottom: clamp(40px, 4vw, 64px);
-  overflow: hidden;
-  background: var(--navy-deep);
-}
-.hero-media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Biased down so the desert horizon and the lounge deck stay in frame behind
-     the copy, and slightly right so the tower keeps clear of the copy column.
-     The moon takes the loss at the top on wide viewports. */
-  object-position: 56% 56%;
-}
-/* The hero uses a LEFT-weighted scrim rather than the shared bottom one: the
-   copy sits in the left column, while the things that give the scene its sense
-   of place — the tower, the lounge, the palms — sit centre and right. A
-   bottom-heavy scrim darkens exactly the band those sit in and flattens the
-   whole painting. The second, much lighter bottom gradient only seats the
-   button row. */
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(to right,
-      rgba(9, 16, 30, .86) 0%,
-      rgba(9, 16, 30, .68) 34%,
-      rgba(9, 16, 30, .28) 62%,
-      rgba(9, 16, 30, .06) 100%),
-    linear-gradient(to top,
-      rgba(9, 16, 30, .42) 0%,
-      rgba(9, 16, 30, .14) 34%,
-      rgba(9, 16, 30, 0) 68%);
-}
-.hero-inner { position: relative; z-index: 2; color: #fff; }
-.hero-inner h1 {
-  font-size: clamp(34px, 4.4vw, 56px);
-  max-width: 15ch;
-  color: #fff;
-  text-shadow: 0 2px 24px rgba(6, 12, 24, .45);
-}
-.hero-inner .lede {
-  color: rgba(255, 255, 255, .88);
+/* ---------- Look sheet ----------
+   Five tiles from Dragify's output, in the same frame as everything else. This
+   replaces a full-bleed fourteen-up collage on a white ground: it exists to
+   evidence one sentence of copy, so it is captioned and it is finite. */
+.product-extra { margin-top: clamp(48px, 5vw, 72px); }
+.sheet-caption {
+  margin: 0 0 20px;
   max-width: 52ch;
-  text-shadow: 0 1px 14px rgba(6, 12, 24, .4);
+  font-size: 15px;
+  color: var(--slate);
 }
-.hero-inner .lede + .lede { margin-top: 14px; }
-
-/* ---------- Statement band ----------
-   The approach on the left, the two shipping apps stacked on the right. */
-.statement-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 72px);
-  align-items: center;
-}
-.statement h2 {
-  font-size: clamp(26px, 3.4vw, 40px);
-  max-width: 20ch;
-}
-.statement .lede { max-width: 62ch; }
-.rule {
-  width: 56px;
-  height: 3px;
-  background: var(--orange);
-  border: 0;
-  border-radius: 2px;
-  margin: 0 0 26px;
-}
-
-/* Both apps stacked in the statement's right-hand column. */
-.app-lineup {
+.look-sheet {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
 }
-.app-card {
-  display: flex;
-  gap: 18px;
-  height: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  padding: 26px;
-  text-decoration: none;
-  color: inherit;
-  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
-}
-.app-card:hover { border-color: var(--orange); box-shadow: var(--shadow-card); transform: translateY(-2px); }
-.app-card .app-icon { flex: none; margin-bottom: 0; }
-.app-card-body { display: block; }
-.app-card h3 { font-size: 22px; margin-bottom: 6px; }
-.app-card p { color: var(--text-muted); font-size: 15.5px; margin-bottom: 12px; }
-.app-card-link { font-size: 14.5px; font-weight: 700; color: var(--cyan-text); }
-.app-card:hover .app-card-link { color: var(--orange-dark); }
 
-/* ---------- Feature rows (apps) ---------- */
-.feature {
+/* ==========================================================================
+   4 & 5 — THE BRAND IDEA, THE FINAL ACTION
+   Both are the same object: a full-bleed frame from the journey with the copy
+   held in the open sky on its left. The scrim is light because the artwork was
+   composed with that empty left third in it — the page is not fighting the
+   picture to get a readable line of text.
+   ========================================================================== */
+.scene {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: clamp(520px, 72svh, 760px);
+  padding-block: clamp(72px, 8vw, 128px);
+  overflow: hidden;
+  background: var(--midnight-deep);
+}
+.scene > img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Each scene sets its own --focus; both paintings put their subject right of
+     centre, and the crop gets tighter the narrower the viewport. */
+  object-position: var(--focus, 50% 50%);
+}
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to right,
+      rgba(5, 12, 21, .86) 0%,
+      rgba(5, 12, 21, .68) 34%,
+      rgba(5, 12, 21, .24) 64%,
+      rgba(5, 12, 21, 0) 92%);
+}
+.scene-inner { position: relative; z-index: 2; }
+.scene-inner h2 { max-width: 14ch; }
+.scene-inner .lede { max-width: 42ch; color: rgba(243, 236, 225, .84); }
+/* The brand-idea band is the emotional peak, so it gets the biggest headline
+   on the page after the hero and a little more air around it. */
+.scene-idea { min-height: clamp(560px, 82svh, 840px); }
+.scene-idea h2 { font-size: clamp(40px, 6vw, 76px); }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: var(--midnight-deep);
+  border-top: 1px solid var(--line);
+  padding-top: clamp(56px, 6vw, 80px);
+}
+.footer-grid {
   display: grid;
-  grid-template-columns: 1fr 1.08fr;
-  gap: clamp(32px, 5vw, 72px);
-  align-items: center;
+  grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
 }
-.feature + .feature { margin-top: clamp(56px, 6vw, 96px); }
-.feature.is-reversed .feature-copy { order: 2; }
-.feature h3 { font-size: clamp(26px, 3vw, 36px); }
-.feature-copy p { color: var(--text-muted); font-size: 17px; max-width: 46ch; }
-.app-links { font-size: 14px; margin-top: 18px; color: var(--text-muted); }
-.app-links a { text-decoration: none; font-weight: 600; color: var(--ink); }
-.app-links a:hover { color: var(--orange-dark); }
-
-/* ---------- Full-bleed image bands ---------- */
-.bleed-band {
-  position: relative;
-  overflow: hidden;
-  background: var(--navy-deep);
+.footer-brand p { margin-top: 14px; color: var(--slate); font-size: 15px; }
+.footer-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.footer-nav h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--slate);
 }
-.bleed-band > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* Bare strip: image only, no overlaid copy. */
-.band-strip {
-  display: block;
-  max-height: 340px;
-}
-.band-strip img { max-height: 340px; }
-
-/* Band with copy on top of the photograph. */
-.band-copy {
-  display: flex;
-  align-items: flex-end;
-  min-height: clamp(380px, 52svh, 560px);
-  padding-block: clamp(44px, 5vw, 72px);
-}
-.band-copy > img {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.band-copy::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: var(--scrim-bottom);
-}
-.band-inner { position: relative; z-index: 2; color: #fff; }
-.band-inner h2 {
-  font-size: clamp(28px, 3.8vw, 46px);
-  max-width: 18ch;
-  color: #fff;
-}
-.band-inner p {
-  color: rgba(255, 255, 255, .88);
-  font-size: 17px;
-  max-width: 54ch;
-}
-
-/* ---------- Closing CTA (full-bleed) ---------- */
-.closing {
-  position: relative;
+.footer-nav a { font-size: 15px; text-decoration: none; opacity: .85; }
+.footer-nav a:hover { opacity: 1; color: var(--cyan); }
+.footer-social { display: flex; gap: 10px; margin-top: 22px; }
+.footer-social a {
   display: flex;
   align-items: center;
-  min-height: clamp(420px, 58svh, 620px);
-  padding-block: clamp(56px, 6vw, 96px);
-  overflow: hidden;
-  background: var(--navy-deep);
-  text-align: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
 }
-.closing > img {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 42%;
+.footer-social a:hover { border-color: var(--cyan); }
+.footer-social svg { width: 16px; height: 16px; fill: currentColor; }
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--slate);
+  font-size: 13.5px;
 }
-/* Weighted for the house-dusk painting: its sunset band is bright right where
-   the headline and the form labels sit, so the middle of this gradient carries
-   more than the old CTA art needed. Lighten it and the white labels stop
-   holding contrast. */
-.closing::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(to top,
-      rgba(9, 16, 30, .90) 0%,
-      rgba(9, 16, 30, .78) 45%,
-      rgba(9, 16, 30, .60) 100%);
-}
-.closing-inner { position: relative; z-index: 2; color: #fff; }
-.closing-inner h2 {
-  font-size: clamp(32px, 4.6vw, 56px);
-  color: #fff;
-  max-width: 16ch;
-  margin-inline: auto;
-}
-.closing-inner .lede {
-  color: rgba(255, 255, 255, .88);
-  margin-inline: auto;
-  max-width: 46ch;
-}
-.closing .button-row { justify-content: center; }
 
-/* ---------- Contact form ----------
-   Sits inside the centred closing band, but form fields read badly centred —
-   the form itself is left-aligned within a centred column. */
+/* ==========================================================================
+   Contact form — its own page, not the homepage.
+   The homepage closes on a decision, not a five-field form; the form lives
+   where somebody who has already decided to write goes looking for it.
+   ========================================================================== */
 .contact-form {
-  margin: clamp(28px, 3vw, 40px) auto 0;
+  margin-top: clamp(32px, 4vw, 48px);
   max-width: 560px;
-  text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .contact-form label {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: .02em;
-  color: #fff;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--slate);
 }
 .contact-form input,
 .contact-form textarea {
   font: inherit;
-  font-size: 16px; /* < 16px makes iOS Safari zoom the page on focus */
+  font-size: 16px; /* below 16px, iOS Safari zooms the page on focus */
   font-weight: 400;
-  color: #fff;
-  background: rgba(255, 255, 255, .1);
-  border: 1px solid rgba(255, 255, 255, .38);
-  border-radius: var(--radius-control);
-  padding: 11px 14px;
-  transition: border-color .15s ease, background .15s ease;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--ivory);
+  background: var(--midnight-lift);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 13px 15px;
+  transition: border-color .18s var(--ease);
 }
-.contact-form textarea { resize: vertical; min-height: 116px; }
-.contact-form input:hover,
-.contact-form textarea:hover { border-color: rgba(255, 255, 255, .65); }
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: #fff;
-  background: rgba(255, 255, 255, .16);
-}
-.contact-form button { align-self: flex-start; margin-top: 4px; }
-/* Honeypot: present in the DOM for bots, never shown or focusable. */
+.contact-form textarea { resize: vertical; min-height: 150px; }
+.contact-form input:hover, .contact-form textarea:hover { border-color: var(--slate); }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--cyan); }
+.contact-form button { align-self: flex-start; margin-top: 6px; }
+/* Honeypot: in the DOM for bots, never shown and never focusable. */
 .contact-form input[name="_honey"] {
   position: absolute;
   left: -9999px;
@@ -768,76 +766,65 @@ button:focus-visible,
   opacity: 0;
 }
 
-/* ---------- Footer ---------- */
-.site-footer { background: var(--surface); border-top: 1px solid var(--border); padding-top: 48px; }
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr auto;
-  gap: 32px;
-  padding-bottom: 32px;
+/* ==========================================================================
+   Static content pages (support / privacy / terms / licenses / contact)
+   ========================================================================== */
+.page-hero { padding-block: clamp(112px, 12vw, 168px) 0; }
+.page-hero h1 { font-size: clamp(40px, 5.4vw, 68px); max-width: 16ch; }
+.page-hero .lede { margin-top: 4px; }
+/* Narrower than the container, for a readable measure — but starting at the
+   container's LEFT edge. These sections also carry .container, and its
+   `margin-inline: auto` would centre the narrow box, leaving the body copy
+   indented from the h1 sitting directly above it. */
+.page-body {
+  width: min(calc(100% - (2 * var(--page-x))), 68ch);
+  margin-inline: max(var(--page-x), calc((100% - var(--container)) / 2)) auto;
+  padding-block: clamp(48px, 5vw, 72px) var(--section-y);
 }
-.footer-brand p { color: var(--text-muted); font-size: 14px; margin-top: 10px; }
-.footer-nav { display: flex; flex-direction: column; gap: 10px; }
-.footer-nav h2 { font-family: var(--font-sans); font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); margin-bottom: 4px; }
-.footer-nav a { font-size: 14px; text-decoration: none; color: var(--ink); }
-.footer-nav a:hover { color: var(--orange-dark); }
-.footer-social { display: flex; gap: 12px; align-items: flex-start; }
-.footer-social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--navy);
+.page-body h2 {
+  font-size: clamp(24px, 2.4vw, 30px);
+  margin-top: 2em;
+  padding-top: 1.6em;
+  border-top: 1px solid var(--line);
 }
-.footer-social svg { width: 17px; height: 17px; fill: #fff; }
-.footer-bottom {
-  border-top: 1px solid var(--border);
-  padding-block: 20px;
-  color: var(--text-muted);
-  font-size: 13px;
-}
+.page-body h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.page-body h3 { font-size: clamp(20px, 1.9vw, 23px); margin-top: 1.8em; }
+.page-body p, .page-body li { color: var(--slate); font-size: 17px; }
+.page-body ul, .page-body ol { padding-left: 1.15em; }
+.page-body li { margin-bottom: .5em; }
+.page-body a { color: var(--ivory); text-decoration-color: var(--line-strong); }
+.page-body a:hover { color: var(--cyan); }
 
-/* ---------- Canonical-policy dialog ----------
+/* ==========================================================================
+   Canonical-policy dialog
    Dragify's terms and privacy policy are maintained on dragifyapp.com; this
-   frames that copy rather than duplicating it here. Native <dialog>, so focus
-   trapping, Esc-to-close and background inertness are the browser's job. */
+   frames that page rather than keeping a second copy here that would then need
+   updating twice. Native <dialog>, so focus trapping, Esc-to-close and
+   background inertness are the browser's job.
+   ========================================================================== */
 .legal-modal {
   width: min(920px, calc(100vw - 32px));
   height: min(86svh, 900px);
   max-width: none;
   max-height: none;
   padding: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  background: var(--surface);
-  box-shadow: 0 32px 80px rgba(15, 30, 55, .3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--midnight);
+  color: var(--ivory);
   overflow: hidden;
 }
-.legal-modal::backdrop { background: rgba(9, 16, 30, .62); }
+.legal-modal::backdrop { background: rgba(5, 12, 21, .78); }
 .legal-modal-bar {
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 14px 16px 14px 22px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface-cream-soft);
+  border-bottom: 1px solid var(--line);
 }
-.legal-modal-bar h2 {
-  flex: 1;
-  min-width: 0;
-  margin: 0;
-  font-size: 18px;
-}
-.legal-modal-open {
-  flex: none;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--cyan-text);
-  text-decoration: none;
-}
-.legal-modal-open:hover { color: var(--orange-dark); }
+.legal-modal-bar h2 { flex: 1; min-width: 0; margin: 0; font-size: 20px; }
+.legal-modal-open { flex: none; font-size: 14px; color: var(--cyan); text-decoration: none; }
+.legal-modal-open:hover { text-decoration: underline; }
 .legal-modal-close {
   flex: none;
   display: inline-flex;
@@ -846,102 +833,120 @@ button:focus-visible,
   width: 36px;
   height: 36px;
   padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: none;
+  color: var(--ivory);
   cursor: pointer;
 }
-.legal-modal-close:hover { border-color: var(--navy); }
-.legal-modal-close svg { width: 18px; height: 18px; fill: var(--ink); }
+.legal-modal-close:hover { border-color: var(--cyan); }
+.legal-modal-close svg { width: 18px; height: 18px; fill: currentColor; }
 .legal-modal-frame {
   display: block;
   width: 100%;
-  height: calc(100% - 65px);
+  height: calc(100% - 66px);
   border: 0;
   background: #fff;
 }
-@media (max-width: 560px) {
-  /* The "open in a new tab" link is the fallback if framing ever fails, so it
-     stays; the dialog goes full-bleed instead of shedding controls. */
-  .legal-modal { width: 100vw; height: 100svh; border-radius: 0; border: 0; }
-  .legal-modal-bar { padding-left: 16px; }
-  .legal-modal-bar h2 { font-size: 16px; }
+
+/* ==========================================================================
+   Responsive
+   Mobile is not the desktop page compressed. Headline scale is preserved,
+   body copy never drops below 17px, measures shorten, section spacing stays
+   generous, and copy always precedes the image it is talking about.
+   ========================================================================== */
+@media (max-width: 1000px) {
+  .philosophy-grid { grid-template-columns: 1fr; gap: 28px; }
+  .philosophy-grid h2 { max-width: 14ch; }
+  .principles li { grid-template-columns: 1fr; gap: 8px; }
+
+  /* Copy first, image second — on both products, including the one that is
+     image-first on desktop. `order` on the copy is what would otherwise leave
+     StraightPic's screenshot above its own headline. */
+  .product { grid-template-columns: 1fr; gap: 36px; }
+  .product.is-reversed .product-copy { order: 0; }
+  .product-media,
+  .product.is-reversed .product-media { max-width: 420px; margin-inline: 0; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
 
-/* ---------- Static content pages (support / privacy / terms / licenses) ---------- */
-.page-hero { padding-block: clamp(48px, 6vw, 80px) 8px; }
-.page-hero h1 { font-size: clamp(30px, 4vw, 44px); max-width: 18ch; }
-.page-body {
-  padding-bottom: var(--section-y);
-  max-width: 760px;
-  /* Narrower than the container for a readable measure, but starting at the
-     container's left edge — .container's own `margin-inline: auto` would
-     centre the 760px box and leave it indented from the page heading above. */
-  margin-inline: max(var(--page-x), calc((100% - var(--container)) / 2)) auto;
-}
-.page-body h2 { font-size: 22px; margin-top: 2.2em; }
-.page-body p, .page-body li { color: var(--text-muted); font-size: 16.5px; }
-.page-body ul { padding-left: 1.2em; }
+@media (max-width: 760px) {
+  body { font-size: 17px; }
+  h1 { font-size: clamp(44px, 12vw, 60px); }
+  h2 { font-size: clamp(36px, 9.5vw, 48px); }
+  h3 { font-size: clamp(30px, 8vw, 40px); }
+  .scene-idea h2 { font-size: clamp(38px, 10vw, 52px); }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 900px) {
-  .feature { grid-template-columns: 1fr; }
-  .feature.is-reversed .feature-copy { order: 0; }
-  .statement-grid { grid-template-columns: 1fr; }
-  /* Stacked, the lineup needs the gap the two-column layout gave it. */
-  .app-lineup { margin-top: clamp(36px, 4vw, 56px); }
-  .compare { max-width: none; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .band-strip, .band-strip img { max-height: 240px; }
-}
-
-@media (max-width: 720px) {
   .menu-toggle { display: flex; }
   .site-nav {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--surface-page);
-    border-bottom: 1px solid var(--border);
     flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    padding: 8px var(--page-x) 20px;
+    align-items: stretch;
+    gap: 0;
+    padding: 6px var(--page-x) 22px;
+    background: rgba(8, 19, 31, .97);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
     transform-origin: top;
     transform: scaleY(0);
     opacity: 0;
     pointer-events: none;
-    transition: transform .18s ease, opacity .18s ease;
+    transition: transform .2s var(--ease), opacity .2s var(--ease);
   }
   .site-nav.is-open { transform: scaleY(1); opacity: 1; pointer-events: auto; }
-  .site-nav a { padding: 10px 0; width: 100%; }
-  .site-nav .nav-cta { width: 100%; text-align: center; justify-content: center; margin-top: 6px; }
-  /* The open panel is opaque cream, so its links revert to ink even while the
-     bar behind them is still transparent over the hero. */
-  .site-header .site-nav.is-open a { color: var(--ink); }
-  .site-header .site-nav.is-open .nav-cta { color: var(--navy); border-color: var(--navy); }
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-social { margin-top: 8px; }
+  .site-nav a { padding: 14px 0; font-size: 17px; border-bottom: 1px solid var(--line); }
+  .site-nav a::after { display: none; }
 
-  .hero {
-    min-height: max(560px, 100svh);
-    /* Same asymmetry as desktop, tightened further: the two-paragraph hero has
-       to clear the header and still land the buttons above the fold on a phone. */
-    padding-top: 84px;
-    padding-bottom: 32px;
+  .hero { min-height: max(600px, 100svh); padding-top: 100px; }
+  /* Portrait crops the landscape painting hard: frame the base of the tower —
+     lit deck, palms, red rock — rather than an anonymous stretch of shaft. */
+  .hero-media { object-position: 63% 78%; }
+  .hero::after {
+    background: linear-gradient(to top,
+        rgba(5, 12, 21, .92) 0%,
+        rgba(5, 12, 21, .80) 42%,
+        rgba(5, 12, 21, .46) 72%,
+        rgba(5, 12, 21, .22) 100%);
   }
-  /* Portrait crops the landscape painting hard, so frame the base of the tower
-     — deck lights, palms, red rock — rather than an anonymous stretch of shaft. */
-  .hero-media { object-position: 62% 84%; }
-  .chip { left: 8px; bottom: 8px; padding: 4px 9px; font-size: 10.5px; }
-  .compare-chip.is-after { right: 8px; }
-  .compare-handle::before { width: 52px; height: 52px; }
+  .hero-inner h1 { max-width: 100%; }
+  .hero-inner .lede { max-width: 34ch; }
+
+  /* Same reasoning as the hero: portrait leaves no open left third to write
+     into, so the scenes switch to a bottom scrim and bottom-aligned copy. */
+  .scene { align-items: flex-end; min-height: clamp(480px, 68svh, 620px); }
+  .scene-idea { min-height: clamp(500px, 74svh, 660px); }
+  .scene::after {
+    background: linear-gradient(to top,
+        rgba(5, 12, 21, .93) 0%,
+        rgba(5, 12, 21, .80) 40%,
+        rgba(5, 12, 21, .42) 72%,
+        rgba(5, 12, 21, .12) 100%);
+  }
+  .scene-inner h2 { max-width: 100%; }
+  .scene-inner .lede { max-width: 34ch; }
+  /* Portrait crops a 21:9 painting down to a slice, and centred that slice is
+     empty sky. Pull each one over to its subject: the shaft for the ascent, the
+     terrace deck and the valley below it for the closing frame. */
+  #name > img { --focus: 76% 46%; }
+  #next > img { --focus: 64% 62%; }
+
+  .product-media { max-width: none; }
+  /* Five tiles at phone width would be 60px wide. Three, larger, says the same
+     thing — the point is "a range of looks", not a census of them. */
+  .look-sheet { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .look-sheet li:nth-child(n + 4) { display: none; }
+
+  .button-row { gap: 12px; }
+  .button-row .button { flex: 1 1 240px; justify-content: center; }
   .form-row { grid-template-columns: 1fr; }
-  .button-row .button { flex: 1 1 auto; justify-content: center; }
-  .band-strip, .band-strip img { max-height: 180px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .legal-modal { width: 100vw; height: 100svh; border: 0; border-radius: 0; }
 }
 
-@media (max-width: 420px) {
-  .app-icon { width: 54px; height: 54px; border-radius: 13px; }
+@media (max-width: 400px) {
+  .app-icon { width: 52px; height: 52px; border-radius: 12px; }
 }

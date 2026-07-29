@@ -23,7 +23,9 @@ MODEL = "nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11
 # name -> (source painting, crop or None, widths to emit)
 # Widths gain larger candidates now that the masters carry real detail.
 JOBS = {
-    "hero":      ("FuturePlane10.png", None, [900, 1300, 1800, 2200, 2800]),
+    # The hero master is cropped 4:3 -> 3:2, trimming the empty pool foreground
+    # so the full-bleed cover crop doesn't have to eat the moon or the lounge.
+    "hero":      ("FuturePlane10.png", "5792x3861+0+120", [900, 1400, 1920, 2400]),
     "band-mars": ("FuturePlane8.png",  None, [900, 1400, 1920, 2400, 3000]),
     "cta":       ("FuturePlane3.png",  None, [900, 1300, 1800, 2200, 2800]),
     "lounge":    ("FuturePlane2.png",  None, [640, 960, 1280, 1600]),

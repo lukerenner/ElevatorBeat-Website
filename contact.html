@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Get help with Dragify or StraightPic — troubleshooting, account questions, and how to reach the ElevatorBeat team.">
-  <title>App Support — ElevatorBeat</title>
-  <link rel="canonical" href="https://elevatorbeat.com/support.html">
+  <meta name="description" content="Tell the ElevatorBeat studio about a problem worth solving, or ask about Dragify and StraightPic.">
+  <title>Contact — ElevatorBeat</title>
+  <link rel="canonical" href="https://elevatorbeat.com/contact.html">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="theme-color" content="#08131f">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://elevatorbeat.com/support.html">
+  <meta property="og:url" content="https://elevatorbeat.com/contact.html">
   <meta property="og:site_name" content="ElevatorBeat">
-  <meta property="og:title" content="App Support — ElevatorBeat">
-  <meta property="og:description" content="Get help with Dragify or StraightPic, or reach the ElevatorBeat team directly.">
+  <meta property="og:title" content="Contact — ElevatorBeat">
+  <meta property="og:description" content="Tell the ElevatorBeat studio about a problem worth solving.">
   <meta property="og:image" content="https://elevatorbeat.com/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="App Support — ElevatorBeat">
-  <meta name="twitter:description" content="Get help with Dragify or StraightPic, or reach the ElevatorBeat team directly.">
+  <meta name="twitter:title" content="Contact — ElevatorBeat">
+  <meta name="twitter:description" content="Tell the ElevatorBeat studio about a problem worth solving.">
   <meta name="twitter:image" content="https://elevatorbeat.com/assets/og-image.jpg">
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-serif-latin.woff2" crossorigin>
   <link rel="stylesheet" href="styles.css?v=20260729d">
@@ -46,8 +46,8 @@
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
         <a href="index.html#apps">Apps</a>
         <a href="index.html#studio">Studio</a>
-        <a href="support.html" aria-current="page">Support</a>
-        <a href="contact.html">Contact</a>
+        <a href="support.html">Support</a>
+        <a href="contact.html" aria-current="page">Contact</a>
       </nav>
     </div>
   </header>
@@ -55,26 +55,44 @@
   <main id="main">
     <section class="page-hero">
       <div class="container">
-        <p class="eyebrow">Support</p>
-        <h1>Find what you need.</h1>
-        <p class="lede">Answers, troubleshooting, and ways to reach the ElevatorBeat team.</p>
+        <p class="eyebrow">Contact</p>
+        <h1>Tell us about a problem worth solving.</h1>
+        <p class="lede">Studio questions, app ideas, press, or something that has been annoying you for years. We read every message.</p>
       </div>
     </section>
 
     <section class="page-body container">
-      <h2 id="dragify">Dragify support</h2>
-      <p>Dragify transforms a selfie into a collection of original drag looks. If a generation fails, stalls, or the result doesn&rsquo;t look right, try again with a clearer, front-facing photo and good lighting &mdash; most issues come down to source image quality.</p>
-      <ul>
-        <li>Trouble with a purchase or subscription: contact us with your App Store order number.</li>
-        <li>A style didn&rsquo;t generate correctly: tell us which style and we&rsquo;ll take a look.</li>
-        <li>Account or data questions: see the <a href="privacy.html">privacy policy</a>.</li>
-      </ul>
+      <!-- FormSubmit handles delivery so the site stays a static build. The
+           honeypot replaces FormSubmit's captcha; _next lands on thanks.html.
+           NOTE: FormSubmit needs one manual confirmation click on the first
+           submission before it will start forwarding mail. -->
+      <form class="contact-form" action="https://formsubmit.co/hello@elevatorbeat.com" method="POST">
+        <input type="hidden" name="_subject" value="New message from elevatorbeat.com">
+        <input type="hidden" name="_next" value="https://elevatorbeat.com/thanks.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="form-row">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+        </div>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+        <button class="button button-primary" type="submit">Send message <span aria-hidden="true">&rarr;</span></button>
+      </form>
 
-      <h2 id="straightpic">StraightPic support</h2>
-      <p>StraightPic corrects perspective in photos of buildings, artwork, and documents. StraightPic is not yet available &mdash; support requests will be answered once the app ships.</p>
+      <h2>Already using an app?</h2>
+      <p>Bug reports, purchase problems and how-do-I questions are handled faster on the <a href="support.html">support page</a>, which covers both apps.</p>
 
-      <h2 id="contact">Still need help?</h2>
-      <p>Email <a href="mailto:hello@elevatorbeat.com">hello@elevatorbeat.com</a> with the app name, a short description of the issue, and your device type. We read every message and typically reply within two business days.</p>
+      <h2>Prefer email?</h2>
+      <p>Write to <a href="mailto:hello@elevatorbeat.com">hello@elevatorbeat.com</a>. We typically reply within two business days.</p>
     </section>
   </main>
 
