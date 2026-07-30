@@ -51,8 +51,8 @@
         href="assets/img/hero-1400.webp"
         imagesrcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w, assets/img/hero-1920.webp 1920w, assets/img/hero-2400.webp 2400w"
         imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260729i">
-  <script defer src="script.js?v=20260729i"></script>
+  <link rel="stylesheet" href="styles.css?v=20260730c">
+  <script defer src="script.js?v=20260730c"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -103,15 +103,17 @@
     <section class="chapter chapter--arrival scrim-bl on-dark" id="top"
              data-rail-section aria-labelledby="arrival-title">
       <div class="chapter-media">
-        <picture>
-          <source media="(max-width: 760px)"
-                  srcset="assets/img/hero-mobile-560.webp 560w, assets/img/hero-mobile-760.webp 760w, assets/img/hero-mobile-1000.webp 1000w, assets/img/hero-mobile-1240.webp 1240w"
-                  sizes="100vw">
-          <img src="assets/img/hero-1400.webp"
-               srcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w, assets/img/hero-1920.webp 1920w, assets/img/hero-2400.webp 2400w"
-               sizes="100vw" width="2400" height="1600" fetchpriority="high"
-               alt="A glass elevator tower rising out of a red desert at dusk, its lit observation decks glowing amber, with a full moon and the trail of a departing rocket in the deep blue sky.">
-        </picture>
+        <div class="parallax-media" data-parallax-media>
+          <picture>
+            <source media="(max-width: 760px)"
+                    srcset="assets/img/hero-mobile-560.webp 560w, assets/img/hero-mobile-760.webp 760w, assets/img/hero-mobile-1000.webp 1000w, assets/img/hero-mobile-1240.webp 1240w"
+                    sizes="100vw">
+            <img src="assets/img/hero-1400.webp"
+                 srcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w, assets/img/hero-1920.webp 1920w, assets/img/hero-2400.webp 2400w"
+                 sizes="100vw" width="2400" height="1600" fetchpriority="high"
+                 alt="A glass elevator tower rising out of a red desert at dusk, its lit observation decks glowing amber, with a full moon and the trail of a departing rocket in the deep blue sky.">
+          </picture>
+        </div>
       </div>
       <div class="container chapter-inner">
         <p class="eyebrow">ElevatorBeat</p>

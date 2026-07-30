@@ -25,6 +25,52 @@ nav?.addEventListener('click', (event) => {
 });
 
 // ---------------------------------------------------------------------------
+// Arrival parallax.
+//
+// The hero photograph drifts slower than the copy stacked over it, so the
+// desert reads as depth behind the type rather than one flat plane scrolling
+// as a unit. Only the image moves; the copy is ordinary in-flow content and
+// needs no code of its own — it already scrolls at full speed.
+//
+// .parallax-media (see styles.css) overscans its box by 8% top and bottom for
+// exactly this: the cap below stays inside that margin, so the translate can
+// never pull a bare edge into view. Reduced-motion visitors get a static
+// photograph — no transform is ever set.
+// ---------------------------------------------------------------------------
+const parallaxMedia = document.querySelector('[data-parallax-media]');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+if (parallaxMedia && !reduceMotion.matches) {
+  const heroSection = parallaxMedia.closest('.chapter');
+  const RATE = 0.3;
+  let cap = 0;
+  let ticking = false;
+
+  const measure = () => {
+    cap = heroSection.offsetHeight * 0.07;
+  };
+
+  const paintParallax = () => {
+    ticking = false;
+    // Past the hero, the section is clipped by scroll anyway; skip the work.
+    if (window.scrollY > heroSection.offsetTop + heroSection.offsetHeight) return;
+    const shift = Math.min(window.scrollY * RATE, cap);
+    parallaxMedia.style.transform = `translateY(${shift}px)`;
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(paintParallax);
+  };
+
+  measure();
+  paintParallax();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', measure);
+}
+
+// ---------------------------------------------------------------------------
 // The rail — the page's elevator floor indicator.
 //
 // A hairline in the window's left gutter with a lit segment tracking scroll
@@ -239,28 +285,50 @@ const aperture = document.querySelector('[data-mosaic]');
 const wall = document.querySelector('[data-mosaic-plane]');
 
 if (aperture && wall && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  let pending = 0;
+  // Where the browser can drive the sweep off a view() timeline (styles.css),
+  // the compositor owns every frame and this script only ever supplies the
+  // floor — the one number CSS can't compute itself, because it depends on
+  // the wall's real rendered height. Recomputing it on scroll would put the
+  // main thread back in the loop it was just taken out of, so it is only
+  // ever touched by the events that can actually change it.
+  const usesViewTimeline = CSS.supports('animation-timeline', 'view()');
 
-  const pinWall = () => {
-    pending = 0;
-    const box = aperture.getBoundingClientRect();
-    // Not rounded: a fractional offset renders still, and a rounded one steps
-    // by a pixel every time the page crosses a boundary — visible as jitter on
-    // something whose whole point is that it is motionless.
-    const shift = -box.height - box.top;
-    const floor = box.height - wall.offsetHeight;
-    wall.style.transform = `translate3d(0, ${Math.min(Math.max(shift, floor), 0)}px, 0)`;
+  const setFloor = () => {
+    const floor = aperture.getBoundingClientRect().height - wall.offsetHeight;
+    wall.style.setProperty('--mosaic-floor', `${Math.min(floor, 0)}px`);
   };
 
-  const schedule = () => { pending ||= requestAnimationFrame(pinWall); };
+  if (usesViewTimeline) {
+    setFloor();
+    window.addEventListener('resize', setFloor);
+    window.addEventListener('load', setFloor);
+    wall.querySelectorAll('img').forEach((img) => {
+      if (!img.complete) img.addEventListener('load', setFloor, { once: true });
+    });
+  } else {
+    // The fallback for browsers without view(): the same rAF-throttled
+    // scroll loop as before.
+    let pending = 0;
 
-  pinWall();
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
-  // The wall is lazy-loaded and its height is only final once the frames are
-  // in, and the frames are only in once the window has been near them.
-  window.addEventListener('load', schedule);
-  wall.querySelectorAll('img').forEach((img) => {
-    if (!img.complete) img.addEventListener('load', schedule, { once: true });
-  });
+    const pinWall = () => {
+      pending = 0;
+      const box = aperture.getBoundingClientRect();
+      // Not rounded: a fractional offset renders still, and a rounded one
+      // steps by a pixel every time the page crosses a boundary — visible
+      // as jitter on something whose whole point is that it is motionless.
+      const shift = -box.height - box.top;
+      const floor = box.height - wall.offsetHeight;
+      wall.style.transform = `translate3d(0, ${Math.min(Math.max(shift, floor), 0)}px, 0)`;
+    };
+
+    const schedule = () => { pending ||= requestAnimationFrame(pinWall); };
+
+    pinWall();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('load', schedule);
+    wall.querySelectorAll('img').forEach((img) => {
+      if (!img.complete) img.addEventListener('load', schedule, { once: true });
+    });
+  }
 }

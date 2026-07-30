@@ -687,6 +687,13 @@ textarea:focus-visible {
   object-fit: cover;
   object-position: var(--focus, 50% 50%);
 }
+
+/* The arrival photograph drifts slower than the copy stacked over it (script.js
+   translates it on scroll), reading as depth rather than one flat plane moving
+   as a unit. This wrapper overscans top and bottom by 8% so that drift always
+   has real pixels to reveal — .chapter's overflow:hidden clips the excess, and
+   the translate is capped in JS well inside that 8%, so an edge can never show. */
+.parallax-media { position: absolute; inset: -8% 0; height: 116%; }
 /* No width here on purpose. This element also carries .container, and a
    `width: 100%` would beat it — which is what silently pushed every chapter's
    copy out to the raw viewport edge instead of onto the site grid. */
@@ -975,6 +982,32 @@ textarea:focus-visible {
   transform: translate3d(0, 0, 0);
 }
 
+/* THE COMPOSITOR TAKES OVER WHERE IT CAN. script.js's rAF loop reads
+   getBoundingClientRect() off a scroll event, which is main-thread work — any
+   frame the main thread is busy, the wall's counter-shift arrives a beat after
+   the window has already scrolled, and the clip shows old-wall-through-new-window
+   for that one frame. That beat is the jitter, and the mismatched slice is the
+   fold.
+
+   `view()` is a scroll timeline the compositor drives directly, no JS in the
+   loop, so there is no beat to miss. Its 0%–100% is exactly "subject entering
+   the scrollport to subject having fully left it" — exactly the sweep this
+   wall needs — so the two keyframes are just the JS-computed floor and the
+   plane's own rest position. script.js still writes --mosaic-floor once (on
+   load/resize/image-load, never on scroll) and skips its rAF loop entirely
+   once it confirms the browser took this branch. */
+@supports (animation-timeline: view()) {
+  .js .mosaic-plane {
+    animation: mosaic-sweep linear both;
+    animation-timeline: view(block);
+    animation-range: cover;
+  }
+}
+@keyframes mosaic-sweep {
+  from { transform: translate3d(0, var(--mosaic-floor, 0), 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
 /* Where the window cannot travel — no script, or motion turned off — there is
    no reveal to spend eighteen frames on, so the wall shows its first twelve and
    the section stays the length of a section. */
@@ -982,7 +1015,7 @@ html:not(.js) .mosaic-col .plate:nth-child(n + 5) { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .js .mosaic { height: auto; overflow: visible; }
-  .js .mosaic-plane { position: static; }
+  .js .mosaic-plane { position: static; animation: none; }
   .mosaic-col .plate:nth-child(n + 5) { display: none; }
 }
 
