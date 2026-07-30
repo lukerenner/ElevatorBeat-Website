@@ -69,7 +69,15 @@
        carry .is-solid from the markup so they start in the scrolled state. -->
   <header class="site-header" data-header>
     <div class="container nav-shell">
-      <a class="brand" href="#top">ElevatorBeat</a>
+      <a class="brand" href="#top" aria-label="ElevatorBeat home">
+        <svg class="brand-mark" viewBox="0 0 24 36" aria-hidden="true">
+          <rect width="24" height="36" rx="5.2" fill="#00D8ED"/>
+          <rect x="6" y="7.8" width="12" height="4" rx="2" fill="#08131F"/>
+          <rect x="6" y="15.8" width="12" height="4" rx="2" fill="#08131F"/>
+          <rect x="6" y="23.8" width="12" height="4" rx="2" fill="#08131F"/>
+        </svg>
+        ElevatorBeat
+      </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
         <span></span><span></span><span></span>
         <span class="sr-only">Open navigation</span>
@@ -578,9 +586,6 @@
   <footer class="site-footer">
     <div class="container footer-bar">
       <a class="footer-brand" href="#top">
-        <!-- The monogram, only here. The header carries the wordmark; a mark and
-             a wordmark competing in the same bar is what made the old header
-             read as a logo lockup rather than as signage. -->
         <svg class="monogram" viewBox="0 0 44 44" aria-hidden="true">
           <circle cx="22" cy="22" r="21" fill="none" stroke="currentColor" stroke-opacity=".34"/>
           <text x="22" y="27.6" text-anchor="middle">EB</text>
