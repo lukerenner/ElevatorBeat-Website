@@ -1,11 +1,11 @@
 # ElevatorBeat — elevatorbeat.com
 
-Marketing site for ElevatorBeat, an independent studio in Portland, Oregon that builds
-**useful curiosities** — digital tools made with the care, authorship and visual ambition of
-art projects. Currently exhibiting Dragify and StraightPic.
+Marketing site for ElevatorBeat, a small app studio in Portland, Oregon. Currently Dragify
+and StraightPic.
 
-Positioning: *"Tools built like art projects."* Not "small apps", not "focused tools", not
-productivity. Dependency-free, hand-authored HTML/CSS/JS — no build step.
+Positioning: *"A small app studio in Portland. We make focused iPhone apps."* The apps carry
+the visual ambition, not the marketing copy around them. Dependency-free, hand-authored
+HTML/CSS/JS — no build step.
 
 ## Run locally
 
