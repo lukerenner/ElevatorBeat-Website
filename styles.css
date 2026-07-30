@@ -597,10 +597,14 @@ textarea:focus-visible {
    optical density as the serif beside it instead of shouting over it. It
    stands taller than the cap height — the car passes the floor it names. */
 .brand-mark { width: 13.6px; height: 30px; flex: none; }
+/* The name is one flex item, not two. .brand is a flex container, so an
+   unwrapped <em> would be laid out beside "Elevator" with the 14px mark gap
+   between them — the name would read as two words no matter how it is kerned. */
+.brand-name { white-space: nowrap; }
 /* Beat is the half of the name that moves. The italic B carries a wide left
-   sidebearing, which on top of the roman r's own reads as a word space and
-   puts the name back into two words — hence the kern. */
-.brand em { font-style: italic; margin-left: -.045em; }
+   sidebearing, which on top of the roman r's own still opens a hairline
+   word space — hence the kern. */
+.brand-name em { font-style: italic; margin-left: -.045em; }
 
 .site-nav { display: flex; align-items: center; gap: 34px; }
 .site-nav a {
