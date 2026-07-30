@@ -10,7 +10,7 @@
         "-c",
         "import os, functools, http.server, socketserver; socketserver.TCPServer.allow_reuse_address = True; socketserver.TCPServer(('', int(os.environ.get('PORT', '8642'))), functools.partial(http.server.SimpleHTTPRequestHandler, directory=os.getcwd())).serve_forever()"
       ],
-      "port": 8673
+      "port": 8681
     }
   ]
 }

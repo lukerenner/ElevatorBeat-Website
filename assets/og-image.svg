@@ -6,11 +6,11 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect x="80" y="80" width="90" height="90" rx="18" fill="#44c9d6"/>
-  <rect x="103" y="104" width="44" height="10" rx="5" fill="#14233f"/>
-  <rect x="103" y="130" width="44" height="10" rx="5" fill="#14233f"/>
-  <rect x="103" y="156" width="30" height="10" rx="5" fill="#14233f"/>
-  <text x="80" y="330" font-family="serif" font-size="72" font-weight="700" fill="#ffffff">Elevator Beat</text>
+  <g fill="none" stroke="#00D8ED" stroke-width="9" stroke-linecap="round">
+    <rect x="86" y="76" width="64" height="141" rx="17"/>
+    <path d="M103.5 123h29M103.5 146.5h29M103.5 170h29"/>
+  </g>
+  <text x="80" y="330" font-family="serif" font-size="72" fill="#ffffff">Elevator<tspan font-style="italic">Beat</tspan></text>
   <text x="80" y="390" font-family="sans-serif" font-size="30" fill="#c8d2e0">We make apps for people who make things.</text>
   <rect x="80" y="440" width="230" height="4" fill="#bf5330"/>
   <text x="80" y="500" font-family="sans-serif" font-size="24" fill="#8f9db4">Portland, Oregon · Creative App Studio</text>

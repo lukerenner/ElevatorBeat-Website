@@ -585,14 +585,22 @@ textarea:focus-visible {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   color: inherit;
   text-decoration: none;
   font-family: var(--font-display);
   font-size: 27px;
   letter-spacing: -.01em;
 }
-.brand-mark { width: 18px; height: 27px; flex: none; }
+/* The car drawn as a line rather than a slab: a single cyan weight for the
+   shell and the three floor indicators, so the mark reads at the same
+   optical density as the serif beside it instead of shouting over it. It
+   stands taller than the cap height — the car passes the floor it names. */
+.brand-mark { width: 13.6px; height: 30px; flex: none; }
+/* Beat is the half of the name that moves. The italic B carries a wide left
+   sidebearing, which on top of the roman r's own reads as a word space and
+   puts the name back into two words — hence the kern. */
+.brand em { font-style: italic; margin-left: -.045em; }
 
 .site-nav { display: flex; align-items: center; gap: 34px; }
 .site-nav a {
