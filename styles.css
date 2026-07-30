@@ -1212,6 +1212,72 @@ textarea:focus-visible {
 .app-links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .app-links span { color: var(--line-strong); }
 
+/* ---------- The install action: a link on a phone, a code on a desk ----------
+   Dragify is an iPhone app, so the App Store link is the finished action on a
+   device that can act on it and a detour on one that cannot — a desktop visitor
+   who clicks lands on Apple's web page and still has to go find the app on
+   their phone. Same href either way; only the presentation swaps.
+
+   The swap is width AND a fine pointer, never one alone and never a UA sniff.
+   The failure that matters is handing a phone a code it cannot scan with
+   itself, so both signals have to agree before the QR appears and anything
+   ambiguous — touchscreen laptop, narrow window, a browser that reports
+   nothing — falls back to the link, which works everywhere.
+
+   No Android branch: there is no Android build. Both rooms are already
+   labelled "iPhone app" in their tags, and Apple's own page is the honest
+   destination for anyone who taps through on one anyway.
+
+   The QR carries its own ink-on-paper palette baked into the SVG rather than
+   currentColor (see tools/appstore-qr.py) — an ivory-on-midnight code is an
+   inverted code, and not every scanner reads those. It takes the hairline and
+   2px radius so it reads as the same .plate vocabulary as the artwork. */
+.install-qr { display: none; }
+@media (min-width: 900px) and (pointer: fine) {
+  .install-btn { display: none; }
+  .install-qr {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+  }
+}
+/* Sizes are set from the module count, not from taste. The code is 37 modules
+   across including its quiet zone, and a phone camera wants roughly 4px per
+   module to read a screen at desk distance — hence 148px on the arrival. The
+   two furniture placements trade that down knowingly; nothing goes below 88px,
+   which is about where a code stops being a code and becomes a texture. */
+.install-qr img {
+  width: var(--qr-size, 148px);
+  height: var(--qr-size, 148px);
+  flex: none;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+}
+.install-qr:hover img { border-color: var(--accent); }
+.install-qr-text {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.65;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+.install-qr-text span {
+  display: block;
+  font-weight: 500;
+  letter-spacing: .13em;
+  color: var(--text-soft);
+}
+/* The footer's copy is one bar of furniture, not an arrival — the code drops to
+   the height of the brand block beside it and loses its caption's second line. */
+.footer-action.install-qr { --qr-size: 96px; gap: 13px; }
+/* Directory rows are built on a 52px icon, so any scannable code sets the row's
+   height instead of the icon — Dragify's row runs taller than StraightPic's and
+   that is the honest trade. Shrinking it to fit the rhythm would have produced
+   a code nobody could scan, which is a worse row than an uneven one. */
+.rooms-actions .install-qr { --qr-size: 88px; gap: 12px; }
+
 /* ==========================================================================
    Contact form — its own page, not the homepage.
    The homepage closes on a decision, not a five-field form; the form lives
