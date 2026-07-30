@@ -37,6 +37,52 @@ nav?.addEventListener('click', (event) => {
 });
 
 // ---------------------------------------------------------------------------
+// Arrival parallax.
+//
+// The hero photograph drifts slower than the copy stacked over it, so the
+// desert reads as depth behind the type rather than one flat plane scrolling
+// as a unit. Only the image moves; the copy is ordinary in-flow content and
+// needs no code of its own — it already scrolls at full speed.
+//
+// .parallax-media (see styles.css) overscans its box by 5% top and bottom for
+// exactly this: the cap below stays inside that margin, so the translate can
+// never pull a bare edge into view. Reduced-motion visitors get a static
+// photograph — no transform is ever set.
+// ---------------------------------------------------------------------------
+const parallaxMedia = document.querySelector('[data-parallax-media]');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+if (parallaxMedia && !reduceMotion.matches) {
+  const heroSection = parallaxMedia.closest('.chapter');
+  const RATE = 0.2;
+  let cap = 0;
+  let ticking = false;
+
+  const measure = () => {
+    cap = heroSection.offsetHeight * 0.045;
+  };
+
+  const paintParallax = () => {
+    ticking = false;
+    // Past the hero, the section is clipped by scroll anyway; skip the work.
+    if (window.scrollY > heroSection.offsetTop + heroSection.offsetHeight) return;
+    const shift = Math.min(window.scrollY * RATE, cap);
+    parallaxMedia.style.transform = `translateY(${shift}px)`;
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(paintParallax);
+  };
+
+  measure();
+  paintParallax();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', measure);
+}
+
+// ---------------------------------------------------------------------------
 // The rail — the page's elevator position indicator.
 //
 // A hairline in the window's left gutter with a lit segment tracking scroll
