@@ -243,7 +243,7 @@ if (legalDialog && typeof legalDialog.showModal === 'function') {
 //
 // Within a section, order is expressed as a --delay in the markup — the wall
 // label, then its evidence. There is no per-frame stagger inside the mosaic on
-// purpose: the six looks arrive as one wall, the way a gallery lights a
+// purpose: the twelve looks arrive as one wall, the way a gallery lights a
 // wall rather than a picture at a time.
 // ---------------------------------------------------------------------------
 const observer = new IntersectionObserver((entries) => {
@@ -259,7 +259,7 @@ document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.obs
 // ---------------------------------------------------------------------------
 // The aperture — Dragify's wall of looks, and the window that climbs it.
 //
-// The gallery is a fixed-height window cut in the page with a wall of six
+// The gallery is a fixed-height window cut in the page with a wall of twelve
 // portraits behind it. The wall is pinned to the VIEWPORT: as the page scrolls,
 // the window travels up over a set of frames that do not move at all. It is not
 // a parallax layer moving at a fraction of scroll speed — the fraction is zero.
@@ -277,7 +277,7 @@ document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.obs
 // y = -height, and the union of everywhere it has been is exactly that band.
 //
 // THE CLAMP is the honest failure mode. If a viewport is tall enough that the
-// band outruns the wall — which at six frames it always does — the wall stops at
+// band outruns the wall — which at four rows it always does — the wall stops at
 // the page for the last pixels of the pass, rather than sliding past and
 // showing the midnight ground through a window that is supposed to be a wall.
 //

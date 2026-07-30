@@ -927,7 +927,7 @@ textarea:focus-visible {
    the ground, the gap and the grid instead.
 
    THE WALL DOES NOT SCROLL. `.mosaic` is a window cut in the page; the wall of
-   six looks behind it is pinned to the VIEWPORT and never moves. So the page
+   twelve looks behind it is pinned to the VIEWPORT and never moves. So the page
    rises, the window climbs the wall, and not one queen travels a pixel — which
    is the opposite of a parallax layer, a thing that moves slower than the page
    rather than not at all. Frames are cut hard by the window's edge on purpose:
@@ -938,16 +938,20 @@ textarea:focus-visible {
    has to finish level, so every frame goes back to the single ratio the app
    exports and no look is cropped at all.
 
-   THE WALL NO LONGER OUTRUNS THE TRAVEL, ON PURPOSE. Between entering at the
-   bottom of the viewport and leaving at the top, the window sweeps a band of
-   100vh + 2 × its own height — far more than two rows of frames. An eighteen-
-   frame wall filled that band, but it also meant any given look was only in the
-   window for a fraction of the pass. At six the wall is shorter than the band,
-   so the script clamps to the wall's own edge and the whole thing drifts a
-   couple of hundred pixels instead of climbing: all six stay in view for most
-   of the section. The clamp is what keeps the midnight ground from ever showing
-   through, so the wall must still be TALLER THAN THE APERTURE at every width —
-   two 2:3 frames always are, by a wide margin.
+   FOUR ROWS, AND THE MIDDLE TWO ARE THE POINT. Between entering at the bottom
+   of the viewport and leaving at the top, the window sweeps a band of
+   100vh + 2 × its own height — more than four rows of frames, so the script
+   clamps at the wall's own edge and the wall drifts rather than climbing the
+   whole band. Eighteen frames filled the band outright, but then no single look
+   held the window for long. Twelve is the compromise: the six that carry the
+   section sit in rows two and three, where the aperture is parked for most of
+   the pass, and the rows above and below are never seen whole — they are cut by
+   the window's edge at both ends, which is what makes the wall read as a piece
+   of something larger rather than as a grid that happens to be six wide.
+
+   The clamp is what keeps the midnight ground from ever showing through, so the
+   wall must stay TALLER THAN THE APERTURE at every width. Four 2:3 frames are,
+   by a wide margin.
    ========================================================================== */
 .mosaic {
   position: relative;
@@ -956,15 +960,15 @@ textarea:focus-visible {
   --aperture-h: clamp(400px, 62svh, 600px);
   --wall-gap: clamp(10px, 1.2vw, 16px);
 }
+/* One flat grid, filled row by row — no column wrappers. Column wrappers would
+   put the wall in DOM order top-to-bottom-then-across, which means the frames
+   that matter land in a different place at two columns than at three. Row-major
+   keeps them in the middle of the wall at every width. */
 .mosaic-plane {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--wall-gap);
   align-items: start;
-}
-.mosaic-col {
-  display: grid;
-  gap: var(--wall-gap);
 }
 .mosaic .plate { aspect-ratio: 2 / 3; }
 
@@ -1029,10 +1033,9 @@ textarea:focus-visible {
 }
 
 /* Where the window cannot travel — no script, or motion turned off — the plane
-   sits still and the wall becomes an ordinary six-up grid. There is nothing to
-   trim any more: at eighteen frames these rules hid everything past the fourth
-   in a column so the section stayed the length of a section, but six frames is
-   already that length. */
+   sits still and the wall becomes an ordinary twelve-up grid, four rows deep.
+   That is a longer section than the aperture would have been, which is the
+   honest trade: without a window to look through, the frames are the section. */
 @media (prefers-reduced-motion: reduce) {
   .js .mosaic { height: auto; overflow: visible; }
   .js .mosaic-plane { position: static; animation: none; }
@@ -1459,16 +1462,14 @@ main > .page-hero:last-child { padding-bottom: clamp(88px, 9vw, 132px); }
   .chapter--observation { min-height: clamp(420px, 92vw, 560px); }
 
   /* Two columns rather than three: a 2:3 frame at a third of a phone's measure
-     is 110px wide, which is a thumbnail of a queen and not a look. The column
-     wrappers step out of the way with `display: contents` so the six frames
-     flow two-up into three rows — comfortably taller than this aperture, which
-     is all the clamp needs to keep the window covered. */
+     is 110px wide, which is a thumbnail of a queen and not a look. The twelve
+     frames simply reflow two-up into six rows — the grid is row-major, so the
+     four that matter stay in the middle of the wall here as well. */
   .mosaic {
     --aperture-h: clamp(320px, 54svh, 480px);
     --wall-gap: 10px;
   }
   .mosaic-plane { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mosaic-col { display: contents; }
 
   /* The pair stays side by side: the two shapes read as a sequence at a glance,
      and the captions underneath carry what the shrunken tool labels no longer
