@@ -60,6 +60,14 @@ JOBS = {
     # room, it just should not out-shout `about`.
     "lounge": dict(master="lounge.png", crop=None, grade=94,
                    widths=[960, 1400, 1920, 2400]),
+    # A 3:4 portrait out of the same room, for the studio passage's arch-topped
+    # plate. The window is the master's right-hand 3258px and nothing else: the
+    # couple, the robot and the drinks table all sit left of x=1700, so this is
+    # the only crop of this painting with no figures in it. It keeps the curved
+    # glass, the mullions, the moon and the banquette — the room as architecture
+    # rather than as a scene, which is what the passage beside it is about.
+    "salon": dict(master="lounge.png", crop=(3258, 4344, 2534, 0), grade=94,
+                  widths=[520, 760, 1040, 1400]),
 
     # ---- THE GROUNDS ---------------------------------------------------------
     "band-mars": dict(master="band-mars.png", crop=None, grade=92,

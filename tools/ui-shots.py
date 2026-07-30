@@ -37,6 +37,16 @@ JOBS = [
         None,
         (420, 640, 840),
     ),
+    # The same session, one screen later: the corrected frame with the transform
+    # applied. Paired with the editor it tells the whole story in two real
+    # captures, which is why the homepage no longer needs the drag-to-compare
+    # slider it used to carry underneath.
+    (
+        "ui-straightpic-result",
+        APPS / "StraightPic/Reference Photos/2 (good).PNG",
+        None,
+        (420, 640, 840),
+    ),
 ]
 
 

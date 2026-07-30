@@ -1,17 +1,5 @@
 document.documentElement.classList.add('js');
 
-// Before/after comparison sliders. The range input is the only control; this
-// just mirrors its value onto --split, which drives both the clip on the
-// "before" image and the handle position. Pointer dragging and keyboard arrows
-// therefore both work with no extra event handling.
-document.querySelectorAll('[data-compare]').forEach((compare) => {
-  const range = compare.querySelector('.compare-range');
-  if (!range) return;
-  const paint = () => compare.style.setProperty('--split', `${range.value}%`);
-  range.addEventListener('input', paint);
-  paint();
-});
-
 const header = document.querySelector('[data-header]');
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const nav = document.querySelector('[data-nav]');
@@ -37,19 +25,26 @@ nav?.addEventListener('click', (event) => {
 });
 
 // ---------------------------------------------------------------------------
-// The rail — the page's elevator position indicator.
+// The rail — the page's elevator floor indicator.
 //
 // A hairline in the window's left gutter with a lit segment tracking scroll
-// position and a tick at the top of each chapter. It is decoration in the sense
-// that it carries nothing you can't already see, which is why it is aria-hidden
-// and why it is only built above 1100px, where there is gutter to spare. The
-// tick positions come from the chapters themselves rather than hard-coded
-// offsets, so editing the page can't leave them pointing at nothing.
+// position, a tick at the top of each chapter, and a named stop at each of the
+// four numbered floors: 01 STUDIO, 02 GALLERY, 03 OBSERVATION, GF GROUND FLOOR.
+// It is decoration in the sense that it carries nothing you can't already see,
+// which is why it is aria-hidden and why it is only built above 1100px, where
+// there is gutter to spare.
+//
+// Both the ticks and the floor names are read off the sections themselves —
+// data-floor / data-floor-name — rather than from a list kept here. Editing,
+// reordering or renaming a section therefore cannot leave the panel pointing at
+// a floor that no longer exists, and a room that shares a floor with another
+// simply omits the attributes and gets a plain tick (StraightPic is the second
+// room on the gallery floor, so Dragify's 02 covers them both).
 //
 // The page has two grounds and the rail is fixed, so it crosses both as you
 // scroll. Rather than blend-mode tricks — which go wrong over photographs — it
-// asks which chapter currently occupies the top of the viewport and takes that
-// chapter's ground. The cyan car reads on either and never changes.
+// asks whether a dark band straddles a probe line. The cyan car reads on either
+// ground and never changes.
 // ---------------------------------------------------------------------------
 const rail = document.querySelector('[data-rail]');
 const railCar = rail?.querySelector('.rail-car');
@@ -70,22 +65,34 @@ if (rail && railCar && sections.length) {
       // full-viewport height the same way the car is mapped, so a tick and the
       // car meet exactly when that chapter reaches the top of the window.
       const at = Math.min(section.offsetTop / doc, 1) * travel;
+      const floor = section.dataset.floor;
 
       const tick = document.createElement('span');
-      tick.className = 'rail-tick';
+      tick.className = floor ? 'rail-tick is-floor' : 'rail-tick';
       tick.style.top = `${at}px`;
       rail.appendChild(tick);
       marks.push(tick);
 
-      const label = section.dataset.railNum;
-      if (label) {
-        const num = document.createElement('span');
-        num.className = 'rail-num';
-        num.textContent = label;
-        num.style.top = `${at}px`;
-        rail.appendChild(num);
-        marks.push(num);
+      if (!floor) return;
+
+      // Numeral over name, as a floor plate reads. The name is a separate
+      // element rather than a second line of text because the stylesheet drops
+      // it on the widths where the gutter is too narrow to hold it without
+      // running into the page grid — leaving the numeral, which always fits.
+      const plate = document.createElement('span');
+      plate.className = 'rail-floor';
+      plate.style.top = `${at}px`;
+      const num = document.createElement('b');
+      num.textContent = floor;
+      plate.appendChild(num);
+      const name = section.dataset.floorName;
+      if (name) {
+        const label = document.createElement('span');
+        label.textContent = name;
+        plate.appendChild(label);
       }
+      rail.appendChild(plate);
+      marks.push(plate);
     });
   };
 
@@ -186,11 +193,12 @@ if (legalDialog && typeof legalDialog.showModal === 'function') {
 //
 // Two behaviours share one observer. Copy blocks rise into place; full-frame
 // chapters settle their photograph from 1.03 to 1, which is the only motion on
-// the page that touches an image.
+// the page that touches an image. Both are one-shot: once seen, unobserved.
 //
-// Gallery frames are staggered by their position in their own row rather than
-// by their index in the list, so a wide row doesn't run a long cascade while a
-// narrow one finishes instantly. Both are one-shot: once seen, unobserved.
+// Within a section, order is expressed as a --delay in the markup — the wall
+// label, then its evidence. There is no per-frame stagger inside the mosaic on
+// purpose: the six looks arrive as one wall, the way a gallery lights a wall
+// rather than a picture at a time.
 // ---------------------------------------------------------------------------
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -201,26 +209,3 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
 
 document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.observe(element));
-
-// Stagger within each gallery row. Reading offsetTop rather than nth-child is
-// what keeps the cascade correct after the grid reflows at a breakpoint — the
-// rows are different at every width, and a hard-coded delay would be wrong at
-// two of the three.
-const stagger = () => {
-  document.querySelectorAll('.gallery-grid').forEach((grid) => {
-    let rowTop = null;
-    let position = 0;
-    [...grid.children].forEach((item) => {
-      if (getComputedStyle(item).display === 'none') return;
-      const top = item.offsetTop;
-      if (rowTop === null || Math.abs(top - rowTop) > 80) {
-        rowTop = top;
-        position = 0;
-      }
-      item.style.setProperty('--delay', `${position * 90}ms`);
-      position += 1;
-    });
-  });
-};
-stagger();
-window.addEventListener('load', stagger);

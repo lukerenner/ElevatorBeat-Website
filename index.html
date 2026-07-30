@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ElevatorBeat is a small app studio in Portland, Oregon. We make focused iPhone apps: Dragify, which turns one photograph into a drag portrait, and StraightPic, which fixes perspective distortion in architectural photographs.">
-  <title>ElevatorBeat — a small app studio in Portland</title>
+  <meta name="description" content="ElevatorBeat is a Portland art collective working in apps. We turn ideas, observations and small irritations into software: Dragify, an image-making studio for drag portraits, and StraightPic, a tool for making crooked photographs feel right again.">
+  <title>ElevatorBeat — a Portland art collective working in apps</title>
   <link rel="canonical" href="https://elevatorbeat.com/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -12,14 +12,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elevatorbeat.com/">
   <meta property="og:site_name" content="ElevatorBeat">
-  <meta property="og:title" content="ElevatorBeat — a small app studio in Portland">
-  <meta property="og:description" content="We make focused iPhone apps. Currently Dragify and StraightPic.">
+  <meta property="og:title" content="ElevatorBeat — a Portland art collective working in apps">
+  <meta property="og:description" content="We turn ideas, observations and small irritations into software. Currently Dragify and StraightPic.">
   <meta property="og:image" content="https://elevatorbeat.com/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ElevatorBeat — a small app studio in Portland">
-  <meta name="twitter:description" content="We make focused iPhone apps. Currently Dragify and StraightPic.">
+  <meta name="twitter:title" content="ElevatorBeat — a Portland art collective working in apps">
+  <meta name="twitter:description" content="We turn ideas, observations and small irritations into software. Currently Dragify and StraightPic.">
   <meta name="twitter:image" content="https://elevatorbeat.com/assets/og-image.jpg">
   <script type="application/ld+json">
   {
@@ -28,8 +28,8 @@
     "name": "ElevatorBeat",
     "url": "https://elevatorbeat.com/",
     "logo": "https://elevatorbeat.com/assets/og-image.jpg",
-    "description": "ElevatorBeat is a small app studio in Portland, Oregon, making focused iPhone apps.",
-    "slogan": "A small app studio in Portland.",
+    "description": "ElevatorBeat is a Portland art collective working in apps, releasing software made with the care of any other creative work.",
+    "slogan": "A Portland art collective working in apps.",
     "email": "mailto:hello@elevatorbeat.com",
     "sameAs": ["https://x.com/elevatorbeat", "https://instagram.com/elevatorbeat"],
     "address": { "@type": "PostalAddress", "addressLocality": "Portland", "addressRegion": "OR", "addressCountry": "US" },
@@ -51,16 +51,17 @@
         href="assets/img/hero-1400.webp"
         imagesrcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w, assets/img/hero-1920.webp 1920w, assets/img/hero-2400.webp 2400w"
         imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260729g">
-  <script defer src="script.js?v=20260729g"></script>
+  <link rel="stylesheet" href="styles.css?v=20260729h">
+  <script defer src="script.js?v=20260729h"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- The scroll-position indicator. Built by script.js from the sections
+  <!-- The floor indicator. Built by script.js from the four numbered floors
        below, and only on viewports wide enough to have a gutter to put it in.
-       It numbers the two projects and nothing else: the page has ONE numbering
-       system, and it belongs to the work. -->
+       It is the page's one numbering system: the same GF/01/02/03 that names
+       the rooms in the markup names the stops here and the rows in the
+       directory at the end. -->
   <div class="rail" data-rail aria-hidden="true"><span class="rail-car"></span></div>
 
   <!-- Transparent while the arrival image is behind it; on scroll it detaches
@@ -68,22 +69,14 @@
        carry .is-solid from the markup so they start in the scrolled state. -->
   <header class="site-header" data-header>
     <div class="container nav-shell">
-      <a class="brand" href="#top" aria-label="ElevatorBeat home">
-        <svg class="brand-mark" viewBox="0 0 24 36" aria-hidden="true">
-          <rect width="24" height="36" rx="5.2" fill="#00D8ED"/>
-          <rect x="6" y="7.8" width="12" height="4" rx="2" fill="#08131F"/>
-          <rect x="6" y="15.8" width="12" height="4" rx="2" fill="#08131F"/>
-          <rect x="6" y="23.8" width="12" height="4" rx="2" fill="#08131F"/>
-        </svg>
-        ElevatorBeat
-      </a>
+      <a class="brand" href="#top">ElevatorBeat</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
         <span></span><span></span><span></span>
         <span class="sr-only">Open navigation</span>
       </button>
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
-        <a href="#projects">Apps</a>
-        <a href="#studio">Studio</a>
+        <a href="#studio">The studio</a>
+        <a href="#collection">The collection</a>
         <a href="support.html">Support</a>
         <a href="contact.html">Contact</a>
       </nav>
@@ -113,276 +106,292 @@
         </picture>
       </div>
       <div class="container chapter-inner">
-        <h1 class="display-xl" id="arrival-title">ElevatorBeat is a small app studio in&nbsp;Portland.</h1>
-        <p class="lede">We make focused iPhone apps.</p>
+        <p class="eyebrow">ElevatorBeat</p>
+        <h1 class="display-xl" id="arrival-title">A Portland art collective working in&nbsp;apps.</h1>
+        <p class="lede">We turn ideas, observations, and small irritations into software that feels useful, surprising, and alive.</p>
         <div class="button-row">
-          <a class="btn btn-primary" href="#projects">See the apps</a>
-          <a class="btn btn-quiet" href="#studio">About the studio <span aria-hidden="true">&darr;</span></a>
+          <a class="btn btn-primary" href="#studio">Enter the studio <span aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn-quiet" href="#collection">See the collection</a>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         THE STUDIO
-         One passage on paper, no picture. Both origins are real and both are
-         named: the smokestack photograph, and wanting to see ourselves in drag.
-         This is the whole "why" and it does not need a second section.
+         01 — THE STUDIO
+         The one passage of pure prose on the page, flanked by two kinds of
+         evidence: a photograph of the room on the left of the gutter, and the
+         survey annotation and floor plan on the right. The annotations are the
+         building described in the other language a studio uses — coordinates
+         and a plan — which is why they are hairlines and not another picture.
          ===================================================================== -->
-    <section class="statement" id="studio" data-rail-section aria-labelledby="studio-title">
-      <div class="container">
-        <div class="statement-grid reveal">
-          <div>
-            <p class="eyebrow">The studio</p>
-            <h2 class="display-l" id="studio-title">We built the apps we could not&nbsp;find.</h2>
-          </div>
+    <section class="section" id="studio" data-rail-section
+             data-floor="01" data-floor-name="Studio" aria-labelledby="studio-title">
+      <div class="container studio-grid">
+        <div class="reveal">
+          <p class="eyebrow">The studio</p>
+          <!-- display-m, not -l: the largest tier is spent once, on the arrival.
+               At -l this heading came within a few points of the h1 and flattened
+               the page's hierarchy from the second screen onwards. -->
+          <h2 class="display-m" id="studio-title">Software is our&nbsp;medium.</h2>
           <div class="body-copy">
-            <p>StraightPic started with a photograph of a smokestack that looked like it was falling over. Dragify started because we wanted to see ourselves in drag.</p>
-            <p>Both apps are designed, drawn, built and supported by the same people, in Portland.</p>
+            <p>ElevatorBeat is a small collective in Portland. We sketch, prototype, build and release apps with the care we would give any other creative work. Some begin with a problem we want solved. Others begin with an image, an interaction, or an experiment we cannot stop thinking about. Each one becomes its own small world.</p>
+            <p><strong>From idea to experiment to launch.</strong></p>
           </div>
         </div>
-        <hr class="statement-rule">
+
+        <!-- The room as architecture rather than as a scene: a figure-free crop
+             of the observation lounge, arched at the top so the plate echoes the
+             pavilion's own curved glass. -->
+        <div class="studio-figure reveal" style="--delay: 80ms">
+          <div class="plate arch">
+            <img src="assets/img/salon-760.webp"
+                 srcset="assets/img/salon-520.webp 520w, assets/img/salon-760.webp 760w, assets/img/salon-1040.webp 1040w, assets/img/salon-1400.webp 1400w"
+                 sizes="(max-width: 1180px) 92vw, 34vw" width="1040" height="1387" loading="lazy"
+                 alt="The studio's observation lounge: a wall of curved brass-framed glass looking out over red desert mesas and a lit pool, a crescent moon high in the evening sky, a curved leather banquette in the foreground.">
+          </div>
+        </div>
+
+        <!-- Survey annotation and plan. Cyan hairlines and tracked numerals —
+             the same annotation language as the rail and the eyebrow ticks. -->
+        <aside class="survey reveal" style="--delay: 160ms" aria-label="Studio location and floor plan">
+          <p class="survey-line"><b>Portland, OR</b><span>45.5152&deg;&nbsp;N, 122.6784&deg;&nbsp;W</span></p>
+          <div class="plan">
+            <!-- The pavilion in plan, drawn from the paintings rather than
+                 invented: a round floor, the roof overhang dashed outside it, the
+                 pool off the south-west, and the elevator shaft ON the pavilion's
+                 edge — which is where it stands in every frame on this page, and
+                 the detail that stops this reading as a target. -->
+            <svg viewBox="0 0 200 150" fill="none" aria-hidden="true">
+              <circle class="plan-line" cx="86" cy="74" r="44"/>
+              <circle class="plan-overhang" cx="86" cy="74" r="52"/>
+              <path class="plan-line" d="M130 74a58 58 0 0 1-52 57"/>
+              <ellipse class="plan-line" cx="44" cy="126" rx="24" ry="7"/>
+              <circle class="plan-core" cx="130" cy="74" r="9"/>
+              <circle class="plan-dot" cx="130" cy="74" r="2.4"/>
+              <path class="plan-axis" d="M130 12v126M18 74h164"/>
+            </svg>
+            <p class="plan-label">Pavilion &amp; shaft <span aria-hidden="true">/</span> plan</p>
+          </div>
+        </aside>
       </div>
     </section>
 
     <!-- =====================================================================
-         01 — DRAGIFY
-         Opens on paper with the label, the specification and the collection,
-         then breaks full-bleed onto midnight for the work itself. The artwork
-         is saturated and theatrical; a cream ground would fight it, and a cream
-         card under a rounded image on a dark ground is exactly the mistake that
-         produced white corners on an earlier version of this page.
+         02 — ROOM 01, DRAGIFY
+         Full-bleed on midnight, because the artwork is saturated and theatrical
+         and a cream ground would fight it. The wall label sits on the left and
+         the work takes the other two thirds.
 
-         Nothing on the midnight band is colour-corrected. These frames are what
-         the app actually returns, so grading them would misrepresent the
-         product. They cohere because the ground, the crop, the gap and the
-         caption are identical, which is a layout problem rather than a
-         retouching one.
+         Nothing in the mosaic is colour-corrected. These frames are what the
+         app actually returns, so grading them would misrepresent the product.
          ===================================================================== -->
-    <section id="projects" data-rail-section data-rail-num="01" aria-labelledby="dragify-title">
-      <div class="section container">
-        <div class="project-head reveal">
-          <div>
-            <p class="dir"><b>01</b><span aria-hidden="true">/</span>Dragify</p>
-            <div class="app-head">
-              <img class="app-icon" src="assets/img/icon-dragify-96.webp"
-                   srcset="assets/img/icon-dragify-96.webp 96w, assets/img/icon-dragify-192.webp 192w, assets/img/icon-dragify-288.webp 288w"
-                   sizes="76px" width="192" height="192" loading="lazy" alt="">
-              <h2 class="display-m" id="dragify-title">Dragify</h2>
-            </div>
-            <dl class="facts facts--spec">
-              <div><b>Purpose</b><span>Drag portraits from one photo</span></div>
-              <div><b>Platform</b><span>iPhone</span></div>
-              <div><b>Status</b><span>On the App Store</span></div>
-              <div><b>Price</b><span>Free, packs $3.99</span></div>
-            </dl>
-          </div>
+    <section class="section on-dark" id="collection" data-rail-section
+             data-floor="02" data-floor-name="Gallery" aria-labelledby="dragify-title">
+      <div class="container room-grid">
+        <div class="room-label reveal">
+          <p class="eyebrow">Room 01</p>
+          <h2 class="display-m" id="dragify-title">Dragify</h2>
+          <p class="display-s room-claim">An image-making studio for portraits that could not exist any other&nbsp;way.</p>
           <div class="body-copy">
-            <p>Turn one photograph into a drag portrait. Choose a look, add a photo and Dragify creates a full-resolution image that keeps you recognizable.</p>
-            <p>There are around ninety looks, in five collections.</p>
-            <div class="button-row">
-              <a class="btn btn-primary" href="#">
-                <svg class="apple-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                Download on the App Store
-              </a>
-            </div>
-            <!-- Dragify's terms and privacy policy stay canonical on
-                 dragifyapp.com — these frame that copy in a dialog rather than
-                 duplicating text that would then need updating twice. -->
-            <p class="app-links">
-              <a href="support.html#dragify">Support</a>
-              <span aria-hidden="true">/</span>
-              <a href="https://dragifyapp.com/terms/" data-legal-modal data-legal-title="Dragify Terms of Service">Terms</a>
-              <span aria-hidden="true">/</span>
-              <a href="https://dragifyapp.com/privacy/" data-legal-modal data-legal-title="Dragify Privacy Policy">Privacy</a>
-            </p>
+            <p>Dragify turns a simple photograph into something more performative, surreal and composed. Part tool, part stage, part experiment.</p>
           </div>
-        </div>
-
-        <!-- The collections, with their real prices. Same component as the
-             specification above, so the page has one way of listing facts. -->
-        <dl class="facts reveal">
-          <div><b>Canonical Queens</b><span>Iconic looks that always cook</span><i>Free</i></div>
-          <div><b>Euphoria // UV</b><span>Electric love and molly magnificence</span><i>$3.99</i></div>
-          <div><b>Afterglow</b><span>A black tie affair</span><i>$3.99</i></div>
-          <div><b>Haute Haus</b><span>Intercontinental couture</span><i>$3.99</i></div>
-          <div><b>Ground Control</b><span>Retro-futurist space drag</span><i>$3.99</i></div>
-        </dl>
-      </div>
-
-      <div class="exhibition on-dark">
-        <div class="container">
-          <!-- The app beside its output, at the top of the band rather than
-               after it: the first thing this section shows is that Dragify is
-               software. The screenshot is the shipping pack drawer. -->
-          <div class="exhibition-head">
-            <figure class="reveal">
-              <div class="plate plate--screen" style="--ratio: 840 / 1385">
-                <img src="assets/img/ui-dragify-packs-420.webp"
-                     srcset="assets/img/ui-dragify-packs-420.webp 420w, assets/img/ui-dragify-packs-640.webp 640w, assets/img/ui-dragify-packs-840.webp 840w"
-                     sizes="(max-width: 760px) 76vw, 320px" width="840" height="1385" loading="lazy"
-                     alt="The Dragify collection screen on an iPhone: full-width cards for Canonical Queens, Euphoria // UV and Afterglow, each showing a look behind its name and description.">
-              </div>
-              <figcaption class="caption"><b>In the app</b>Pick a collection, then a look.</figcaption>
-            </figure>
-            <figure class="look reveal" style="--delay: 90ms">
-              <div class="plate">
-                <img src="assets/img/dragify/afterglow-06-480.webp"
-                     srcset="assets/img/dragify/afterglow-06-480.webp 480w, assets/img/dragify/afterglow-06-788.webp 788w"
-                     sizes="(max-width: 760px) 92vw, 46vw" width="480" height="720" loading="lazy"
-                     alt="An Afterglow look: a white feathered gown beside a lit pool under a full moon, holding a sparkler.">
-              </div>
-              <figcaption class="caption"><b>Afterglow</b>What it gives back, at full resolution.</figcaption>
-            </figure>
-          </div>
-
-          <!-- Five more, on identical terms. One collection each, same crop,
-               same gap, same caption. Once the premise is understood a sixth
-               row of portraits stops carrying information. -->
-          <ul class="gallery-grid">
-            <li class="look reveal"><div class="plate"><img src="assets/img/dragify/haute-haus-13-480.webp" srcset="assets/img/dragify/haute-haus-13-480.webp 480w, assets/img/dragify/haute-haus-13-682.webp 682w" sizes="(max-width: 760px) 44vw, 19vw" width="480" height="720" loading="lazy" alt="A Haute Haus look: an enormous black tulle ball gown with a beaded bodice, shot against concrete."></div><p class="caption"><b>Haute Haus</b></p></li>
-            <li class="look reveal"><div class="plate"><img src="assets/img/dragify/euphoria-uv-12-480.webp" srcset="assets/img/dragify/euphoria-uv-12-480.webp 480w, assets/img/dragify/euphoria-uv-12-800.webp 800w" sizes="(max-width: 760px) 44vw, 19vw" width="480" height="720" loading="lazy" alt="A Euphoria // UV look: a teal bob and a zipped leather dress in front of hot pink neon rings."></div><p class="caption"><b>Euphoria // UV</b></p></li>
-            <li class="look reveal"><div class="plate"><img src="assets/img/dragify/canonical-queens-04-480.webp" srcset="assets/img/dragify/canonical-queens-04-480.webp 480w, assets/img/dragify/canonical-queens-04-800.webp 800w" sizes="(max-width: 760px) 44vw, 19vw" width="480" height="720" loading="lazy" alt="A Canonical Queens look: a tall blue updo and a monochrome zebra gown against a flat cyan ground."></div><p class="caption"><b>Canonical Queens</b></p></li>
-            <li class="look reveal"><div class="plate"><img src="assets/img/dragify/ground-control-07-480.webp" srcset="assets/img/dragify/ground-control-07-480.webp 480w, assets/img/dragify/ground-control-07-800.webp 800w" sizes="(max-width: 760px) 44vw, 19vw" width="480" height="720" loading="lazy" alt="A Ground Control look: a silver and mint flight suit with a rocket headdress and a smoking ray gun."></div><p class="caption"><b>Ground Control</b></p></li>
-            <li class="look reveal"><div class="plate"><img src="assets/img/dragify/haute-haus-05-480.webp" srcset="assets/img/dragify/haute-haus-05-480.webp 480w, assets/img/dragify/haute-haus-05-706.webp 706w" sizes="(max-width: 760px) 44vw, 19vw" width="480" height="720" loading="lazy" alt="A Haute Haus look: a tiered teal tulle ball gown with sheer sleeves, shot in a concrete courtyard."></div><p class="caption"><b>Haute Haus</b></p></li>
+          <ul class="tags">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ic" x="7" y="2.5" width="10" height="19" rx="2.4"/><path class="ic" d="M10.6 5.2h2.8"/></svg>
+              iPhone app
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ic" cx="12" cy="12" r="8.6"/><path class="ic" d="m8.2 12.3 2.6 2.6 5-5.4"/></svg>
+              Released
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ic" d="M5 19 17.5 6.5M14.6 3.6l1.2 2.6 2.6 1.2-2.6 1.2-1.2 2.6-1.2-2.6L10.8 7.4l2.6-1.2z"/></svg>
+              Portrait tool
+            </li>
           </ul>
+          <div class="button-row">
+            <a class="btn btn-outline" href="#">
+              <svg class="apple-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              Open Dragify
+            </a>
+          </div>
+          <!-- Dragify's terms and privacy policy stay canonical on
+               dragifyapp.com — these frame that copy in a dialog rather than
+               duplicating text that would then need updating twice. -->
+          <p class="app-links">
+            <a href="support.html#dragify">Support</a>
+            <span aria-hidden="true">/</span>
+            <a href="https://dragifyapp.com/terms/" data-legal-modal data-legal-title="Dragify Terms of Service">Terms</a>
+            <span aria-hidden="true">/</span>
+            <a href="https://dragifyapp.com/privacy/" data-legal-modal data-legal-title="Dragify Privacy Policy">Privacy</a>
+          </p>
+        </div>
+
+        <!-- Three columns, six frames, each frame at the ratio its own
+             composition can take: the four full-length looks stay at the 2:3
+             every look is exported at, and only the two half-length ones — a
+             seated portrait and a bust — are given the short slots. The column
+             widths in the stylesheet are derived from those ratios, so all three
+             columns come out the same height with no fixed container height to
+             keep in sync. -->
+        <div class="mosaic reveal" style="--delay: 120ms">
+          <div class="mosaic-col">
+            <div class="plate frame--tall">
+              <img src="assets/img/dragify/haute-haus-01-480.webp"
+                   srcset="assets/img/dragify/haute-haus-01-480.webp 480w, assets/img/dragify/haute-haus-01-682.webp 682w"
+                   sizes="(max-width: 900px) 44vw, 21vw" width="480" height="720" loading="lazy"
+                   alt="A Haute Haus look: a copper satin mermaid gown with opera gloves, photographed in a raw concrete colonnade.">
+            </div>
+            <div class="plate frame--wide">
+              <img src="assets/img/dragify/afterglow-02-480.webp"
+                   srcset="assets/img/dragify/afterglow-02-480.webp 480w, assets/img/dragify/afterglow-02-768.webp 768w"
+                   sizes="(max-width: 900px) 44vw, 21vw" width="480" height="720" loading="lazy"
+                   style="--focus: 50% 24%"
+                   alt="An Afterglow look: an emerald sequinned gown and matching fur, lit by teal chandeliers in a grand salon.">
+            </div>
+          </div>
+          <div class="mosaic-col">
+            <div class="plate frame--tall">
+              <img src="assets/img/dragify/canonical-queens-04-480.webp"
+                   srcset="assets/img/dragify/canonical-queens-04-480.webp 480w, assets/img/dragify/canonical-queens-04-800.webp 800w"
+                   sizes="(max-width: 900px) 44vw, 20vw" width="480" height="720" loading="lazy"
+                   alt="A Canonical Queens look: a tall blue updo and a monochrome zebra gown against a flat cyan ground.">
+            </div>
+            <div class="plate frame--short">
+              <img src="assets/img/dragify/euphoria-uv-03-480.webp"
+                   srcset="assets/img/dragify/euphoria-uv-03-480.webp 480w, assets/img/dragify/euphoria-uv-03-800.webp 800w"
+                   sizes="(max-width: 900px) 44vw, 20vw" width="480" height="720" loading="lazy"
+                   style="--focus: 50% 28%"
+                   alt="A Euphoria // UV look: a purple sequinned bodice and dark bouffant framed by a red neon rectangle.">
+            </div>
+          </div>
+          <div class="mosaic-col">
+            <div class="plate frame--tall">
+              <img src="assets/img/dragify/haute-haus-05-480.webp"
+                   srcset="assets/img/dragify/haute-haus-05-480.webp 480w, assets/img/dragify/haute-haus-05-706.webp 706w"
+                   sizes="(max-width: 900px) 44vw, 16vw" width="480" height="720" loading="lazy"
+                   alt="A Haute Haus look: a tiered teal tulle ball gown with sheer sleeves, shot in a concrete courtyard.">
+            </div>
+            <div class="plate frame--tall">
+              <img src="assets/img/dragify/afterglow-06-480.webp"
+                   srcset="assets/img/dragify/afterglow-06-480.webp 480w, assets/img/dragify/afterglow-06-788.webp 788w"
+                   sizes="(max-width: 900px) 44vw, 16vw" width="480" height="720" loading="lazy"
+                   alt="An Afterglow look: a white feathered gown beside a lit pool under a full moon, holding a sparkler.">
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         TRANSITION — morning
-         The building, in daylight, with nothing written on it. Paired with the
-         night frame further down, it reads as one place across one day; a label
-         saying "Morning" would only announce what the picture already is.
+         MORNING
+         The one chapter that does NOT carry .on-dark. Darkening a pale morning
+         sky enough to hold ivory type would turn the morning into another dusk,
+         which is the "every image becomes the same dark scene" failure. The
+         type is near-black and the scrim LIFTS the sky instead.
          ===================================================================== -->
-    <section class="chapter chapter--band" data-rail-section
-             aria-label="The studio building in morning light">
+    <section class="chapter chapter--morning scrim-lift" data-rail-section
+             aria-labelledby="morning-title">
       <div class="chapter-media">
         <img src="assets/img/house-day-1920.webp"
              srcset="assets/img/house-day-900.webp 900w, assets/img/house-day-1400.webp 1400w, assets/img/house-day-1920.webp 1920w, assets/img/house-day-2400.webp 2400w, assets/img/house-day-3000.webp 3000w"
              sizes="100vw" width="3000" height="1313" loading="lazy"
              alt="A low glass pavilion and its elevator shaft in flat morning light, pale blue sky above a wide sand plain and distant grey mountains.">
       </div>
+      <div class="container chapter-inner">
+        <p class="eyebrow">Morning</p>
+        <h2 class="display-m" id="morning-title">Some work needs the light to be&nbsp;honest.</h2>
+        <p class="body-copy">Not every experiment has to perform. Some simply need clarity.</p>
+      </div>
     </section>
 
     <!-- =====================================================================
-         02 — STRAIGHTPIC
-         Paper, geometry, restraint: the counterweight to Dragify's wall. Same
-         label, specification and caption grammar, different evidence. The app
-         is a single transform, so the transform itself is the exhibit and it is
-         given the room a gallery would have taken.
-
-         The photograph is real — a phone shot of a brick smokestack, 4284x5712.
-         The guide lines are SVG over the plate rather than baked into the
-         pixels, so they stay crisp at any density, and they are clipped with
-         the "before" frame so dragging sweeps them away along with the
-         distortion.
+         03 — ROOM 02, STRAIGHTPIC
+         Same wall label, same tag row, same action — different evidence. Two
+         real captures from one session in the app: the editor with the four
+         perspective handles placed, and the corrected frame that came back.
          ===================================================================== -->
-    <section class="section" id="straightpic" data-rail-section data-rail-num="02" aria-labelledby="straightpic-title">
-      <div class="container">
-        <div class="project-head reveal">
-          <div>
-            <p class="dir"><b>02</b><span aria-hidden="true">/</span>StraightPic</p>
-            <div class="app-head">
-              <img class="app-icon" src="assets/img/icon-straightpic-96.webp"
-                   srcset="assets/img/icon-straightpic-96.webp 96w, assets/img/icon-straightpic-192.webp 192w, assets/img/icon-straightpic-288.webp 288w"
-                   sizes="76px" width="192" height="192" loading="lazy" alt="">
-              <h2 class="display-m" id="straightpic-title">StraightPic</h2>
-            </div>
-            <dl class="facts facts--spec">
-              <div><b>Purpose</b><span>Perspective correction</span></div>
-              <div><b>Platform</b><span>iPhone</span></div>
-              <div><b>Status</b><span>Coming soon</span></div>
-              <div><b>Price</b><span>Free</span></div>
-            </dl>
-          </div>
+    <!-- No floor label of its own: StraightPic is the second room on the gallery
+         floor, so the rail gives it a tick and Dragify's 02 covers them both. -->
+    <section class="section" id="straightpic" data-rail-section aria-labelledby="straightpic-title">
+      <div class="container room-grid">
+        <div class="room-label reveal">
+          <p class="eyebrow">Room 02</p>
+          <h2 class="display-m" id="straightpic-title">StraightPic</h2>
+          <p class="display-s room-claim">A precise little tool for making crooked photographs feel right&nbsp;again.</p>
           <div class="body-copy">
-            <p>StraightPic fixes the perspective distortion that makes buildings lean in photographs. Mark the lines that should be straight and the app corrects and reframes the image.</p>
-            <div class="button-row">
-              <!-- StraightPic hasn't shipped, so this is a real button rather
-                   than a dead link: focusable and hoverable, where a disabled
-                   control is neither. The aria-label carries both halves of
-                   the label so assistive tech never gets only the painted
-                   half. -->
-              <button class="btn btn-quiet btn-upcoming" type="button" aria-disabled="true"
-                      aria-label="Download StraightPic on the App Store — coming soon">
-                <svg class="apple-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                <span class="button-label" aria-hidden="true">
-                  <span class="button-label-rest">Download on the App Store</span>
-                  <span class="button-label-hover">Coming soon</span>
-                </span>
-              </button>
-            </div>
-            <!-- ElevatorBeat's own terms and privacy policy are single
-                 documents covering both apps, so these link to the whole page
-                 rather than a per-app fragment that doesn't exist. -->
-            <p class="app-links">
-              <a href="support.html#straightpic">Support</a>
-              <span aria-hidden="true">/</span>
-              <a href="terms.html">Terms</a>
-              <span aria-hidden="true">/</span>
-              <a href="privacy.html">Privacy</a>
-            </p>
+            <p>Choose a vertical or horizontal reference, set the line, and let the frame settle into place. StraightPic is a small utility built for a very specific satisfaction.</p>
           </div>
+          <ul class="tags">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ic" x="7" y="2.5" width="10" height="19" rx="2.4"/><path class="ic" d="M10.6 5.2h2.8"/></svg>
+              iPhone app
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ic" d="M4 20h16M4 20 20 4M9.5 20V9.5H20"/></svg>
+              Utility
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ic" cx="12" cy="12" r="8.6"/><path class="ic" d="M12 7.4V12l3.4 2.1"/></svg>
+              Coming soon
+            </li>
+          </ul>
+          <div class="button-row">
+            <!-- StraightPic hasn't shipped, so this is a real button rather
+                 than a dead link: focusable and hoverable, where a disabled
+                 control is neither. The aria-label carries both halves of the
+                 label so assistive tech never gets only the painted half. -->
+            <button class="btn btn-outline btn-upcoming" type="button" aria-disabled="true"
+                    aria-label="Open StraightPic on the App Store — coming soon">
+              <svg class="apple-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span class="button-label" aria-hidden="true">
+                <span class="button-label-rest">Open StraightPic</span>
+                <span class="button-label-hover">Coming soon</span>
+              </span>
+            </button>
+          </div>
+          <!-- ElevatorBeat's own terms and privacy policy are single documents
+               covering both apps, so these link to the whole page rather than a
+               per-app fragment that doesn't exist. -->
+          <p class="app-links">
+            <a href="support.html#straightpic">Support</a>
+            <span aria-hidden="true">/</span>
+            <a href="terms.html">Terms</a>
+            <span aria-hidden="true">/</span>
+            <a href="privacy.html">Privacy</a>
+          </p>
         </div>
 
-        <div class="demo reveal">
-          <figure class="demo-main">
-            <div class="plate compare" data-compare>
-              <img class="compare-after" src="assets/img/straightpic-after-900.webp"
-                   srcset="assets/img/straightpic-after-600.webp 600w, assets/img/straightpic-after-900.webp 900w, assets/img/straightpic-after-1200.webp 1200w"
-                   sizes="(max-width: 760px) 92vw, 52vw" width="1200" height="1600" loading="lazy"
-                   alt="The same photograph after correction: the smokestack and both buildings now stand upright and square to the frame, with the skewed edges cropped away.">
-              <img class="compare-before" src="assets/img/straightpic-before-900.webp"
-                   srcset="assets/img/straightpic-before-600.webp 600w, assets/img/straightpic-before-900.webp 900w, assets/img/straightpic-before-1200.webp 1200w"
-                   sizes="(max-width: 760px) 92vw, 52vw" width="1200" height="1600" loading="lazy"
-                   alt="A brick smokestack photographed from its base, leaning inwards against a bright cloudy sky between a concrete block and a Victorian brick warehouse.">
-              <!-- The four points a photographer would actually drop: the
-                   corners of the brick face carrying the arched door, which is
-                   a true rectangle in the world and is leaning in the frame.
-                   The plate is exactly 3:4 and so is the photograph, so with
-                   preserveAspectRatio="none" these viewBox units map straight
-                   onto the picture with no drift at any size. It carries
-                   .compare-before so the clip that reveals the corrected frame
-                   takes the guides with it. -->
-              <svg class="guides compare-before" viewBox="0 0 300 400" fill="none" aria-hidden="true" preserveAspectRatio="none">
-                <line x1="86" y1="220" x2="226" y2="216"/>
-                <line x1="226" y1="216" x2="242" y2="322"/>
-                <line x1="242" y1="322" x2="70" y2="332"/>
-                <line x1="70" y1="332" x2="86" y2="220"/>
-                <circle cx="86" cy="220" r="9"/><circle class="guide-dot" cx="86" cy="220" r="2.4"/>
-                <circle cx="226" cy="216" r="9"/><circle class="guide-dot" cx="226" cy="216" r="2.4"/>
-                <circle cx="242" cy="322" r="9"/><circle class="guide-dot" cx="242" cy="322" r="2.4"/>
-                <circle cx="70" cy="332" r="9"/><circle class="guide-dot" cx="70" cy="332" r="2.4"/>
-              </svg>
-              <span class="frame-label is-before">Before</span>
-              <span class="frame-label is-after">After</span>
-              <span class="compare-handle" aria-hidden="true"></span>
-              <input class="compare-range" type="range" min="0" max="100" value="50" step="1"
-                     aria-label="Drag to compare the StraightPic before and after photographs">
-            </div>
-            <figcaption class="caption"><b>Drag to compare</b>4284&thinsp;&times;&thinsp;5712, corrected and reframed.</figcaption>
-          </figure>
+        <div class="devices reveal" style="--delay: 120ms">
           <figure>
             <div class="plate plate--screen" style="--ratio: 840 / 1826">
               <img src="assets/img/ui-straightpic-editor-420.webp"
                    srcset="assets/img/ui-straightpic-editor-420.webp 420w, assets/img/ui-straightpic-editor-640.webp 640w, assets/img/ui-straightpic-editor-840.webp 840w"
-                   sizes="(max-width: 760px) 76vw, 300px" width="840" height="1826" loading="lazy"
-                   alt="The StraightPic editor on an iPhone: the smokestack photograph with four draggable handles marking a rectangle on the brick wall, a row of Vertical, Horizontal and Perspective tools, and a Straighten button.">
+                   sizes="(max-width: 900px) 42vw, 20vw" width="840" height="1826" loading="lazy"
+                   alt="The StraightPic editor on an iPhone: a photograph of a leaning brick smokestack with four draggable handles marking a rectangle on the brick wall, a row of Vertical, Horizontal and Perspective tools, and a Straighten button.">
             </div>
-            <figcaption class="caption"><b>In the app</b>Four handles and one button.</figcaption>
+            <figcaption class="caption"><b>Set the line</b>Four handles on something that should be square.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate plate--screen" style="--ratio: 840 / 1826">
+              <img src="assets/img/ui-straightpic-result-420.webp"
+                   srcset="assets/img/ui-straightpic-result-420.webp 420w, assets/img/ui-straightpic-result-640.webp 640w, assets/img/ui-straightpic-result-840.webp 840w"
+                   sizes="(max-width: 900px) 42vw, 20vw" width="840" height="1826" loading="lazy"
+                   alt="The same photograph in StraightPic after correction: the smokestack and the buildings beside it now stand upright and square to the frame.">
+            </div>
+            <figcaption class="caption"><b>Let it settle</b>The frame comes back upright.</figcaption>
           </figure>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         TRANSITION — night
-         The same pavilion, hours later. No copy, for the same reason as the
-         morning frame.
+         THE OBSERVATION LEVEL
+         The empty floors, said plainly. The panorama is the argument: there is
+         a great deal of building and only two rooms in use.
          ===================================================================== -->
-    <section class="chapter chapter--band on-dark" data-rail-section
-             aria-label="The studio building at night">
+    <section class="chapter chapter--observation scrim-bl on-dark" data-rail-section
+             data-floor="03" data-floor-name="Observation" aria-labelledby="observation-title">
       <div class="chapter-media">
         <picture>
           <source media="(max-width: 760px)"
@@ -391,105 +400,123 @@
           <img src="assets/img/band-mars-1920.webp"
                srcset="assets/img/band-mars-900.webp 900w, assets/img/band-mars-1400.webp 1400w, assets/img/band-mars-1920.webp 1920w, assets/img/band-mars-2400.webp 2400w, assets/img/band-mars-3000.webp 3000w"
                sizes="100vw" width="3000" height="1285" loading="lazy"
-               alt="The same pavilion and elevator shaft seen from far out on the plain at night, alone under an enormous rising moon, with a rocket's vapour trail crossing the rust-coloured sky.">
+               alt="The pavilion and its elevator shaft seen from far out on the plain at night, alone under an enormous rising moon, with a rocket's vapour trail crossing the rust-coloured sky.">
         </picture>
+      </div>
+      <div class="container chapter-inner">
+        <p class="eyebrow">The observation level</p>
+        <h2 class="display-m" id="observation-title">Two rooms are occupied. The rest are for whatever we notice&nbsp;next.</h2>
+        <p class="body-copy">The collection is meant to grow slowly and unevenly — a tool, an experiment, an object nobody asked for. When something earns a room, we build it.</p>
       </div>
     </section>
 
     <!-- =====================================================================
-         THE APPS
-         Where to get them, as a directory rather than a closing statement. Both
-         rows carry the same fields as their project specification above, and
-         each carries exactly one action.
+         GF — GROUND FLOOR
+         Where to get the work, as a board rather than a closing statement.
+         Both rows carry the same tags they were labelled with upstairs, and
+         each carries exactly one primary action plus support.
          ===================================================================== -->
-    <section class="section" id="apps" data-rail-section aria-labelledby="apps-title">
-      <div class="container">
+    <section class="section" id="ground-floor" data-rail-section
+             data-floor="GF" data-floor-name="Ground floor" aria-labelledby="ground-title">
+      <div class="container ground-grid">
         <div class="reveal">
-          <p class="eyebrow">The apps</p>
-          <h2 class="display-m" id="apps-title">ElevatorBeat designs, builds and supports both apps from&nbsp;Portland.</h2>
+          <p class="eyebrow">Ground floor</p>
+          <h2 class="display-m" id="ground-title">Made in Portland. Released&nbsp;everywhere.</h2>
+          <p class="body-copy">ElevatorBeat designs, builds and supports every app in the collection from Portland, Oregon.</p>
+          <p class="signoff">Art as app.</p>
         </div>
 
-        <ul class="directory reveal">
+        <ul class="rooms reveal" style="--delay: 80ms">
           <li>
             <img class="app-icon" src="assets/img/icon-dragify-96.webp"
                  srcset="assets/img/icon-dragify-96.webp 96w, assets/img/icon-dragify-192.webp 192w"
-                 sizes="60px" width="192" height="192" loading="lazy" alt="">
-            <div class="directory-name">
-              <p class="dir"><b>01</b><span aria-hidden="true">/</span>Dragify</p>
-              <p>Drag portraits from one photo</p>
+                 sizes="52px" width="192" height="192" loading="lazy" alt="">
+            <div class="rooms-name">
+              <h3 class="display-s">Dragify</h3>
+              <p>Portrait tool for imaginative transformations.</p>
             </div>
-            <p class="directory-meta">iPhone<span aria-hidden="true">/</span>Free, packs $3.99</p>
-            <a class="btn btn-primary" href="#">
-              <svg class="apple-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-              App Store
-            </a>
+            <ul class="tags tags--compact">
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ic" x="7" y="2.5" width="10" height="19" rx="2.4"/><path class="ic" d="M10.6 5.2h2.8"/></svg>
+                iPhone app
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ic" cx="12" cy="12" r="8.6"/><path class="ic" d="m8.2 12.3 2.6 2.6 5-5.4"/></svg>
+                Released
+              </li>
+            </ul>
+            <p class="rooms-actions">
+              <a class="btn btn-outline btn-sm" href="#">View app</a>
+              <a class="btn btn-outline btn-sm" href="support.html#dragify">Support</a>
+            </p>
           </li>
           <li>
             <img class="app-icon" src="assets/img/icon-straightpic-96.webp"
                  srcset="assets/img/icon-straightpic-96.webp 96w, assets/img/icon-straightpic-192.webp 192w"
-                 sizes="60px" width="192" height="192" loading="lazy" alt="">
-            <div class="directory-name">
-              <p class="dir"><b>02</b><span aria-hidden="true">/</span>StraightPic</p>
-              <p>Perspective correction</p>
+                 sizes="52px" width="192" height="192" loading="lazy" alt="">
+            <div class="rooms-name">
+              <h3 class="display-s">StraightPic</h3>
+              <p>Straighten photos with precision and ease.</p>
             </div>
-            <p class="directory-meta">iPhone<span aria-hidden="true">/</span>Free</p>
-            <a class="btn btn-quiet" href="#straightpic">See the project <span aria-hidden="true">&uarr;</span></a>
+            <ul class="tags tags--compact">
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ic" x="7" y="2.5" width="10" height="19" rx="2.4"/><path class="ic" d="M10.6 5.2h2.8"/></svg>
+                iPhone app
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ic" cx="12" cy="12" r="8.6"/><path class="ic" d="M12 7.4V12l3.4 2.1"/></svg>
+                Coming soon
+              </li>
+            </ul>
+            <p class="rooms-actions">
+              <a class="btn btn-outline btn-sm" href="#straightpic">See the room</a>
+              <a class="btn btn-outline btn-sm" href="support.html#straightpic">Support</a>
+            </p>
           </li>
         </ul>
-
-        <div class="closing-line reveal">
-          <p class="body-copy">Support questions and ideas both go to <a href="mailto:hello@elevatorbeat.com">hello@elevatorbeat.com</a>.</p>
-          <a class="btn btn-primary" href="contact.html">Get in touch</a>
-        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a class="brand" href="#top">
-          <svg class="brand-mark" viewBox="0 0 24 36" aria-hidden="true">
-            <rect width="24" height="36" rx="5.2" fill="#00D8ED"/>
-            <rect x="6" y="7.8" width="12" height="4" rx="2" fill="#08131F"/>
-            <rect x="6" y="15.8" width="12" height="4" rx="2" fill="#08131F"/>
-            <rect x="6" y="23.8" width="12" height="4" rx="2" fill="#08131F"/>
-          </svg>
+    <div class="container footer-bar">
+      <a class="footer-brand" href="#top">
+        <!-- The monogram, only here. The header carries the wordmark; a mark and
+             a wordmark competing in the same bar is what made the old header
+             read as a logo lockup rather than as signage. -->
+        <svg class="monogram" viewBox="0 0 44 44" aria-hidden="true">
+          <circle cx="22" cy="22" r="21" fill="none" stroke="currentColor" stroke-opacity=".34"/>
+          <text x="22" y="27.6" text-anchor="middle">EB</text>
+        </svg>
+        <span class="footer-brand-text">
           ElevatorBeat
-        </a>
-        <p>A small app studio making focused iPhone apps.<br>Portland, Oregon.</p>
-        <div class="footer-social">
-          <a href="https://x.com/elevatorbeat" target="_blank" rel="noopener" aria-label="ElevatorBeat on X">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.6-7.3L4.2 22H1l8.2-9.4L.9 2H8.2l5 6.7L18.9 2Zm-1.2 18h1.9L6.4 4H4.3l13.4 16Z"/></svg>
-          </a>
-          <a href="https://instagram.com/elevatorbeat" target="_blank" rel="noopener" aria-label="ElevatorBeat on Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.16.5.5.87 1.05 1.16 1.77.25.64.42 1.37.47 2.43C21.99 8.94 22 9.3 22 12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.16 1.77c-.5.5-1.05.87-1.77 1.16-.64.25-1.37.42-2.43.47C14.94 21.99 14.58 22 12 22s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.16 4.9 4.9 0 0 1-1.16-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43a4.9 4.9 0 0 1 1.16-1.77c.5-.5 1.05-.87 1.77-1.16.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.3 2 12 2Zm0 2.7c-2.65 0-2.98.01-4.02.06-.87.04-1.34.18-1.65.3-.42.16-.71.36-1.02.67-.31.31-.5.6-.67 1.02-.12.31-.26.78-.3 1.65-.05 1.04-.06 1.37-.06 4.02s.01 2.98.06 4.02c.04.87.18 1.34.3 1.65.16.42.36.71.67 1.02.31.31.6.5 1.02.67.31.12.78.26 1.65.3 1.04.05 1.37.06 4.02.06s2.98-.01 4.02-.06c.87-.04 1.34-.18 1.65-.3.42-.16.71-.36 1.02-.67.31-.31.5-.6.67-1.02.12-.31.26-.78.3-1.65.05-1.04.06-1.37.06-4.02s-.01-2.98-.06-4.02c-.04-.87-.18-1.34-.3-1.65a2.7 2.7 0 0 0-.67-1.02 2.7 2.7 0 0 0-1.02-.67c-.31-.12-.78-.26-1.65-.3-1.04-.05-1.37-.06-4.02-.06Zm0 3.7a5.6 5.6 0 1 1 0 11.2 5.6 5.6 0 0 1 0-11.2Zm0 2.3a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6Zm5.8-2.5a1.3 1.3 0 1 1-2.6 0 1.3 1.3 0 0 1 2.6 0Z"/></svg>
-          </a>
-        </div>
-      </div>
-      <nav class="footer-nav" aria-labelledby="footer-apps-heading">
-        <h2 id="footer-apps-heading">Apps</h2>
-        <a href="#projects">Dragify</a>
-        <a href="#straightpic">StraightPic</a>
-        <a href="#apps">Where to get them</a>
-      </nav>
-      <nav class="footer-nav" aria-labelledby="footer-studio-heading">
-        <h2 id="footer-studio-heading">Studio</h2>
-        <a href="#studio">About</a>
-        <a href="contact.html">Contact</a>
+          <span>Portland, Oregon</span>
+        </span>
+      </a>
+
+      <nav class="footer-links" aria-label="Footer">
         <a href="mailto:hello@elevatorbeat.com">hello@elevatorbeat.com</a>
-      </nav>
-      <nav class="footer-nav" aria-labelledby="footer-legal-heading">
-        <h2 id="footer-legal-heading">Support &amp; legal</h2>
-        <a href="support.html">App support</a>
+        <a href="support.html">Support</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="open-source.html">Licenses</a>
       </nav>
+
+      <a class="btn btn-outline btn-sm footer-action" href="#">
+        <svg class="apple-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        App Store <span aria-hidden="true">&nearr;</span>
+      </a>
     </div>
     <div class="container footer-bottom">
       <p>&copy; 2026 ElevatorBeat LLC</p>
-      <p>Portland, Oregon</p>
+      <div class="footer-social">
+        <a href="https://x.com/elevatorbeat" target="_blank" rel="noopener" aria-label="ElevatorBeat on X">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.6-7.3L4.2 22H1l8.2-9.4L.9 2H8.2l5 6.7L18.9 2Zm-1.2 18h1.9L6.4 4H4.3l13.4 16Z"/></svg>
+        </a>
+        <a href="https://instagram.com/elevatorbeat" target="_blank" rel="noopener" aria-label="ElevatorBeat on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.16.5.5.87 1.05 1.16 1.77.25.64.42 1.37.47 2.43C21.99 8.94 22 9.3 22 12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.16 1.77c-.5.5-1.05.87-1.77 1.16-.64.25-1.37.42-2.43.47C14.94 21.99 14.58 22 12 22s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.16 4.9 4.9 0 0 1-1.16-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43a4.9 4.9 0 0 1 1.16-1.77c.5-.5 1.05-.87 1.77-1.16.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.3 2 12 2Zm0 2.7c-2.65 0-2.98.01-4.02.06-.87.04-1.34.18-1.65.3-.42.16-.71.36-1.02.67-.31.31-.5.6-.67 1.02-.12.31-.26.78-.3 1.65-.05 1.04-.06 1.37-.06 4.02s.01 2.98.06 4.02c.04.87.18 1.34.3 1.65.16.42.36.71.67 1.02.31.31.6.5 1.02.67.31.12.78.26 1.65.3 1.04.05 1.37.06 4.02.06s2.98-.01 4.02-.06c.87-.04 1.34-.18 1.65-.3.42-.16.71-.36 1.02-.67.31-.31.5-.6.67-1.02.12-.31.26-.78.3-1.65.05-1.04.06-1.37.06-4.02s-.01-2.98-.06-4.02c-.04-.87-.18-1.34-.3-1.65a2.7 2.7 0 0 0-.67-1.02 2.7 2.7 0 0 0-1.02-.67c-.31-.12-.78-.26-1.65-.3-1.04-.05-1.37-.06-4.02-.06Zm0 3.7a5.6 5.6 0 1 1 0 11.2 5.6 5.6 0 0 1 0-11.2Zm0 2.3a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6Zm5.8-2.5a1.3 1.3 0 1 1-2.6 0 1.3 1.3 0 0 1 2.6 0Z"/></svg>
+        </a>
+      </div>
     </div>
   </footer>
 
