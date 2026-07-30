@@ -243,7 +243,7 @@ if (legalDialog && typeof legalDialog.showModal === 'function') {
 //
 // Within a section, order is expressed as a --delay in the markup — the wall
 // label, then its evidence. There is no per-frame stagger inside the mosaic on
-// purpose: the eighteen looks arrive as one wall, the way a gallery lights a
+// purpose: the six looks arrive as one wall, the way a gallery lights a
 // wall rather than a picture at a time.
 // ---------------------------------------------------------------------------
 const observer = new IntersectionObserver((entries) => {
@@ -259,7 +259,7 @@ document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.obs
 // ---------------------------------------------------------------------------
 // The aperture — Dragify's wall of looks, and the window that climbs it.
 //
-// The gallery is a fixed-height window cut in the page with a wall of eighteen
+// The gallery is a fixed-height window cut in the page with a wall of six
 // portraits behind it. The wall is pinned to the VIEWPORT: as the page scrolls,
 // the window travels up over a set of frames that do not move at all. It is not
 // a parallax layer moving at a fraction of scroll speed — the fraction is zero.
@@ -277,7 +277,7 @@ document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.obs
 // y = -height, and the union of everywhere it has been is exactly that band.
 //
 // THE CLAMP is the honest failure mode. If a viewport is tall enough that the
-// band outruns eighteen frames, the wall stops at its own edge and creeps with
+// band outruns the wall — which at six frames it always does — the wall stops at
 // the page for the last pixels of the pass, rather than sliding past and
 // showing the midnight ground through a window that is supposed to be a wall.
 //
@@ -306,7 +306,7 @@ if (aperture && wall && !window.matchMedia('(prefers-reduced-motion: reduce)').m
   // Where the wall stands as the window starts its pass. It is the same
   // `-height - top` as the loop below, evaluated at the one moment the range
   // begins — top = one viewport down — and held to the same floor, so a
-  // viewport tall enough to outrun eighteen frames starts flush with the
+  // viewport tall enough to outrun the wall starts flush with the
   // wall's bottom edge instead of past it.
   const setStart = () => {
     const height = aperture.getBoundingClientRect().height;

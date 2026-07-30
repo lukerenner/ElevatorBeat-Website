@@ -927,22 +927,27 @@ textarea:focus-visible {
    the ground, the gap and the grid instead.
 
    THE WALL DOES NOT SCROLL. `.mosaic` is a window cut in the page; the wall of
-   eighteen looks behind it is pinned to the VIEWPORT by script.js and never
-   moves. So the page rises, the window climbs the wall, and not one queen
-   travels a pixel — which is the opposite of a parallax layer, a thing that
-   moves slower than the page rather than not at all. Frames are cut hard by the
-   window's edge on purpose: an opening in a wall, not a carousel.
+   six looks behind it is pinned to the VIEWPORT and never moves. So the page
+   rises, the window climbs the wall, and not one queen travels a pixel — which
+   is the opposite of a parallax layer, a thing that moves slower than the page
+   rather than not at all. Frames are cut hard by the window's edge on purpose:
+   an opening in a wall, not a carousel.
 
    ONE RATIO NOW. The old mosaic mixed 3:2 and 5:4 into the 2:3 so that three
    columns of different widths would finish level. Behind an aperture nothing
    has to finish level, so every frame goes back to the single ratio the app
    exports and no look is cropped at all.
 
-   THE WALL HAS TO OUTRUN THE WINDOW'S TRAVEL. Between entering at the bottom of
-   the viewport and leaving at the top, the window sweeps a band of
-   100vh + 2 × its own height. Six frames a column covers that at the viewports
-   this page is read on; beyond them the script clamps instead of letting a gap
-   open, and the wall creeps for the last pixels of the pass.
+   THE WALL NO LONGER OUTRUNS THE TRAVEL, ON PURPOSE. Between entering at the
+   bottom of the viewport and leaving at the top, the window sweeps a band of
+   100vh + 2 × its own height — far more than two rows of frames. An eighteen-
+   frame wall filled that band, but it also meant any given look was only in the
+   window for a fraction of the pass. At six the wall is shorter than the band,
+   so the script clamps to the wall's own edge and the whole thing drifts a
+   couple of hundred pixels instead of climbing: all six stay in view for most
+   of the section. The clamp is what keeps the midnight ground from ever showing
+   through, so the wall must still be TALLER THAN THE APERTURE at every width —
+   two 2:3 frames always are, by a wide margin.
    ========================================================================== */
 .mosaic {
   position: relative;
@@ -1023,15 +1028,14 @@ textarea:focus-visible {
   to { transform: translate3d(0, 0, 0); }
 }
 
-/* Where the window cannot travel — no script, or motion turned off — there is
-   no reveal to spend eighteen frames on, so the wall shows its first twelve and
-   the section stays the length of a section. */
-html:not(.js) .mosaic-col .plate:nth-child(n + 5) { display: none; }
-
+/* Where the window cannot travel — no script, or motion turned off — the plane
+   sits still and the wall becomes an ordinary six-up grid. There is nothing to
+   trim any more: at eighteen frames these rules hid everything past the fourth
+   in a column so the section stayed the length of a section, but six frames is
+   already that length. */
 @media (prefers-reduced-motion: reduce) {
   .js .mosaic { height: auto; overflow: visible; }
   .js .mosaic-plane { position: static; animation: none; }
-  .mosaic-col .plate:nth-child(n + 5) { display: none; }
 }
 
 /* ==========================================================================
@@ -1456,9 +1460,9 @@ main > .page-hero:last-child { padding-bottom: clamp(88px, 9vw, 132px); }
 
   /* Two columns rather than three: a 2:3 frame at a third of a phone's measure
      is 110px wide, which is a thumbnail of a queen and not a look. The column
-     wrappers step out of the way with `display: contents` so all eighteen
-     frames flow two-up, and the wall comes out nine rows tall — still well
-     clear of the window's travel at this aperture. */
+     wrappers step out of the way with `display: contents` so the six frames
+     flow two-up into three rows — comfortably taller than this aperture, which
+     is all the clamp needs to keep the window covered. */
   .mosaic {
     --aperture-h: clamp(320px, 54svh, 480px);
     --wall-gap: 10px;

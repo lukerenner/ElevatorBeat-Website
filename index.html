@@ -51,8 +51,8 @@
         href="assets/img/hero-1400.webp"
         imagesrcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w, assets/img/hero-1920.webp 1920w, assets/img/hero-2400.webp 2400w"
         imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260730f">
-  <script defer src="script.js?v=20260730f"></script>
+  <link rel="stylesheet" href="styles.css?v=20260730g">
+  <script defer src="script.js?v=20260730g"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -238,15 +238,20 @@
         </div>
 
         <!-- THE APERTURE.
-             Three columns of six, eighteen looks, every one at the 2:3 the app
-             exports — so nothing here is cropped any more than it is graded.
+             Six looks — three columns of two — every one at the 2:3 the app
+             exports, so nothing here is cropped any more than it is graded.
+             Six and not eighteen because these are the looks worth showing:
+             a wall deep enough to fill the whole travel would mean most of it
+             is only ever glimpsed in passing, and the best frames would spend
+             the section half out of view.
 
              The wall does not scroll. `.mosaic` is a window cut in the page and
              `.mosaic-plane` is held still in the VIEWPORT behind it (script.js),
              so as the page rises the aperture climbs the wall and the queens
-             never move a pixel. That is why the wall has to be taller than the
-             viewport plus two apertures: the window's travel exposes a band that
-             tall, and any less would show the wall running out.
+             never move a pixel. At six frames the wall is shorter than the
+             window's full travel, so it clamps to its own edge and drifts the
+             last stretch — which is the point: all six stay in view for most of
+             the pass instead of scrolling past.
 
              Without JS, or under prefers-reduced-motion, the plane simply sits
              at the top of the window and the section is an ordinary cropped
@@ -254,20 +259,6 @@
         <div class="mosaic reveal" style="--delay: 120ms" data-mosaic>
           <div class="mosaic-plane" data-mosaic-plane>
             <div class="mosaic-col">
-              <div class="plate">
-                <img src="assets/img/dragify/afterglow-06-480.webp"
-                     srcset="assets/img/dragify/afterglow-06-480.webp 480w, assets/img/dragify/afterglow-06-788.webp 788w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="An Afterglow look: a white feathered gown beside a lit pool under a full moon, holding a sparkler.">
-              </div>
-              <div class="plate">
-                <img src="assets/img/dragify/ground-control-15-480.webp"
-                     srcset="assets/img/dragify/ground-control-15-480.webp 480w, assets/img/dragify/ground-control-15-800.webp 800w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Ground Control look: a lilac flight suit and an antenna bouffant, holding a prop scanner.">
-              </div>
               <div class="plate">
                 <img src="assets/img/dragify/haute-haus-01-480.webp"
                      srcset="assets/img/dragify/haute-haus-01-480.webp 480w, assets/img/dragify/haute-haus-01-682.webp 682w"
@@ -282,36 +273,8 @@
                      width="480" height="720" loading="lazy" decoding="async"
                      alt="A Canonical Queens look: a tall blue updo and a monochrome zebra gown against a flat cyan ground.">
               </div>
-              <div class="plate">
-                <img src="assets/img/dragify/euphoria-uv-12-480.webp"
-                     srcset="assets/img/dragify/euphoria-uv-12-480.webp 480w, assets/img/dragify/euphoria-uv-12-800.webp 800w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Euphoria // UV look: a teal bob and a zipped leather dress in front of hot pink neon rings.">
-              </div>
-              <div class="plate">
-                <img src="assets/img/dragify/haute-haus-13-480.webp"
-                     srcset="assets/img/dragify/haute-haus-13-480.webp 480w, assets/img/dragify/haute-haus-13-682.webp 682w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Haute Haus look: an enormous black tulle ball gown with a beaded bodice, shot against concrete.">
-              </div>
             </div>
             <div class="mosaic-col">
-              <div class="plate">
-                <img src="assets/img/dragify/afterglow-02-480.webp"
-                     srcset="assets/img/dragify/afterglow-02-480.webp 480w, assets/img/dragify/afterglow-02-768.webp 768w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="An Afterglow look: an emerald sequinned gown and matching fur, lit by teal chandeliers in a grand salon.">
-              </div>
-              <div class="plate">
-                <img src="assets/img/dragify/haute-haus-09-480.webp"
-                     srcset="assets/img/dragify/haute-haus-09-480.webp 480w, assets/img/dragify/haute-haus-09-682.webp 682w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Haute Haus look: a cream feathered gown with a ruffled train against pale concrete.">
-              </div>
               <div class="plate">
                 <img src="assets/img/dragify/euphoria-uv-08-480.webp"
                      srcset="assets/img/dragify/euphoria-uv-08-480.webp 480w, assets/img/dragify/euphoria-uv-08-800.webp 800w"
@@ -326,36 +289,8 @@
                      width="480" height="720" loading="lazy" decoding="async"
                      alt="A Ground Control look: a silver and mint flight suit with a rocket headdress and a smoking ray gun.">
               </div>
-              <div class="plate">
-                <img src="assets/img/dragify/canonical-queens-16-480.webp"
-                     srcset="assets/img/dragify/canonical-queens-16-480.webp 480w, assets/img/dragify/canonical-queens-16-768.webp 768w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Canonical Queens look: a lilac bouffant and a scarlet blazer over a red mini dress, against a hot pink ground.">
-              </div>
-              <div class="plate">
-                <img src="assets/img/dragify/afterglow-14-480.webp"
-                     srcset="assets/img/dragify/afterglow-14-480.webp 480w, assets/img/dragify/afterglow-14-768.webp 768w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="An Afterglow look: a crimson beaded gown and auburn waves in a red velvet salon.">
-              </div>
             </div>
             <div class="mosaic-col">
-              <div class="plate">
-                <img src="assets/img/dragify/euphoria-uv-03-480.webp"
-                     srcset="assets/img/dragify/euphoria-uv-03-480.webp 480w, assets/img/dragify/euphoria-uv-03-800.webp 800w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Euphoria // UV look: a purple sequinned bodice and dark bouffant framed by a red neon rectangle.">
-              </div>
-              <div class="plate">
-                <img src="assets/img/dragify/canonical-queens-10-480.webp"
-                     srcset="assets/img/dragify/canonical-queens-10-480.webp 480w, assets/img/dragify/canonical-queens-10-800.webp 800w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Canonical Queens look: a black strapless gown with a long train and a full afro, on a flat green ground.">
-              </div>
               <div class="plate">
                 <img src="assets/img/dragify/haute-haus-05-480.webp"
                      srcset="assets/img/dragify/haute-haus-05-480.webp 480w, assets/img/dragify/haute-haus-05-706.webp 706w"
@@ -369,20 +304,6 @@
                      sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
                      width="480" height="720" loading="lazy" decoding="async"
                      alt="An Afterglow look: an embroidered emerald suit and finger waves in a red-lit drawing room.">
-              </div>
-              <div class="plate">
-                <img src="assets/img/dragify/ground-control-18-480.webp"
-                     srcset="assets/img/dragify/ground-control-18-480.webp 480w, assets/img/dragify/ground-control-18-800.webp 800w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Ground Control look: a silver flight suit and a bubble helmet over a platinum bouffant, ray gun in hand.">
-              </div>
-              <div class="plate">
-                <img src="assets/img/dragify/euphoria-uv-17-480.webp"
-                     srcset="assets/img/dragify/euphoria-uv-17-480.webp 480w, assets/img/dragify/euphoria-uv-17-800.webp 800w"
-                     sizes="(max-width: 760px) 46vw, (max-width: 1180px) 30vw, (max-width: 1420px) 21vw, 250px"
-                     width="480" height="720" loading="lazy" decoding="async"
-                     alt="A Euphoria // UV look: platinum waves and a black latex dress with opera gloves, under a pink neon heart.">
               </div>
             </div>
           </div>
