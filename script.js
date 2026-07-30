@@ -280,6 +280,16 @@ document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.obs
 // band outruns eighteen frames, the wall stops at its own edge and creeps with
 // the page for the last pixels of the pass, rather than sliding past and
 // showing the midnight ground through a window that is supposed to be a wall.
+//
+// ALL OF THE ABOVE IS THE FALLBACK NOW. Recomputing that anchor every scroll
+// event is main-thread work, and any frame the main thread is late, the wall's
+// transform is still the previous frame's while the window has already moved
+// on — a beat of desync that shows up as old-wall-through-new-window, i.e. the
+// jitter and the fold. Where the browser supports it, styles.css drives the
+// same sweep off a view() timeline instead, which the compositor evaluates
+// every frame without asking this thread — no beat to miss. This code then
+// only supplies --mosaic-floor, computed once per load/resize/image-load, and
+// never touches a scroll event.
 // ---------------------------------------------------------------------------
 const aperture = document.querySelector('[data-mosaic]');
 const wall = document.querySelector('[data-mosaic-plane]');
