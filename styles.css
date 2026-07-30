@@ -614,10 +614,10 @@ textarea:focus-visible {
 
 /* The arrival photograph drifts slower than the copy stacked over it (script.js
    translates it on scroll), reading as depth rather than one flat plane moving
-   as a unit. This wrapper overscans top and bottom by 5% so that drift always
+   as a unit. This wrapper overscans top and bottom by 8% so that drift always
    has real pixels to reveal — .chapter's overflow:hidden clips the excess, and
-   the translate is capped in JS well inside that 5%, so an edge can never show. */
-.parallax-media { position: absolute; inset: -5% 0; height: 110%; }
+   the translate is capped in JS well inside that 8%, so an edge can never show. */
+.parallax-media { position: absolute; inset: -8% 0; height: 116%; }
 /* No width here on purpose. This element also carries .container, and a
    `width: 100%` would beat it — which is what silently pushed every chapter's
    copy out to the raw viewport edge instead of onto the site grid. */

@@ -44,7 +44,7 @@ nav?.addEventListener('click', (event) => {
 // as a unit. Only the image moves; the copy is ordinary in-flow content and
 // needs no code of its own — it already scrolls at full speed.
 //
-// .parallax-media (see styles.css) overscans its box by 5% top and bottom for
+// .parallax-media (see styles.css) overscans its box by 8% top and bottom for
 // exactly this: the cap below stays inside that margin, so the translate can
 // never pull a bare edge into view. Reduced-motion visitors get a static
 // photograph — no transform is ever set.
@@ -54,12 +54,12 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 if (parallaxMedia && !reduceMotion.matches) {
   const heroSection = parallaxMedia.closest('.chapter');
-  const RATE = 0.2;
+  const RATE = 0.3;
   let cap = 0;
   let ticking = false;
 
   const measure = () => {
-    cap = heroSection.offsetHeight * 0.045;
+    cap = heroSection.offsetHeight * 0.07;
   };
 
   const paintParallax = () => {
