@@ -197,8 +197,8 @@ if (legalDialog && typeof legalDialog.showModal === 'function') {
 //
 // Within a section, order is expressed as a --delay in the markup — the wall
 // label, then its evidence. There is no per-frame stagger inside the mosaic on
-// purpose: the six looks arrive as one wall, the way a gallery lights a wall
-// rather than a picture at a time.
+// purpose: the eighteen looks arrive as one wall, the way a gallery lights a
+// wall rather than a picture at a time.
 // ---------------------------------------------------------------------------
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -209,3 +209,58 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
 
 document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.observe(element));
+
+// ---------------------------------------------------------------------------
+// The aperture — Dragify's wall of looks, and the window that climbs it.
+//
+// The gallery is a fixed-height window cut in the page with a wall of eighteen
+// portraits behind it. The wall is pinned to the VIEWPORT: as the page scrolls,
+// the window travels up over a set of frames that do not move at all. It is not
+// a parallax layer moving at a fraction of scroll speed — the fraction is zero.
+//
+// WHY THE ANCHOR IS THE WINDOW'S OWN BOX, NOT window.scrollY. Everything is
+// derived from one `getBoundingClientRect()` each frame, so the wall re-pins
+// itself to whatever the window's real position turns out to be. That is what
+// makes it survive the reveal transition on the same element, a lazy image
+// resolving above it, a phone's URL bar collapsing mid-scroll and an anchor
+// jump — none of which a scroll offset accumulated on this side would see.
+//
+// THE ANCHOR ITSELF: hold the wall's top one window-height above the top of the
+// viewport. That is the only constant that keeps the wall covering the window at
+// both ends of the pass, because the window's box sweeps from y = 100vh down to
+// y = -height, and the union of everywhere it has been is exactly that band.
+//
+// THE CLAMP is the honest failure mode. If a viewport is tall enough that the
+// band outruns eighteen frames, the wall stops at its own edge and creeps with
+// the page for the last pixels of the pass, rather than sliding past and
+// showing the midnight ground through a window that is supposed to be a wall.
+// ---------------------------------------------------------------------------
+const aperture = document.querySelector('[data-mosaic]');
+const wall = document.querySelector('[data-mosaic-plane]');
+
+if (aperture && wall && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let pending = 0;
+
+  const pinWall = () => {
+    pending = 0;
+    const box = aperture.getBoundingClientRect();
+    // Not rounded: a fractional offset renders still, and a rounded one steps
+    // by a pixel every time the page crosses a boundary — visible as jitter on
+    // something whose whole point is that it is motionless.
+    const shift = -box.height - box.top;
+    const floor = box.height - wall.offsetHeight;
+    wall.style.transform = `translate3d(0, ${Math.min(Math.max(shift, floor), 0)}px, 0)`;
+  };
+
+  const schedule = () => { pending ||= requestAnimationFrame(pinWall); };
+
+  pinWall();
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  // The wall is lazy-loaded and its height is only final once the frames are
+  // in, and the frames are only in once the window has been near them.
+  window.addEventListener('load', schedule);
+  wall.querySelectorAll('img').forEach((img) => {
+    if (!img.complete) img.addEventListener('load', schedule, { once: true });
+  });
+}

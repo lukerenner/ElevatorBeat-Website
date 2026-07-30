@@ -21,15 +21,20 @@ and framed freely. They are the canonical source for site imagery from now on.
 
 THE EDIT
 --------
-Fifteen looks, chosen for visual quality, spread across all five collections, and
+Eighteen looks, chosen for visual quality, spread across all five collections, and
 sequenced so that colour, silhouette and setting change from one frame to the next.
 The homepage labels by COLLECTION only — the individual queen names stay in the app.
 
+Eighteen and not fifteen because the homepage now shows the collection through a fixed
+aperture — three columns of six, held still while the window travels over them — and a
+wall that has to be taller than the viewport in both directions needs enough frames to
+fill it without ever repeating one. Appending to EDIT is safe: the index comes from the
+list order, so 01–15 keep the filenames they already ship under.
+
 Every look is emitted at the SAME 2:3 ratio. That is deliberate: the brief asks for
-shared cropping, margins and presentation so fifteen unrelated portraits read as one
-exhibition. Rhythm comes from how many grid columns a look spans, not from ratio
-changes — which also means no image is ever letterboxed or distorted, and the delivered
-pixel dimensions match the CSS `aspect-ratio` exactly.
+shared cropping, margins and presentation so eighteen unrelated portraits read as one
+exhibition — and with the mosaic now a single grid of one shape, that ratio is also the
+only one on the page, so no frame is cropped away from what the app returns.
 
 Sources are 768–1024px, so 1200 is the largest honest width. Nothing is upscaled.
 
@@ -113,6 +118,19 @@ EDIT = [
     ("ground-control", "10. Major Climax.jpg",
      "A Ground Control look: a lilac flight suit and an antenna bouffant, holding a "
      "prop scanner."),
+    # 16–18 extend the wall to eighteen. They are appended rather than interleaved so
+    # the first fifteen keep their stems, and they still land the sequence on Ground
+    # Control: saturated seamless, then neon, then the retro-futurism the page is set
+    # in.
+    ("canonical-queens", "1. Lola Luxeon.jpg",
+     "A Canonical Queens look: a lilac bouffant and a scarlet blazer over a red mini "
+     "dress, against a hot pink ground."),
+    ("euphoria-uv", "19. Roxy Riviera.jpg",
+     "A Euphoria // UV look: platinum waves and a black latex dress with opera gloves, "
+     "under a pink neon heart."),
+    ("ground-control", "12. Glimmer Rocketblaster.jpg",
+     "A Ground Control look: a silver flight suit and a bubble helmet over a platinum "
+     "bouffant, ray gun in hand."),
 ]
 
 

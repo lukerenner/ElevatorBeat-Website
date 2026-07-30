@@ -84,7 +84,7 @@ contrast — there is no rule forcing paper and midnight to alternate.
 | --- | --- | --- | --- |
 | — | Arrival — the front elevation, the whole window | dark | `hero-*` / `hero-mobile-*` |
 | **01** | The studio — one passage, flanked by a photograph and a survey annotation | paper | `salon-*` |
-| **02** | Room 01, Dragify — wall label and a three-column mosaic | dark | `assets/img/dragify/*` |
+| **02** | Room 01, Dragify — wall label and a wall of looks behind a moving aperture | dark | `assets/img/dragify/*` |
 | — | Morning — the one daylight frame, and the one chapter with **ink type over a lifted scrim** | **paper over image** | `house-day-*` |
 | **02** | Room 02, StraightPic — wall label and two real captures from the app | paper | `ui-straightpic-editor-*`, `ui-straightpic-result-*` |
 | **03** | The observation level — the empty floors, said plainly | dark | `band-mars-*` |
@@ -185,28 +185,45 @@ full-bleed look images at 768–1024px:
 | Haute Haus | Intercontinental couture |
 | Ground Control | Retro-futurist space drag |
 
-Six looks ship, chosen for visual quality, spread across four of the five collections, and
-sequenced so colour, silhouette and setting change frame to frame. The homepage labels nothing
-by name — the collection and queen names stay in the app.
+Eighteen looks ship, chosen for visual quality, spread across all five collections, and
+sequenced so colour, silhouette and setting change frame to frame — down the columns and across
+the rows both. The homepage labels nothing by name — the collection and queen names stay in the
+app. `EDIT` in the script is appended to, never reordered: the index comes from list order, so
+adding a look cannot rename the fifteen already deployed.
 
-**The mosaic's column widths are derived, not chosen.** Every look is exported at the same
-**2:3**, and four of the six are full-length figures that cannot lose height without losing a
-head or a hem — so those four stay at 2:3, and only the seated portrait (`afterglow-02`) and
-the bust (`euphoria-uv-03`) take the short slots, at 3:2 and 5:4. Given those ratios, asking all
-three columns to finish level fixes the widths:
+**The wall does not scroll.** `.mosaic` is a fixed-height window cut in the page; the
+`.mosaic-plane` behind it is pinned to the *viewport* by `script.js`. As the page rises the
+window climbs the wall and not one queen travels a pixel — the opposite of a parallax layer,
+which moves slower than the page rather than not at all. Frames are cut hard by the window's
+edge on purpose: an opening in a wall, not a carousel.
 
-```
-col 1 = 3/2 + 2/3 = 2.1667w      col 2 = 3/2 + 4/5 = 2.3w      col 3 = 3/2 + 3/2 = 3w
-                    →  w1 : w2 : w3  =  1.385 : 1.304 : 1
-```
+Three rules keep it honest:
 
-Which is why there is **no fixed container height** here to keep in sync with the frames: the
-columns come out level on their own, at any width. Only those two frames crop at all, and both
-carry a measured `--focus` so the crop keeps the face.
+1. **The anchor is the window's own box, never `scrollY`.** Everything comes from one
+   `getBoundingClientRect()` per frame, so the wall re-pins to wherever the window actually is.
+   That survives a lazy image resolving above it, a phone's URL bar collapsing mid-scroll and an
+   anchor jump — none of which an offset accumulated on the JS side would see. Hold the wall's
+   top one window-height above the top of the viewport and it is motionless for the whole pass;
+   measured, the error is **0.00px** at every stop.
+2. **The wall has to outrun the window's travel.** Between entering at the bottom of the
+   viewport and leaving at the top, the window sweeps a band of `100vh + 2 × its own height`.
+   Six frames a column clears that at every viewport the page is read on. Past that the script
+   clamps rather than let a gap open, and the wall creeps for the last pixels of the pass.
+3. **The aperture is the one reveal that fades without rising.** A transition fires no scroll
+   events, so a window that slid 12px into place would carry the wall with it and only find its
+   anchor again on the visitor's next scroll.
 
-On a phone the wrappers step out of the way with `display: contents` and all six flow two-up at
-the single 2:3 the whole collection shares — the mixed ratios need three columns to stay level,
-and at a phone's measure a mixed grid of six frames is a contact sheet.
+**One ratio now.** The old mosaic mixed 3:2 and 5:4 into the 2:3 so three columns of different
+widths would finish level. Behind an aperture nothing has to finish level, so every frame is
+back at the single ratio the app exports: no look is cropped at all, and `--focus` is gone.
+
+On a phone the column wrappers step out of the way with `display: contents` and all eighteen
+flow two-up — three columns at a phone's measure is a 110px-wide thumbnail of a queen, not a
+look.
+
+Where the window cannot travel — **no JS, or `prefers-reduced-motion`** — the same markup is an
+ordinary static wall, cut to its first twelve frames so the section stays the length of a
+section.
 
 > **Deprecated: `assets/img/deprecated/`, `tools/deprecated/dragify-sheet.py`.**
 > `dragify-looks-*.webp` is a fourteen-up contact sheet in which **every tile already has a

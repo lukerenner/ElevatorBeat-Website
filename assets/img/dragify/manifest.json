@@ -193,5 +193,44 @@
   ],
   "source": "10. Major Climax.jpg",
   "alt": "A Ground Control look: a lilac flight suit and an antenna bouffant, holding a prop scanner."
+ },
+ {
+  "index": 16,
+  "collection": "canonical-queens",
+  "collection_name": "Canonical Queens",
+  "collection_description": "Iconic looks that always cook",
+  "stem": "canonical-queens-16",
+  "widths": [
+   480,
+   768
+  ],
+  "source": "1. Lola Luxeon.jpg",
+  "alt": "A Canonical Queens look: a lilac bouffant and a scarlet blazer over a red mini dress, against a hot pink ground."
+ },
+ {
+  "index": 17,
+  "collection": "euphoria-uv",
+  "collection_name": "Euphoria // UV",
+  "collection_description": "Electric love and molly magnificence",
+  "stem": "euphoria-uv-17",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "19. Roxy Riviera.jpg",
+  "alt": "A Euphoria // UV look: platinum waves and a black latex dress with opera gloves, under a pink neon heart."
+ },
+ {
+  "index": 18,
+  "collection": "ground-control",
+  "collection_name": "Ground Control",
+  "collection_description": "Retro-futurist space drag",
+  "stem": "ground-control-18",
+  "widths": [
+   480,
+   800
+  ],
+  "source": "12. Glimmer Rocketblaster.jpg",
+  "alt": "A Ground Control look: a silver flight suit and a bubble helmet over a platinum bouffant, ray gun in hand."
  }
 ]

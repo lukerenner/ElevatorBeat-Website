@@ -419,9 +419,13 @@ textarea:focus-visible {
 .btn-upcoming:focus-visible .button-label-hover { opacity: 1; }
 
 /* ---------- Motion ----------
-   Two gestures only. Copy rises 12px as it enters; full-frame architecture
-   settles from 1.03 to 1 — an elevator arriving at a floor, not a parallax
-   effect. Everything is disabled under prefers-reduced-motion. */
+   Two gestures on arrival. Copy rises 12px as it enters; full-frame
+   architecture settles from 1.03 to 1 — an elevator arriving at a floor, not a
+   parallax effect. Everything here is disabled under prefers-reduced-motion.
+
+   The gallery's aperture is the third and last piece of motion on the page, and
+   it is not a gesture: it is a window that travels with the scroll over a wall
+   that never moves. See THE APERTURE below. */
 .js .reveal {
   opacity: 0;
   transform: translateY(12px);
@@ -913,38 +917,79 @@ textarea:focus-visible {
 .tags--compact { margin: 0; padding: 0; border-top: 0; gap: 8px 18px; }
 
 /* ==========================================================================
-   THE MOSAIC — Dragify's evidence
+   THE APERTURE — Dragify's evidence, behind a window that moves
    --------------------------------------------------------------------------
    NOTHING HERE IS COLOUR-CORRECTED, deliberately. These frames are what the app
    returns, so a saturation filter or a warm wash would be the site quietly
    misrepresenting the product to protect its own palette. Coherence comes from
    the ground, the gap and the grid instead.
 
-   THE COLUMN WIDTHS ARE DERIVED, NOT CHOSEN. Every look is exported at 2:3, and
-   four of these six are full-length figures that cannot lose height without
-   losing a head or a hem — so those four stay at 2:3, and only the seated
-   portrait and the bust take the short slots (3:2 and 5:4). Given those ratios,
-   asking all three columns to finish at the same height fixes the widths:
+   THE WALL DOES NOT SCROLL. `.mosaic` is a window cut in the page; the wall of
+   eighteen looks behind it is pinned to the VIEWPORT by script.js and never
+   moves. So the page rises, the window climbs the wall, and not one queen
+   travels a pixel — which is the opposite of a parallax layer, a thing that
+   moves slower than the page rather than not at all. Frames are cut hard by the
+   window's edge on purpose: an opening in a wall, not a carousel.
 
-     col 1 = 3/2 + 2/3 = 2.1667w     col 2 = 3/2 + 4/5 = 2.3w
-     col 3 = 3/2 + 3/2 = 3w          →  w1:w2:w3 = 1.385 : 1.304 : 1
+   ONE RATIO NOW. The old mosaic mixed 3:2 and 5:4 into the 2:3 so that three
+   columns of different widths would finish level. Behind an aperture nothing
+   has to finish level, so every frame goes back to the single ratio the app
+   exports and no look is cropped at all.
 
-   Which is why there is no fixed container height here to keep in sync with the
-   frames: the columns come out level on their own, at any width.
+   THE WALL HAS TO OUTRUN THE WINDOW'S TRAVEL. Between entering at the bottom of
+   the viewport and leaving at the top, the window sweeps a band of
+   100vh + 2 × its own height. Six frames a column covers that at the viewports
+   this page is read on; beyond them the script clamps instead of letting a gap
+   open, and the wall creeps for the last pixels of the pass.
    ========================================================================== */
 .mosaic {
+  position: relative;
+  /* Tall enough to hold two frames and a gutter, never so tall that the wall
+     stops reading as something seen THROUGH something. */
+  --aperture-h: clamp(400px, 62svh, 600px);
+  --wall-gap: clamp(10px, 1.2vw, 16px);
+}
+.mosaic-plane {
   display: grid;
-  grid-template-columns: 1.385fr 1.304fr 1fr;
-  gap: clamp(10px, 1.2vw, 18px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--wall-gap);
   align-items: start;
 }
 .mosaic-col {
   display: grid;
-  gap: clamp(10px, 1.2vw, 18px);
+  gap: var(--wall-gap);
 }
-.frame--tall  { aspect-ratio: 2 / 3; }
-.frame--wide  { aspect-ratio: 3 / 2; }
-.frame--short { aspect-ratio: 5 / 4; }
+.mosaic .plate { aspect-ratio: 2 / 3; }
+
+/* The window only exists where the script can drive it. Without JS the same
+   markup is an ordinary static wall, which is also the state the aperture falls
+   back to below. `translate3d` is declared rather than left to the first scroll
+   so the plane starts life on its own compositor layer. */
+.js .mosaic {
+  height: var(--aperture-h);
+  overflow: hidden;
+  /* The one reveal on the page that fades without rising. The 12px rise is a
+     transition, and a transition fires no scroll events — so the wall would be
+     carried up with the window it is meant to be independent of, and only find
+     its anchor again on the visitor's next scroll. */
+  transform: none;
+}
+.js .mosaic-plane {
+  position: absolute;
+  inset: 0 0 auto;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Where the window cannot travel — no script, or motion turned off — there is
+   no reveal to spend eighteen frames on, so the wall shows its first twelve and
+   the section stays the length of a section. */
+html:not(.js) .mosaic-col .plate:nth-child(n + 5) { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .mosaic { height: auto; overflow: visible; }
+  .js .mosaic-plane { position: static; }
+  .mosaic-col .plate:nth-child(n + 5) { display: none; }
+}
 
 /* ==========================================================================
    THE DEVICES — StraightPic's evidence
@@ -1366,16 +1411,17 @@ main > .page-hero:last-child { padding-bottom: clamp(88px, 9vw, 132px); }
   .chapter--morning { align-items: flex-start; }
   .chapter--observation { min-height: clamp(420px, 92vw, 560px); }
 
-  /* Two columns, six frames, all at the 2:3 they were exported at. The desktop
-     mosaic's mixed ratios need three columns to stay level, and at a phone's
-     measure a mixed grid of six frames is a contact sheet — so the wrappers step
-     out of the way with `display: contents` and the frames flow two-up on the
-     one crop the whole collection shares. */
-  .mosaic { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  /* Two columns rather than three: a 2:3 frame at a third of a phone's measure
+     is 110px wide, which is a thumbnail of a queen and not a look. The column
+     wrappers step out of the way with `display: contents` so all eighteen
+     frames flow two-up, and the wall comes out nine rows tall — still well
+     clear of the window's travel at this aperture. */
+  .mosaic {
+    --aperture-h: clamp(320px, 54svh, 480px);
+    --wall-gap: 10px;
+  }
+  .mosaic-plane { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mosaic-col { display: contents; }
-  .frame--tall,
-  .frame--wide,
-  .frame--short { aspect-ratio: 2 / 3; }
 
   /* The pair stays side by side: the two shapes read as a sequence at a glance,
      and the captions underneath carry what the shrunken tool labels no longer
