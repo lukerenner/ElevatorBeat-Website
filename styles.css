@@ -989,22 +989,37 @@ textarea:focus-visible {
    for that one frame. That beat is the jitter, and the mismatched slice is the
    fold.
 
-   `view()` is a scroll timeline the compositor drives directly, no JS in the
-   loop, so there is no beat to miss. Its 0%–100% is exactly "subject entering
-   the scrollport to subject having fully left it" — exactly the sweep this
-   wall needs — so the two keyframes are just the JS-computed floor and the
-   plane's own rest position. script.js still writes --mosaic-floor once (on
-   load/resize/image-load, never on scroll) and skips its rAF loop entirely
-   once it confirms the browser took this branch. */
+   A view() timeline is one the compositor drives directly, no JS in the loop,
+   so there is no beat to miss. Its `cover` range is exactly "subject entering
+   the scrollport to subject having fully left it", which is exactly this
+   sweep — and because the window's box travels linearly across that range, the
+   wall's counter-shift is linear too, so the whole pass is two keyframes.
+
+   THE TIMELINE IS DECLARED ON THE WINDOW, NOT THE WALL. The obvious spelling —
+   `animation-timeline: view()` on the plane — is silently dead here: the
+   `overflow: hidden` that cuts the aperture also makes `.mosaic` a scroll
+   CONTAINER, so a view() resolved from inside it takes `.mosaic` as its
+   scrollport rather than the document. `.mosaic` never scrolls, so that
+   timeline is permanently inactive and the wall never moves at all. Naming the
+   timeline on `.mosaic` makes `.mosaic` the SUBJECT instead — its scrollport is
+   then the document, which is the thing actually scrolling — and descendants
+   can reference the name. */
 @supports (animation-timeline: view()) {
+  .js .mosaic {
+    view-timeline-name: --mosaic-window;
+    view-timeline-axis: block;
+  }
   .js .mosaic-plane {
     animation: mosaic-sweep linear both;
-    animation-timeline: view(block);
+    animation-timeline: --mosaic-window;
     animation-range: cover;
   }
 }
+/* --mosaic-start is where the wall sits as the window begins its pass; script.js
+   computes it, because it depends on the wall's real rendered height. `both`
+   holds that value before the range and 0 after it. */
 @keyframes mosaic-sweep {
-  from { transform: translate3d(0, var(--mosaic-floor, 0), 0); }
+  from { transform: translate3d(0, var(--mosaic-start, 0px), 0); }
   to { transform: translate3d(0, 0, 0); }
 }
 

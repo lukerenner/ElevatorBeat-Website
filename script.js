@@ -288,7 +288,7 @@ document.querySelectorAll('.reveal, .chapter').forEach((element) => observer.obs
 // jitter and the fold. Where the browser supports it, styles.css drives the
 // same sweep off a view() timeline instead, which the compositor evaluates
 // every frame without asking this thread — no beat to miss. This code then
-// only supplies --mosaic-floor, computed once per load/resize/image-load, and
+// only supplies --mosaic-start, computed once per load/resize/image-load, and
 // never touches a scroll event.
 // ---------------------------------------------------------------------------
 const aperture = document.querySelector('[data-mosaic]');
@@ -297,23 +297,30 @@ const wall = document.querySelector('[data-mosaic-plane]');
 if (aperture && wall && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   // Where the browser can drive the sweep off a view() timeline (styles.css),
   // the compositor owns every frame and this script only ever supplies the
-  // floor — the one number CSS can't compute itself, because it depends on
-  // the wall's real rendered height. Recomputing it on scroll would put the
-  // main thread back in the loop it was just taken out of, so it is only
-  // ever touched by the events that can actually change it.
+  // pass's starting offset — the one number CSS can't work out for itself,
+  // because it depends on the wall's real rendered height. Recomputing it on
+  // scroll would put the main thread straight back into the loop it was just
+  // taken out of, so only the events that can actually change it touch it.
   const usesViewTimeline = CSS.supports('animation-timeline', 'view()');
 
-  const setFloor = () => {
-    const floor = aperture.getBoundingClientRect().height - wall.offsetHeight;
-    wall.style.setProperty('--mosaic-floor', `${Math.min(floor, 0)}px`);
+  // Where the wall stands as the window starts its pass. It is the same
+  // `-height - top` as the loop below, evaluated at the one moment the range
+  // begins — top = one viewport down — and held to the same floor, so a
+  // viewport tall enough to outrun eighteen frames starts flush with the
+  // wall's bottom edge instead of past it.
+  const setStart = () => {
+    const height = aperture.getBoundingClientRect().height;
+    const floor = height - wall.offsetHeight;
+    const start = Math.min(Math.max(-height - window.innerHeight, floor), 0);
+    wall.style.setProperty('--mosaic-start', `${start}px`);
   };
 
   if (usesViewTimeline) {
-    setFloor();
-    window.addEventListener('resize', setFloor);
-    window.addEventListener('load', setFloor);
+    setStart();
+    window.addEventListener('resize', setStart);
+    window.addEventListener('load', setStart);
     wall.querySelectorAll('img').forEach((img) => {
-      if (!img.complete) img.addEventListener('load', setFloor, { once: true });
+      if (!img.complete) img.addEventListener('load', setStart, { once: true });
     });
   } else {
     // The fallback for browsers without view(): the same rAF-throttled
