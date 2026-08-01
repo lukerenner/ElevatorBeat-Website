@@ -75,7 +75,8 @@ if (parallaxMedia && !reduceMotion.matches) {
 //
 // A hairline in the window's left gutter with a lit segment tracking scroll
 // position, a tick at the top of each chapter, and a named stop at each of the
-// four numbered floors: 01 STUDIO, 02 GALLERY, 03 OBSERVATION, GF GROUND FLOOR.
+// six numbered floors: 01 STUDIO, 02 THE GALLERY, 03 THE EXTERIOR,
+// 04 THE STUDY, 05 THE OBSERVATION DECK, GF THE GROUND FLOOR.
 // It is decoration in the sense that it carries nothing you can't already see,
 // which is why it is aria-hidden and why it is only built above 1100px, where
 // there is gutter to spare.
@@ -83,9 +84,8 @@ if (parallaxMedia && !reduceMotion.matches) {
 // Both the ticks and the floor names are read off the sections themselves —
 // data-floor / data-floor-name — rather than from a list kept here. Editing,
 // reordering or renaming a section therefore cannot leave the panel pointing at
-// a floor that no longer exists, and a room that shares a floor with another
-// simply omits the attributes and gets a plain tick (StraightPic is the second
-// room on the gallery floor, so Dragify's 02 covers them both).
+// a floor that no longer exists, and a room without those attributes simply
+// gets a plain tick.
 //
 // The page has two grounds and the rail is fixed, so it crosses both as you
 // scroll. Rather than blend-mode tricks — which go wrong over photographs — it
