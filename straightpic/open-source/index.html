@@ -3,34 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="The terms that govern your use of ElevatorBeat's apps and website, including Dragify and StraightPic.">
-  <title>Terms of Use — ElevatorBeat</title>
-  <link rel="canonical" href="https://elevatorbeat.com/terms.html">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="description" content="Open source disclosure for StraightPic, an ElevatorBeat app. StraightPic uses no third-party open source components.">
+  <title>Open Source — StraightPic — ElevatorBeat</title>
+  <link rel="canonical" href="https://elevatorbeat.com/straightpic/open-source/">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
   <meta name="theme-color" content="#F7F3EC">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://elevatorbeat.com/terms.html">
+  <meta property="og:url" content="https://elevatorbeat.com/straightpic/open-source/">
   <meta property="og:site_name" content="ElevatorBeat">
-  <meta property="og:title" content="Terms of Use — ElevatorBeat">
-  <meta property="og:description" content="The terms that govern your use of ElevatorBeat's apps and website.">
+  <meta property="og:title" content="Open Source — StraightPic">
+  <meta property="og:description" content="StraightPic uses no third-party open source components.">
   <meta property="og:image" content="https://elevatorbeat.com/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Terms of Use — ElevatorBeat">
-  <meta name="twitter:description" content="The terms that govern your use of ElevatorBeat's apps and website.">
+  <meta name="twitter:title" content="Open Source — StraightPic">
+  <meta name="twitter:description" content="StraightPic uses no third-party open source components.">
   <meta name="twitter:image" content="https://elevatorbeat.com/assets/og-image.jpg">
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-serif-latin.woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20260730o">
-  <script defer src="script.js?v=20260730k"></script>
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/instrument-serif-latin.woff2" crossorigin>
+  <link rel="stylesheet" href="../../styles.css?v=20260802a">
+  <script defer src="../../script.js?v=20260802a"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header is-solid" data-header>
     <div class="container nav-shell">
-      <a class="brand" href="index.html" aria-label="ElevatorBeat home">
+      <a class="brand" href="../../index.html" aria-label="ElevatorBeat home">
         <svg class="brand-mark" viewBox="0 0 20 44" fill="none" stroke="var(--cyan)"
              stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
           <rect x="1.2" y="1.2" width="17.6" height="41.6" rx="5"/>
@@ -43,10 +43,10 @@
         <span class="sr-only">Open navigation</span>
       </button>
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
-        <a href="index.html#studio">The studio</a>
-        <a href="index.html#collection">The collection</a>
-        <a href="support.html">Support</a>
-        <a href="contact.html">Contact</a>
+        <a href="../../index.html#studio">The studio</a>
+        <a href="../../index.html#collection">The collection</a>
+        <a href="../../support.html">Support</a>
+        <a href="../../contact.html">Contact</a>
       </nav>
     </div>
   </header>
@@ -54,41 +54,33 @@
   <main id="main">
     <section class="page-hero">
       <div class="container">
-        <p class="eyebrow">Legal</p>
-        <h1 class="display-l">Terms of Use</h1>
-        <p class="lede">Last updated July 28, 2026. Applies to elevatorbeat.com, Dragify, and StraightPic.</p>
+        <p class="eyebrow">StraightPic &middot; Legal</p>
+        <h1 class="display-l">Open Source</h1>
+        <p class="lede">Last updated August 2, 2026.</p>
       </div>
     </section>
 
     <section class="page-body container">
-      <p>These terms govern your use of the ElevatorBeat website and apps, including Dragify and StraightPic. By downloading or using an ElevatorBeat app, or by using this website, you agree to these terms.</p>
+      <!-- StraightPic's Xcode project has no Swift Package or CocoaPods
+           dependencies: every framework it imports (SwiftUI, Core Image, Metal,
+           Photos, ImageIO, AVFoundation, StoreKit, …) is Apple's own and ships
+           under the Apple SDK licence, not an open source one. If a third-party
+           package is ever added, list it here. -->
+      <p>StraightPic does not include any third-party open source components. Its perspective correction, cropping, and export pipeline is built entirely on first-party Apple frameworks &mdash; SwiftUI, Core Image, Core Graphics, Metal, ImageIO, Photos, AVFoundation, and StoreKit &mdash; which are provided under Apple&rsquo;s own SDK and platform licenses rather than an open source license.</p>
+      <p>Because the correction runs on device using those frameworks, StraightPic ships no bundled open source libraries and makes no open source network calls. There is accordingly nothing to attribute for this app today.</p>
+      <p>If a future release of StraightPic adds an open source dependency, it will be listed here with its copyright notice, license, and project URL before that release ships.</p>
 
-      <h2>Using our apps</h2>
-      <p>You may use Dragify and StraightPic for personal, lawful purposes. You are responsible for the images you upload and for having the rights needed to edit and generate results from them. Don&rsquo;t use our apps to process images you don&rsquo;t have the right to use, or to create content that is unlawful, harassing, or infringes on someone else&rsquo;s rights.</p>
-
-      <h2>Your content</h2>
-      <p>You retain ownership of the photos you upload and the results our apps generate for you. See our <a href="privacy.html">Privacy Policy</a> for how images are processed and retained.</p>
-
-      <h2>Subscriptions and purchases</h2>
-      <p>Some features are offered through in-app purchases or subscriptions billed through the Apple App Store, and are subject to Apple&rsquo;s own terms and refund policies in addition to these terms.</p>
-
-      <h2>Availability</h2>
-      <p>ElevatorBeat is a small, independent studio. Features, pricing, and app availability may change as we continue building. StraightPic is currently in development and not yet available for download.</p>
-
-      <h2>No warranty</h2>
-      <p>Our apps are provided &ldquo;as is.&rdquo; We work hard to make them reliable, but we don&rsquo;t guarantee that every result will be error-free or meet every expectation.</p>
-
-      <h2>Changes to these terms</h2>
-      <p>We may update these terms as our apps evolve. Continued use of an app or this website after a change means you accept the updated terms.</p>
+      <h2>No affiliation</h2>
+      <p>This page exists so the absence of third-party software is stated plainly rather than left unaddressed.</p>
 
       <h2>Contact</h2>
-      <p>Questions about these terms can be sent to <a href="mailto:hello@elevatorbeat.com">hello@elevatorbeat.com</a>.</p>
+      <p>Questions about this notice can be sent to <a href="mailto:hello@elevatorbeat.com">hello@elevatorbeat.com</a>.</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-bar">
-      <a class="footer-brand" href="index.html">
+      <a class="footer-brand" href="../../index.html">
         <svg class="monogram" viewBox="0 0 44 44" aria-hidden="true">
           <circle cx="22" cy="22" r="21" fill="none" stroke="currentColor" stroke-opacity=".34"/>
           <text x="22" y="27.6" text-anchor="middle">EB</text>
@@ -101,10 +93,10 @@
 
       <nav class="footer-links" aria-label="Footer">
         <a href="mailto:hello@elevatorbeat.com">hello@elevatorbeat.com</a>
-        <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-        <a href="open-source.html">Licenses</a>
+        <a href="../../support.html">Support</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="../terms/">Terms</a>
+        <a href="../open-source/">Licenses</a>
       </nav>
 
       <!-- Same href twice: the button for a phone, the code for a desk.
@@ -114,12 +106,12 @@
         App Store <span aria-hidden="true">&nearr;</span>
       </a>
       <a class="footer-action install-qr" href="https://apps.apple.com/us/app/dragify-drag-queen-face-swap/id6756401226" target="_blank" rel="noopener">
-        <img src="assets/img/qr-dragify.svg" width="96" height="96" alt="" loading="lazy">
+        <img src="../../assets/img/qr-dragify.svg" width="96" height="96" alt="" loading="lazy">
         <span class="install-qr-text">Scan to install<span>Dragify &middot; App&nbsp;Store</span></span>
       </a>
     </div>
     <div class="container footer-bottom">
-      <p>&copy; 2026 ElevatorBeat LLC</p>
+      <p>&copy; 2026 Elevator Beat LLC</p>
       <div class="footer-social">
         <a href="https://x.com/elevatorbeat" target="_blank" rel="noopener" aria-label="ElevatorBeat on X">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.6-7.3L4.2 22H1l8.2-9.4L.9 2H8.2l5 6.7L18.9 2Zm-1.2 18h1.9L6.4 4H4.3l13.4 16Z"/></svg>
