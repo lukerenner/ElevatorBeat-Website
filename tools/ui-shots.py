@@ -33,7 +33,7 @@ JOBS = [
     ),
     (
         "ui-straightpic-editor",
-        APPS / "StraightPic/Reference Photos/1 (original).PNG",
+        APPS / "StraightPic/Reference Photos/3 (rainbow editor).PNG",
         None,
         (420, 640, 840),
     ),
@@ -43,7 +43,7 @@ JOBS = [
     # slider it used to carry underneath.
     (
         "ui-straightpic-result",
-        APPS / "StraightPic/Reference Photos/2 (good).PNG",
+        APPS / "StraightPic/Reference Photos/4 (rainbow result).PNG",
         None,
         (420, 640, 840),
     ),
