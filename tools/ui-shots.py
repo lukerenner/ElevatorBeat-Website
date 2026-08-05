@@ -4,9 +4,9 @@
 Both sources are real screenshots living with the apps themselves, outside this
 repo. Nothing here is illustration: the Dragify frame is the pack drawer as it
 ships, cropped out of the App Store screenshot that composites it over marketing
-type, and the StraightPic frame is an unretouched capture of the editor with the
-four perspective handles placed on the same Tower.jpg the before/after below it
-is built from.
+type, and the StraightPic frame is an unretouched on-device capture of the
+editor with the four perspective handles placed, paired with the corrected
+result from the same session.
 
 Run from the repo root:  python3 tools/ui-shots.py
 """
@@ -33,7 +33,7 @@ JOBS = [
     ),
     (
         "ui-straightpic-editor",
-        APPS / "StraightPic/Reference Photos/3 (rainbow editor).PNG",
+        APPS / "StraightPic/Reference Photos/5 (rainbow editor, stone building).PNG",
         None,
         (420, 640, 840),
     ),
@@ -43,7 +43,7 @@ JOBS = [
     # slider it used to carry underneath.
     (
         "ui-straightpic-result",
-        APPS / "StraightPic/Reference Photos/4 (rainbow result).PNG",
+        APPS / "StraightPic/Reference Photos/6 (rainbow result, stone building).PNG",
         None,
         (420, 640, 840),
     ),
