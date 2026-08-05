@@ -51,17 +51,14 @@
         href="assets/img/hero-1400.webp"
         imagesrcset="assets/img/hero-900.webp 900w, assets/img/hero-1400.webp 1400w, assets/img/hero-1920.webp 1920w, assets/img/hero-2400.webp 2400w"
         imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260802a">
-  <script defer src="script.js?v=20260802a"></script>
+  <link rel="stylesheet" href="styles.css?v=20260804a">
+  <script defer src="script.js?v=20260804a"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- The floor indicator. Built by script.js from the four numbered floors
-       below, and only on viewports wide enough to have a gutter to put it in.
-       It is the page's one numbering system: the same GF/01/02/03 that names
-       the rooms in the markup names the stops here and the rows in the
-       directory at the end. -->
+  <!-- The floor indicator. Built by script.js from the numbered floors below,
+       and only on viewports wide enough to have a gutter to put it in. -->
   <div class="rail" data-rail aria-hidden="true"><span class="rail-car"></span></div>
 
   <!-- Transparent while the arrival image is behind it; on scroll it detaches
@@ -493,84 +490,13 @@
       </div>
     </section>
 
-    <!-- =====================================================================
-         GF — GROUND FLOOR
-         Where to get the work, as a board rather than a closing statement.
-         Both rows carry the same tags they were labelled with upstairs, and
-         each carries exactly one primary action plus support.
-         ===================================================================== -->
-    <section class="section" id="ground-floor" data-rail-section
-             data-floor="GF" data-floor-name="The ground floor" aria-labelledby="ground-title">
-      <div class="container ground-grid">
-        <div class="reveal">
-          <p class="eyebrow">Ground floor</p>
-          <h2 class="display-m" id="ground-title">Made in Portland. Released<br>everywhere.</h2>
-          <p class="body-copy">ElevatorBeat designs, builds and supports every app in the collection from Portland, Oregon.</p>
-        </div>
-
-        <ul class="rooms reveal" style="--delay: 80ms">
-          <li>
-            <img class="app-icon" src="assets/img/icon-dragify-96.webp"
-                 srcset="assets/img/icon-dragify-96.webp 96w, assets/img/icon-dragify-192.webp 192w"
-                 sizes="52px" width="192" height="192" loading="lazy" alt="">
-            <div class="rooms-name">
-              <h3 class="display-s">Dragify</h3>
-              <p>Portrait tool for imaginative transformations.</p>
-            </div>
-            <ul class="tags tags--compact">
-              <li>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ic" x="7" y="2.5" width="10" height="19" rx="2.4"/><path class="ic" d="M10.6 5.2h2.8"/></svg>
-                iPhone app
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ic" cx="12" cy="12" r="8.6"/><path class="ic" d="m8.2 12.3 2.6 2.6 5-5.4"/></svg>
-                Released
-              </li>
-            </ul>
-            <p class="rooms-actions">
-              <!-- Same href twice: the button for a phone, the code for a desk.
-                   See "The install action" in styles.css. -->
-              <a class="btn btn-outline btn-sm install-btn" href="https://apps.apple.com/us/app/dragify-drag-queen-face-swap/id6756401226" target="_blank" rel="noopener">View app</a>
-              <!-- Label is screen-reader-only here, unlike the room and the
-                   footer: this row's action column is narrow, and a visible
-                   "SCAN TO INSTALL" beside the code squeezed the description
-                   into one word per line. The link still announces properly. -->
-              <a class="install-qr" href="https://apps.apple.com/us/app/dragify-drag-queen-face-swap/id6756401226" target="_blank" rel="noopener">
-                <img src="assets/img/qr-dragify.svg" width="88" height="88" alt="" loading="lazy">
-                <span class="sr-only">Scan to install Dragify from the App Store</span>
-              </a>
-              <a class="btn btn-outline btn-sm" href="support.html#dragify">Support</a>
-            </p>
-          </li>
-          <li>
-            <img class="app-icon" src="assets/img/icon-straightpic-96.webp"
-                 srcset="assets/img/icon-straightpic-96.webp 96w, assets/img/icon-straightpic-192.webp 192w"
-                 sizes="52px" width="192" height="192" loading="lazy" alt="">
-            <div class="rooms-name">
-              <h3 class="display-s">StraightPic</h3>
-              <p>Straighten photos with precision and ease.</p>
-            </div>
-            <ul class="tags tags--compact">
-              <li>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ic" x="7" y="2.5" width="10" height="19" rx="2.4"/><path class="ic" d="M10.6 5.2h2.8"/></svg>
-                iPhone app
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ic" cx="12" cy="12" r="8.6"/><path class="ic" d="M12 7.4V12l3.4 2.1"/></svg>
-                Coming soon
-              </li>
-            </ul>
-            <p class="rooms-actions">
-              <a class="btn btn-outline btn-sm" href="#straightpic">See the room</a>
-              <a class="btn btn-outline btn-sm" href="support.html#straightpic">Support</a>
-            </p>
-          </li>
-        </ul>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
+    <div class="container footer-tagline">
+      <p class="display-m">Made in Portland. Released everywhere.</p>
+      <p class="body-copy">ElevatorBeat designs, builds and supports every app in the collection from Portland, Oregon.</p>
+    </div>
     <div class="container footer-bar">
       <a class="footer-brand" href="#top">
         <svg class="monogram" viewBox="0 0 44 44" aria-hidden="true">
@@ -593,21 +519,10 @@
         <a href="straightpic/terms/">Terms</a>
         <a href="straightpic/open-source/">Licenses</a>
       </nav>
-
-      <!-- Same href twice: the button for a phone, the code for a desk.
-           See "The install action" in styles.css. -->
-      <a class="btn btn-outline btn-sm footer-action install-btn" href="https://apps.apple.com/us/app/dragify-drag-queen-face-swap/id6756401226" target="_blank" rel="noopener">
-        <svg class="apple-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-        App Store <span aria-hidden="true">&nearr;</span>
-      </a>
-      <a class="footer-action install-qr" href="https://apps.apple.com/us/app/dragify-drag-queen-face-swap/id6756401226" target="_blank" rel="noopener">
-        <img src="assets/img/qr-dragify.svg" width="96" height="96" alt="" loading="lazy">
-        <span class="install-qr-text">Scan to install<span>Dragify &middot; App&nbsp;Store</span></span>
-      </a>
     </div>
     <div class="container footer-bottom">
       <p>&copy; 2026 Elevator Beat LLC</p>
-      <div class="footer-social">
+      <div class="footer-social" hidden>
         <a href="https://x.com/elevatorbeat" target="_blank" rel="noopener" aria-label="ElevatorBeat on X">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.1l-5.6-7.3L4.2 22H1l8.2-9.4L.9 2H8.2l5 6.7L18.9 2Zm-1.2 18h1.9L6.4 4H4.3l13.4 16Z"/></svg>
         </a>

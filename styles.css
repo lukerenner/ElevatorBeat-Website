@@ -928,8 +928,6 @@ textarea:focus-visible {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.tags--compact { margin: 0; padding: 0; border-top: 0; gap: 8px 18px; }
-
 /* ==========================================================================
    THE APERTURE — Dragify's evidence, behind a window that moves
    --------------------------------------------------------------------------
@@ -1073,56 +1071,6 @@ textarea:focus-visible {
 .devices .plate { --plate-radius: 22px; }
 
 /* ==========================================================================
-   GF — THE GROUND FLOOR
-   --------------------------------------------------------------------------
-   Where to get the work, as a board rather than a closing statement. Both rows
-   carry the same tag row they were labelled with upstairs, so the directory is
-   a summary of the building and not a second description of it.
-   ========================================================================== */
-.ground-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
-  gap: clamp(40px, 5vw, 88px);
-  align-items: start;
-}
-.ground-grid h2 { max-width: 15ch; }
-.ground-grid .body-copy { max-width: 34ch; }
-/* The signature. The only italic on the page, and the only line of display type
-   at reading size — it is the studio initialling its own work. */
-.signoff {
-  margin-top: clamp(28px, 3vw, 40px);
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(23px, 2vw, 28px);
-  line-height: 1.2;
-  color: var(--text);
-}
-
-.rooms {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-}
-/* DIRECT CHILDREN ONLY. Each row contains a nested <ul class="tags">, so a
-   descendant `.rooms li` also matched every tag in it — handing each tag the
-   four-column row grid, the row padding and a bottom hairline, which shattered
-   the row. The tag row is a component that travels; anything styling rows has to
-   say `> li`. */
-.rooms > li {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) minmax(0, auto) auto;
-  align-items: center;
-  gap: clamp(16px, 2.4vw, 34px);
-  padding-block: clamp(20px, 2.4vw, 30px);
-  border-bottom: 1px solid var(--line);
-}
-.rooms .app-icon { width: 52px; height: 52px; border-radius: 12px; }
-.rooms-name h3 { margin: 0 0 4px; }
-.rooms-name p { margin: 0; font-size: 16.5px; color: var(--text-soft); }
-.rooms-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
-
-/* ==========================================================================
    Footer — one bar
    --------------------------------------------------------------------------
    The four-column sitemap this replaced was a larger navigation apparatus than
@@ -1143,6 +1091,13 @@ textarea:focus-visible {
   gap: clamp(24px, 3vw, 44px);
   padding-bottom: clamp(32px, 3.5vw, 48px);
 }
+.footer-tagline {
+  padding-top: clamp(4px, 1vw, 12px);
+  padding-bottom: clamp(24px, 3vw, 40px);
+}
+.footer-tagline .display-m { max-width: 16ch; margin: 0 0 14px; }
+.footer-tagline .body-copy { max-width: 46ch; margin: 0; }
+
 .footer-brand {
   display: inline-flex;
   align-items: center;
@@ -1184,6 +1139,7 @@ textarea:focus-visible {
   font-size: 14px;
 }
 .footer-social { display: flex; gap: 10px; }
+.footer-social[hidden] { display: none; }
 .footer-social a {
   display: flex;
   align-items: center;
@@ -1275,11 +1231,6 @@ textarea:focus-visible {
 /* The footer's copy is one bar of furniture, not an arrival — the code drops to
    the height of the brand block beside it and loses its caption's second line. */
 .footer-action.install-qr { --qr-size: 96px; gap: 13px; }
-/* Directory rows are built on a 52px icon, so any scannable code sets the row's
-   height instead of the icon — Dragify's row runs taller than StraightPic's and
-   that is the honest trade. Shrinking it to fit the rhythm would have produced
-   a code nobody could scan, which is a worse row than an uneven one. */
-.rooms-actions .install-qr { --qr-size: 88px; gap: 12px; }
 
 /* ==========================================================================
    Contact form — its own page, not the homepage.
@@ -1449,22 +1400,12 @@ main > .page-hero:last-child { padding-bottom: clamp(88px, 9vw, 132px); }
   .studio-grid h2 { max-width: 18ch; }
   .studio-grid .body-copy { max-width: 62ch; }
 
-  .room-grid,
-  .ground-grid { grid-template-columns: 1fr; gap: 40px; }
-  .room-label h2,
-  .ground-grid h2 { max-width: 18ch; }
-  .room-label .body-copy,
-  .ground-grid .body-copy { max-width: 54ch; }
+  .room-grid { grid-template-columns: 1fr; gap: 40px; }
+  .room-label h2 { max-width: 18ch; }
+  .room-label .body-copy { max-width: 54ch; }
   /* The wall label has the page's full measure once it is alone on a row, and
      the tag row and action should not stretch across all of it. */
-  .room-label,
-  .ground-grid > .reveal:first-child { max-width: 640px; }
-}
-
-@media (max-width: 900px) {
-  .rooms > li { grid-template-columns: auto minmax(0, 1fr); row-gap: 16px; }
-  .rooms .tags--compact,
-  .rooms-actions { grid-column: 2; }
+  .room-label { max-width: 640px; }
 }
 
 @media (max-width: 760px) {
@@ -1548,11 +1489,6 @@ main > .page-hero:last-child { padding-bottom: clamp(88px, 9vw, 132px); }
   .devices .plate { --plate-radius: 16px; }
   .devices .caption { font-size: 14.5px; }
   .devices .caption b { font-size: 12px; }
-
-  .rooms > li { grid-template-columns: 1fr; }
-  .rooms .app-icon { width: 46px; height: 46px; border-radius: 11px; }
-  .rooms .tags--compact,
-  .rooms-actions { grid-column: auto; }
 
   /* The arrival's solid action goes full measure so it is a comfortable tap
      target; the quiet one beside it wraps underneath. */
