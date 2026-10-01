@@ -22,12 +22,11 @@ server, though relative links between pages work best served over HTTP.
 | --- | --- |
 | `index.html` | Home page — the seven-beat shot list (see below) |
 | `support.html` | App support (Dragify + StraightPic), links to contact |
-| `privacy.html` | Privacy policy for the site and both apps |
-| `terms.html` | Terms of use |
-| `open-source.html` | Open source license notices for Dragify and StraightPic |
+| `straightpic/` | StraightPic product + help page, with `privacy/`, `terms/` and `open-source/` beneath it |
+| `dragify/` | `privacy/`, `terms/`, `open-source/` redirect stubs to dragifyapp.com — stable URLs for App Store Connect, never a second copy |
 | `thanks.html` | Contact-form confirmation page — `noindex`, not in the sitemap |
 | `styles.css` | All styling — dual-ground tokens in `:root` / `.on-dark`, the `.plate` image component, one button system |
-| `script.js` | Transparent-until-scroll header, mobile nav, canonical-policy dialog, the floor indicator, scroll reveals |
+| `script.js` | Transparent-until-scroll header, mobile nav, the floor indicator, scroll reveals |
 | `assets/` | Favicon (SVG), apple touch icon, OG/social share image |
 | `assets/img/` | All site photography, WebP, multiple widths per image for `srcset` |
 | `assets/video/` | Superseded hero animation — **no longer referenced**, kept on disk only |
@@ -38,7 +37,7 @@ server, though relative links between pages work best served over HTTP.
 | `tools/house-art.py`, `tools/house-dusk-refine.py` | Generate the `house-day` / `house-dusk` paintings — dev only |
 | `tools/deprecated/` | Superseded generators, kept for provenance — see the Dragify note below |
 | `robots.txt` | Allows crawling, points at sitemap |
-| `sitemap.xml` | Lists all five indexable pages (thanks.html is deliberately excluded) |
+| `sitemap.xml` | Lists every indexable page (thanks.html is deliberately excluded) |
 | `CNAME` | Custom domain for GitHub Pages (`elevatorbeat.com`) |
 
 ## Design system — two grounds, one set of components
@@ -287,31 +286,18 @@ with itself depending on when in the frame it runs.
 The header is transparent and absolutely positioned over the arrival image, then switches to a
 solid paper bar once the page scrolls past 12px.
 
-Pages with no photographic arrival (`support`, `contact`, `privacy`, `terms`, `open-source`,
+Pages with no photographic arrival (`support`, `contact`, `straightpic` and its legal pages,
 `thanks`) ship `class="site-header is-solid"` in the markup. That starts them in the solid
 appearance and makes `script.js` skip the scroll toggle entirely. **If you add a page,
 remember the `is-solid`.**
 
-## Canonical policy dialog
+## Dragify policies
 
 Dragify's terms and privacy policy are maintained on **dragifyapp.com**, and that copy stays
-canonical — this site must never hold a second copy to keep in sync. The Dragify feature's
-"Terms of Service" and "Privacy Policy" links therefore carry `data-legal-modal` and open a
-native `<dialog>` that frames the live page, with an "open in a new tab" link alongside.
-
-Notes for anyone touching this:
-
-- The iframe `src` is set on open and reset to `about:blank` on close, so nothing is requested
-  from dragifyapp.com unless a visitor actually asks for it.
-- Teardown is wired to the close button, the backdrop click and the `cancel` (Esc) event —
-  **not** to the `close` event alone. Some engines never fire `close` for a scripted
-  `dialog.close()`, which left the third-party page loaded behind a dismissed dialog.
-- Without JS the links are ordinary external links and still work.
-- dragifyapp.com currently sends no `X-Frame-Options` or `frame-ancestors` CSP. If that ever
-  changes the frame will go blank, and the "open in a new tab" link becomes the fallback.
-
-StraightPic's links point at this site's own `terms.html` / `privacy.html`, which are single
-documents covering both apps — hence no per-app fragment.
+canonical — this site must never hold a second copy to keep in sync. `dragify/privacy/`,
+`dragify/terms/` and `dragify/open-source/` are redirect stubs (meta refresh + `location.replace`,
+canonical pointing at dragifyapp.com) that exist only so App Store Connect has a stable
+elevatorbeat.com URL. They are not in the sitemap.
 
 ## Deploying to elevatorbeat.com (GitHub Pages)
 
@@ -348,11 +334,11 @@ lives where somebody who has already decided to write goes looking for it.
 
 ## Legal pages
 
-`privacy.html` and `terms.html` are drafted from the app descriptions on this site and are
+`straightpic/privacy/` and `straightpic/terms/` are drafted from the app descriptions on this site and are
 a reasonable starting point, not a substitute for review by counsel — especially before
 Dragify/StraightPic process real user photos at scale or collect payment data directly.
 
-`open-source.html` carries both apps' notices. The Dragify list is a copy of the one on
+`straightpic/open-source/` carries the StraightPic notices; Dragify's live only on
 dragifyapp.com/open-source/. The StraightPic section says the app has **no** third-party
 open source components — that is checked, not assumed: its Xcode project has no Swift Package
 or CocoaPods dependencies, and every framework it imports (SwiftUI, Core Image, Core Graphics,

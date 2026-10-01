@@ -193,47 +193,6 @@ if (rail && railCar && sections.length) {
 
 updateHeader();
 
-// Policies that are canonical on another domain (Dragify's live on
-// dragifyapp.com) open in a dialog framing that page, so there is only ever one
-// copy to keep current. The iframe src is set on open and cleared on close, so
-// nothing is requested from the other origin unless the visitor asks for it.
-// Without JS the links are ordinary external links and still work.
-const legalDialog = document.querySelector('[data-legal-dialog]');
-if (legalDialog && typeof legalDialog.showModal === 'function') {
-  const frame = legalDialog.querySelector('[data-legal-dialog-frame]');
-  const title = legalDialog.querySelector('[data-legal-dialog-title]');
-  const openInTab = legalDialog.querySelector('[data-legal-dialog-link]');
-
-  document.querySelectorAll('[data-legal-modal]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const label = link.dataset.legalTitle || link.textContent.trim();
-      title.textContent = label;
-      frame.title = label;
-      frame.src = link.href;
-      openInTab.href = link.href;
-      legalDialog.showModal();
-    });
-  });
-
-  // Tearing the frame down is done here rather than in a 'close' listener:
-  // some engines don't fire 'close' for a scripted dialog.close(), which would
-  // leave the third-party page loaded and running behind a dismissed dialog.
-  // Every dismissal route is therefore wired explicitly. The 'close' listener
-  // stays as a backstop for any route that does fire it.
-  const teardown = () => { frame.src = 'about:blank'; };
-  const close = () => { teardown(); legalDialog.close(); };
-
-  legalDialog.querySelector('[data-legal-dialog-close]')?.addEventListener('click', close);
-  // Clicking the backdrop lands on the dialog element itself, not its contents.
-  legalDialog.addEventListener('click', (event) => {
-    if (event.target === legalDialog) close();
-  });
-  // Esc: 'cancel' fires before the browser closes the dialog itself.
-  legalDialog.addEventListener('cancel', teardown);
-  legalDialog.addEventListener('close', teardown);
-}
-
 // ---------------------------------------------------------------------------
 // Reveals.
 //

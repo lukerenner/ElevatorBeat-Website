@@ -1316,60 +1316,6 @@ main > .page-hero:last-child { padding-bottom: clamp(88px, 9vw, 132px); }
 .page-body a:hover { color: var(--accent); }
 
 /* ==========================================================================
-   Canonical-policy dialog
-   Dragify's terms and privacy policy are maintained on dragifyapp.com; this
-   frames that page rather than keeping a second copy here that would then need
-   updating twice. Native <dialog>, so focus trapping, Esc-to-close and
-   background inertness are the browser's job.
-   ========================================================================== */
-.legal-modal {
-  width: min(940px, calc(100vw - 32px));
-  height: min(86svh, 900px);
-  max-width: none;
-  max-height: none;
-  padding: 0;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  background: var(--ground);
-  color: var(--text);
-  overflow: hidden;
-}
-.legal-modal::backdrop { background: rgba(5, 12, 21, .70); }
-.legal-modal-bar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 15px 16px 15px 24px;
-  border-bottom: 1px solid var(--line);
-}
-.legal-modal-bar h2 { flex: 1; min-width: 0; margin: 0; font-size: 22px; }
-.legal-modal-open { flex: none; font-size: 15px; color: var(--accent); text-decoration: none; }
-.legal-modal-open:hover { text-decoration: underline; }
-.legal-modal-close {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  background: none;
-  color: var(--text);
-  cursor: pointer;
-}
-.legal-modal-close:hover { border-color: var(--accent); }
-.legal-modal-close svg { width: 19px; height: 19px; fill: currentColor; }
-.legal-modal-frame {
-  display: block;
-  width: 100%;
-  height: calc(100% - 71px);
-  border: 0;
-  background: #fff;
-}
-
-/* ==========================================================================
    Responsive
    Mobile is not the desktop page compressed. Headline scale is preserved, body
    copy never drops below 19px, measures shorten, section spacing stays
@@ -1496,6 +1442,5 @@ main > .page-hero:last-child { padding-bottom: clamp(88px, 9vw, 132px); }
   .button-row .btn-primary { flex: 1 1 260px; }
   .footer-bar { flex-direction: column; align-items: flex-start; }
   .form-row { grid-template-columns: 1fr; }
-  .legal-modal { width: 100vw; height: 100svh; border: 0; border-radius: 0; }
 }
 
