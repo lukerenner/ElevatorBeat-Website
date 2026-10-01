@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render assets/img/qr-dragify.svg — the desktop "scan to install" code.
+"""Render assets/img/qr-dragify.svg and qr-straightpic.svg — the desktop "scan to install" code.
 
 A committed SVG rather than a runtime QR library or a Google Charts URL: the
 code only changes when the App Store listing does, so generating it on every
@@ -27,7 +27,6 @@ except ImportError:
     sys.exit("segno not installed — run: pip3 install segno")
 
 SITE = Path(__file__).resolve().parent.parent
-OUT = SITE / "assets" / "img" / "qr-dragify.svg"
 
 # Apple's short form, not the descriptive URL the anchors carry. It 301s to
 # exactly that URL, and at 39 characters instead of 71 it drops the symbol from
@@ -35,26 +34,30 @@ OUT = SITE / "assets" / "img" / "qr-dragify.svg"
 # for a code displayed on a monitor: at the ~148px the room gives it, fewer
 # modules means each one is 4px instead of 2.7px, which is the difference
 # between scanning from across a desk and having to lean in.
-URL = "https://apps.apple.com/app/id6756401226"
+URLS = {
+    "qr-dragify.svg": "https://apps.apple.com/app/id6756401226",
+    "qr-straightpic.svg": "https://apps.apple.com/app/id6816278709",
+}
 
 INK = "#08131F"     # --ink, the midnight ground
 PAPER = "#F7F3EC"   # --ground, the warm white canvas
 
 
 def main() -> None:
-    # 'M' recovers 15% — plenty for a screen-displayed code, and it keeps the
-    # module count (and so the printed size of each module) low enough to scan
-    # comfortably at the ~150px the layout gives it.
-    qr = segno.make(URL, error="m")
+    for name, url in URLS.items():
+        out = SITE / "assets" / "img" / name
+        # 'M' recovers 15% — plenty for a screen-displayed code, and it keeps
+        # the module count low enough to scan comfortably at ~150px.
+        qr = segno.make(url, error="m")
 
-    # omitsize writes a viewBox in place of width/height, so the file scales
-    # from CSS alone and stays resolution-free at any size the layout picks.
-    qr.save(OUT, kind="svg", border=4, dark=INK, light=PAPER,
-            omitsize=True, svgversion=1.1, xmldecl=False)
+        # omitsize writes a viewBox in place of width/height, so the file
+        # scales from CSS alone and stays resolution-free at any size.
+        qr.save(out, kind="svg", border=4, dark=INK, light=PAPER,
+                omitsize=True, svgversion=1.1, xmldecl=False)
 
-    size = qr.symbol_size(border=4)[0]
-    print(f"{OUT.relative_to(SITE)} — version {qr.version}, "
-          f"{size}×{size} modules, {OUT.stat().st_size} bytes")
+        size = qr.symbol_size(border=4)[0]
+        print(f"{out.relative_to(SITE)} — version {qr.version}, "
+              f"{size}×{size} modules, {out.stat().st_size} bytes")
 
 
 if __name__ == "__main__":
